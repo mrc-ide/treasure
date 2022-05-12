@@ -21,7 +21,8 @@ Cost SMC
 \strong{smc_cost_per_dose_delivered}
 
 Current default is the average economic cost of administering four monthly
-  SMC cycles across seven countries in the Sahel subregion
+  SMC cycles of sulfadoxine–pyrimethamine plus amodiaquine for children
+  younger than 5 years across seven countries in the Sahel subregion
   (Burkina Faso, Chad, Guinea, Mali, Niger, Nigeria, and The Gambia)
   in 2016. These include multiple delivery methods (door to door, fixed point,
    mobile point, mixed). The cost per dose delivered is the average cost of

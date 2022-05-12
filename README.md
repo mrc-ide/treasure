@@ -12,8 +12,12 @@ public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostat
 [![R-CMD-check](https://github.com/mrc-ide/treasure/workflows/R-CMD-check/badge.svg)](https://github.com/mrc-ide/treasure/actions)
 <!-- badges: end -->
 
-The goal of treasure is to provide basic unit-costing help for
-malariasimulation.
+The goal of treasure is to provide basic, generic unit-costing help for
+[malariasimulation](https://mrc-ide.github.io/malariasimulation/).
+
+Functionality is fairly minimal. A key goal of treasure is to be a
+transparent and version controlled repository for unit cost estimates
+that included detailed citations or referencs for cost sources.
 
 ## Installation
 
@@ -24,3 +28,19 @@ You can install the development version of treasure from
 # install.packages("devtools")
 devtools::install_github("mrc-ide/treasure")
 ```
+
+## Updates
+
+Updates and improvements are encouranged via
+[PRs](https://github.com/mrc-ide/treasure/pulls)!
+
+Updates should be citable from a published source. They should be
+in-line with the aim of this package to be source for generic costing
+estimates and therefore should be broadly representative of the costing
+for a given intervention, and not focussed on a specific location or
+implementation approach.
+
+Any suggested update should include: 1. An update to the costing
+function deafault value. 2. Updated documentation for the function
+including a citable source in the references section. 3. Corresponding
+update to the unit tests for the modified costing function.

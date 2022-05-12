@@ -13,10 +13,16 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/cost_al.html</loc>
+  </url>
+  <url>
     <loc>/reference/cost_llin.html</loc>
   </url>
   <url>
     <loc>/reference/cost_pbo_itn.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cost_rdt.html</loc>
   </url>
   <url>
     <loc>/reference/cost_rtss.html</loc>

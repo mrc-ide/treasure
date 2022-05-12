@@ -27,7 +27,7 @@ cost_llin <- function(n_llin, llin_unit_cost = 2.52, llin_delivery_cost = 1.50) 
     stop("All llin_n estimates must be >= 0")
   }
   if(any(llin_unit_cost < 0) | any(llin_delivery_cost < 0)){
-    stop("Cost inputs must be >= 0")
+    stop("LLIN cost inputs must be >= 0")
   }
 
   cost_per_net_delivered <- llin_unit_cost + llin_delivery_cost
@@ -63,7 +63,7 @@ cost_pbo_itn <- function(n_pbo_itn, pbo_itn_unit_cost = 3.51, pbo_itn_delivery_c
     stop("All llin_n estimates must be >= 0")
   }
   if(any(pbo_itn_unit_cost < 0) | any(pbo_itn_delivery_cost < 0)){
-    stop("Cost inputs must be >= 0")
+    stop("PBO cost inputs must be >= 0")
   }
 
   cost_per_net_delivered <- pbo_itn_unit_cost + pbo_itn_delivery_cost

@@ -9,7 +9,8 @@
 has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![R-CMD-check](https://github.com/mrc-ide/treasure/workflows/R-CMD-check/badge.svg)](https://github.com/mrc-ide/treasure/actions)
-[![R-CMD-check](https://github.com/mrc-ide/treasure/workflows/R-CMD-check/badge.svg)](https://github.com/mrc-ide/treasure/actions)
+[![Coverage
+status](https://codecov.io/gh/mrc-ide/treasure/branch/main/graph/badge.svg)](https://codecov.io/github/mrc-ide/treasure)
 <!-- badges: end -->
 
 The goal of treasure is to provide basic, generic unit-costing help for

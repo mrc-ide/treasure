@@ -2,3 +2,5 @@
 
 export(cost_llin)
 export(cost_pbo_itn)
+export(cost_rtss)
+export(cost_smc)

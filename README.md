@@ -16,9 +16,37 @@ status](https://codecov.io/gh/mrc-ide/treasure/branch/main/graph/badge.svg)](htt
 The goal of treasure is to provide basic, generic unit-costing help for
 [malariasimulation](https://mrc-ide.github.io/malariasimulation/).
 
-Functionality is fairly minimal. A key goal of treasure is to be a
+Functionality is minimal. The key goal of treasure is to be a
 transparent and version controlled repository for unit cost estimates
-that included detailed citations or referencs for cost sources.
+that included detailed citations or references for cost sources.
+
+:warning: Cost estimates are targeted to be as up-to-date as possible.
+Retrospective costing of past programmes may therefore require
+adjustment.
+
+:warning: This is a living package and costs will be updated when new
+data are available. As such, be sure to reference and use a specific
+version if stable costing is required for a project.
+
+:warning: This is not an exhaustive source of malaria programme costs.
+For an example of a more complete costing exercise please see
+[Patouillard et al](https://gh.bmj.com/content/2/2/e000176).
+
+## Updates
+
+Updates, reviews and improvements are encouraged via
+[PRs](https://github.com/mrc-ide/treasure/pulls)!
+
+Updates should be citable from a published source. They should be
+in-line with the aim of this package to be source for generic costing
+estimates and therefore should be broadly representative of the costing
+for a given intervention, and not focussed on a specific location or
+implementation approach.
+
+Any suggested update should include: 1. An update to the costing
+function default value. 2. Updated documentation for the function
+including a citable source in the references section. 3. Corresponding
+update to the unit tests for the modified costing function.
 
 ## Installation
 
@@ -29,19 +57,3 @@ You can install the development version of treasure from
 # install.packages("devtools")
 devtools::install_github("mrc-ide/treasure")
 ```
-
-## Updates
-
-Updates and improvements are encouranged via
-[PRs](https://github.com/mrc-ide/treasure/pulls)!
-
-Updates should be citable from a published source. They should be
-in-line with the aim of this package to be source for generic costing
-estimates and therefore should be broadly representative of the costing
-for a given intervention, and not focussed on a specific location or
-implementation approach.
-
-Any suggested update should include: 1. An update to the costing
-function deafault value. 2. Updated documentation for the function
-including a citable source in the references section. 3. Corresponding
-update to the unit tests for the modified costing function.

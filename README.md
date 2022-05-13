@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# treasure <img src="man/figures/treasure_hex.png" align="right" width=30% height=30% />
+# treasure <img src="man/figures/Treasure_hex.png" align="right" width=30% height=30% />
 
 <!-- badges: start -->
 

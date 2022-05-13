@@ -84,6 +84,44 @@ cost_al <- function(n_doses, cost_per_dose = 0.30){
   return(cost)
 }
 
+#' Cost primaquine treatment
+#'
+#' Note the cost per dose is for a single dose (7.5 mg). A treatment course typically
+#' constitutes primaquine 0.25 mg base/kg bw per day for 14 days
+#'
+#' So course for a single adult (weighing 50kg) may constitute
+#' 14 days x 0.25mg x 50kg (14 x 0.25 x 50 / 7.5) = 25 doses.
+#'
+#' @param n_doses Number of tests
+#' @param cost_per_dose Cost per dose is for a single dose (7.5 mg)
+#'
+#' @return primaquine costs
+#' @export
+#'
+#' @references
+#' \strong{dosing information}
+#'
+#' \url{https://www.who.int/publications/i/item/guidelines-for-malaria}
+#'
+#' \strong{cost_per_dose}
+#'
+#' Current default is the average cost for 7.5mg.
+#'
+#' The Global Fund Pooled Procurement Mechanism Reference Pricing: Antimalarial medicines, version: quarter 1, 2022
+#'
+#' \url{https://www.theglobalfund.org/en/sourcing-management/health-products/antimalarial-medicines/}.
+cost_primaquine <- function(n_doses, cost_per_dose = 0.40){
+  if(any(n_doses < 0)){
+    stop("All n_doses estimates must be >= 0")
+  }
+  if(any(cost_per_dose < 0)){
+    stop("Primaquine cost inputs must be >= 0")
+  }
+
+  cost <- n_doses * cost_per_dose
+  return(cost)
+}
+
 #' Cost per outpatient visit
 #'
 #' For information on country specific outpatient costs from WHO CHOICE see \code{?who_coice}

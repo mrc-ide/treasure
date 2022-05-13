@@ -22,6 +22,16 @@ test_that("AL costing", {
   expect_error(cost_al(n_doses = 1, cost_per_dose = -1), "AL cost inputs must be >= 0")
 })
 
+test_that("Primaquine costing", {
+  expect_equal(cost_primaquine(n_doses = 1), 1 * 0.4)
+  expect_equal(cost_primaquine(n_doses = 2), 2 * 0.4)
+  expect_equal(cost_primaquine(n_doses = c(1, 2)), c(1, 2) * 0.4)
+
+  expect_equal(cost_primaquine(n_doses = 1, cost_per_dose  = 2), 1 * 2)
+
+  expect_error(cost_primaquine(n_doses = -1), "All n_doses estimates must be >= 0")
+  expect_error(cost_primaquine(n_doses = 1, cost_per_dose = -1), "Primaquine cost inputs must be >= 0")
+})
 
 test_that("WHO CHOICE costing", {
   # Outpatient

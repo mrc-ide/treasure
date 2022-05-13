@@ -38,10 +38,10 @@ Updates, reviews and improvements are encouraged via
 [PRs](https://github.com/mrc-ide/treasure/pulls)!
 
 Updates should be citable from a published source. They should be
-in-line with the aim of this package to be source for generic costing
+in-line with the aim of this package to be a source for generic costing
 estimates and therefore should be broadly representative of the costing
-for a given intervention, and not focussed on a specific location or
-implementation approach.
+for a given intervention, and (ideally) not focussed on a specific
+location or implementation approach.
 
 Any suggested update should include: 1. An update to the costing
 function default value. 2. Updated documentation for the function

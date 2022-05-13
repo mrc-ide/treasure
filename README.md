@@ -32,6 +32,9 @@ version if stable costing is required for a project.
 For an example of a more complete costing exercise please see
 [Patouillard et al](https://gh.bmj.com/content/2/2/e000176).
 
+:warning: When using treasure, please be sure to reference the original
+sources, not just the package.
+
 :warning: All costs are in USD$, however the reference year for costs
 may differ and costs have not be inflation-adjusted.
 

@@ -9,7 +9,7 @@
 #'   \item{world_bank_income_group}{World bank income group}
 #'   \item{world_bank_region}{World bank region}
 #'   \item{inpatient}{Inpatient visit cost}
-#'   \item{outpatient}{Outpatient visit cost}
+#'   \item{outpatient}{Outpatient visit cost (Assuming 3 day stay as in Patouillard et al)}
 #' }
 #' @source \url{http://www.who.int/choice/en/}
 "who_choice"

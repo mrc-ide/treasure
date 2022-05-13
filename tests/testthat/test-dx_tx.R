@@ -21,3 +21,26 @@ test_that("AL costing", {
   expect_error(cost_al(n_doses = -1), "All n_doses estimates must be >= 0")
   expect_error(cost_al(n_doses = 1, cost_per_dose = -1), "AL cost inputs must be >= 0")
 })
+
+
+test_that("WHO CHOICE costing", {
+  # Outpatient
+  expect_equal(cost_outpatient(n_visits = 1, cost_per_visit = 1), 1 * 1)
+  expect_equal(cost_outpatient(n_visits = 2, cost_per_visit = 1), 2 * 1)
+  expect_equal(cost_outpatient(n_visits = c(1, 2), cost_per_visit = 1), c(1, 2) * 1)
+
+  expect_equal(cost_outpatient(n_visits = 1, cost_per_visit = 2), 1 * 2)
+
+  expect_error(cost_outpatient(n_visits = -1, cost_per_visit = 1), "All n_visits estimates must be >= 0")
+  expect_error(cost_outpatient(n_visits = 1, cost_per_visit = -1), "Outpatient cost inputs must be >= 0")
+
+  # Inpatient
+  expect_equal(cost_inpatient(n_visits = 1, cost_per_visit = 1), 1 * 1)
+  expect_equal(cost_inpatient(n_visits = 2, cost_per_visit = 1), 2 * 1)
+  expect_equal(cost_inpatient(n_visits = c(1, 2), cost_per_visit = 1), c(1, 2) * 1)
+
+  expect_equal(cost_inpatient(n_visits = 1, cost_per_visit = 2), 1 * 2)
+
+  expect_error(cost_inpatient(n_visits = -1, cost_per_visit = 1), "All n_visits estimates must be >= 0")
+  expect_error(cost_inpatient(n_visits = 1, cost_per_visit = -1), "Inpatient cost inputs must be >= 0")
+})

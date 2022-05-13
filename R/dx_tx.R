@@ -83,3 +83,46 @@ cost_al <- function(n_doses, cost_per_dose = 0.30){
   cost <- n_doses * cost_per_dose
   return(cost)
 }
+
+#' Cost per outpatient visit
+#'
+#' For information on country specific outpatient costs from WHO CHOICE see \code{?who_coice}
+#'
+#' @param n_visits Number of visits
+#' @param cost_per_visit Cost per visit
+#'
+#' @return Outpatient costs
+#' @export
+cost_outpatient <- function(n_visits, cost_per_visit){
+  if(any(n_visits < 0)){
+    stop("All n_visits estimates must be >= 0")
+  }
+  if(any(cost_per_visit < 0)){
+    stop("Outpatient cost inputs must be >= 0")
+  }
+
+  cost <- n_visits * cost_per_visit
+  return(cost)
+}
+
+#' Cost per inpatient visit
+#'
+#' For information on country specific inpatient costs from WHO CHOICE see \code{?who_coice}
+#'
+#' @param n_visits Number of visits
+#' @param cost_per_visit Cost per visit
+#'
+#' @return Inpatient costs
+#' @export
+cost_inpatient <- function(n_visits, cost_per_visit){
+  if(any(n_visits < 0)){
+    stop("All n_visits estimates must be >= 0")
+  }
+  if(any(cost_per_visit < 0)){
+    stop("Inpatient cost inputs must be >= 0")
+  }
+
+  cost <- n_visits * cost_per_visit
+  return(cost)
+}
+

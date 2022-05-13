@@ -16,7 +16,19 @@
     <loc>/reference/cost_al.html</loc>
   </url>
   <url>
+    <loc>/reference/cost_inpatient.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cost_ll_irs_person.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cost_ll_irs_structure.html</loc>
+  </url>
+  <url>
     <loc>/reference/cost_llin.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cost_outpatient.html</loc>
   </url>
   <url>
     <loc>/reference/cost_pbo_itn.html</loc>
@@ -32,5 +44,8 @@
   </url>
   <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/who_choice.html</loc>
   </url>
 </urlset>

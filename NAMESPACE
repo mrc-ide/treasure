@@ -2,6 +2,8 @@
 
 export(cost_al)
 export(cost_inpatient)
+export(cost_ipti)
+export(cost_iptp)
 export(cost_ll_irs_person)
 export(cost_ll_irs_structure)
 export(cost_llin)

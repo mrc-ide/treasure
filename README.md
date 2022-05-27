@@ -32,7 +32,7 @@ version if stable costing is required for a project.
 For an example of a more complete costing exercise please see
 [Patouillard et al](https://gh.bmj.com/content/2/2/e000176), and for a
 recent cost and cost-effectiveness review [Conteh et
-al](https://doi.org/10.1016/j.jval.%202021.01.013).
+al](https://www.sciencedirect.com/science/article/pii/S1098301521001479?via%3Dihub).
 
 :warning: When using treasure, please be sure to reference the original
 sources, not just the package.

@@ -14,7 +14,6 @@
 #' Estimate from Patouillard et al (2017), consisting of a summary from strategic
 #' plans from: Botswana, Nigeria, India, Eritrea, Swaziland, Namibia.
 #'
-#'
 #' \url{https://gh.bmj.com/content/2/2/e000176}.
 cost_surveillance <- function(pop_at_risk, cost_per_pop_at_risk = 0.05){
   if(any(pop_at_risk < 0)){

@@ -23,6 +23,5 @@ Cost of epidemiological and entomological surveillance.
 Estimate from Patouillard et al (2017), consisting of a summary from strategic
 plans from: Botswana, Nigeria, India, Eritrea, Swaziland, Namibia.
 
-
 \url{https://gh.bmj.com/content/2/2/e000176}.
 }

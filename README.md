@@ -30,7 +30,9 @@ version if stable costing is required for a project.
 
 :warning: This is not an exhaustive source of malaria programme costs.
 For an example of a more complete costing exercise please see
-[Patouillard et al](https://gh.bmj.com/content/2/2/e000176).
+[Patouillard et al](https://gh.bmj.com/content/2/2/e000176), and for a
+recent cost and cost-effectiveness review [Conteh et
+al](https://doi.org/10.1016/j.jval.%202021.01.013).
 
 :warning: When using treasure, please be sure to reference the original
 sources, not just the package.
@@ -49,10 +51,11 @@ estimates and therefore should be broadly representative of the costing
 for a given intervention, and (ideally) not focussed on a specific
 location or implementation approach.
 
-Any suggested update should include: 1. An update to the costing
-function default value. 2. Updated documentation for the function
-including a citable source in the references section. 3. Corresponding
-update to the unit tests for the modified costing function.
+Any suggested update via a PR should include: 1. An update to the
+costing function default value. 2. Updated documentation for the
+function including a citable source in the references section. 3.
+Corresponding update to the unit tests for the modified costing
+function.
 
 ## Installation
 

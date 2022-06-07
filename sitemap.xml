@@ -37,10 +37,16 @@
     <loc>/reference/cost_outpatient.html</loc>
   </url>
   <url>
+    <loc>/reference/cost_pacd.html</loc>
+  </url>
+  <url>
     <loc>/reference/cost_pbo_itn.html</loc>
   </url>
   <url>
     <loc>/reference/cost_primaquine.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cost_racd.html</loc>
   </url>
   <url>
     <loc>/reference/cost_rdt.html</loc>

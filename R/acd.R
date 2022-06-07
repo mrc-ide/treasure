@@ -13,7 +13,7 @@
 #'
 #' Silumbe et al (2015)
 #'
-#' \url{}.
+#' \url{https://malariajournal.biomedcentral.com/articles/10.1186/s12936-015-0722-3}.
 cost_pacd <- function(n_tested, cost_per_person_tested = 4.79){
   if(any(n_tested < 0)){
     stop("All n_tested estimates must be >= 0")
@@ -39,9 +39,9 @@ cost_pacd <- function(n_tested, cost_per_person_tested = 4.79){
 #' @references
 #' \strong{cost_per_person_tested}
 #'
-#' Larson et al (2014)
+#' Larson et al (2016)
 #'
-#' \url{}.
+#' \url{https://malariajournal.biomedcentral.com/articles/10.1186/s12936-016-1457-5}.
 cost_racd <- function(n_tested, cost_per_person_tested = 38.63){
   if(any(n_tested < 0)){
     stop("All n_tested estimates must be >= 0")

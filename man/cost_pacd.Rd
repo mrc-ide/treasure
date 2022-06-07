@@ -22,5 +22,5 @@ Cost for proactive case detection.
 
 Silumbe et al (2015)
 
-\url{}.
+\url{https://malariajournal.biomedcentral.com/articles/10.1186/s12936-015-0722-3}.
 }

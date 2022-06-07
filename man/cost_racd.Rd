@@ -20,7 +20,7 @@ Cost for reactive case detection.
 \references{
 \strong{cost_per_person_tested}
 
-Larson et al (2014)
+Larson et al (2016)
 
-\url{}.
+\url{https://malariajournal.biomedcentral.com/articles/10.1186/s12936-016-1457-5}.
 }

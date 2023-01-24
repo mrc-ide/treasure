@@ -11,7 +11,7 @@
 #' @references
 #' \strong{cost_per_pop_at_risk}
 #'
-#' Estimate from Patouillard et al (2017), consisting of a summary from strategic
+#' Estimate from Patouillard et al (2017), consisting of a summary from the strategic
 #' plans from: Botswana, Nigeria, India, Eritrea, Swaziland, Namibia.
 #'
 #' \url{https://gh.bmj.com/content/2/2/e000176}.

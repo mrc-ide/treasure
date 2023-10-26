@@ -4,12 +4,12 @@
 \alias{cost_inpatient}
 \title{Cost per inpatient visit}
 \usage{
-cost_inpatient(n_visits, cost_per_visit, average_stay_duration = 3)
+cost_inpatient(n_visits, cost_per_day, average_stay_duration = 3)
 }
 \arguments{
 \item{n_visits}{Number of visits}
 
-\item{cost_per_visit}{Cost per visit}
+\item{cost_per_day}{Cost per day}
 
 \item{average_stay_duration}{Average duration of stay, defaults to 3 days following Patouillard et al 2017.}
 }

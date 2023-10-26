@@ -45,13 +45,13 @@ test_that("WHO CHOICE costing", {
   expect_error(cost_outpatient(n_visits = 1, cost_per_visit = -1), "Outpatient cost inputs must be >= 0")
 
   # Inpatient
-  expect_equal(cost_inpatient(n_visits = 1, cost_per_visit = 1), 1 * 1 * 3)
-  expect_equal(cost_inpatient(n_visits = 1, cost_per_visit = 1, average_stay_duration = 4), 1 * 1 * 4)
-  expect_equal(cost_inpatient(n_visits = 2, cost_per_visit = 1), 2 * 1 * 3)
-  expect_equal(cost_inpatient(n_visits = c(1, 2), cost_per_visit = 1), c(1, 2) * 1 * 3)
+  expect_equal(cost_inpatient(n_visits = 1, cost_per_day = 1), 1 * 1 * 3)
+  expect_equal(cost_inpatient(n_visits = 1, cost_per_day = 1, average_stay_duration = 4), 1 * 1 * 4)
+  expect_equal(cost_inpatient(n_visits = 2, cost_per_day = 1), 2 * 1 * 3)
+  expect_equal(cost_inpatient(n_visits = c(1, 2), cost_per_day = 1), c(1, 2) * 1 * 3)
 
-  expect_equal(cost_inpatient(n_visits = 1, cost_per_visit = 2), 1 * 2 * 3)
+  expect_equal(cost_inpatient(n_visits = 1, cost_per_day = 2), 1 * 2 * 3)
 
-  expect_error(cost_inpatient(n_visits = -1, cost_per_visit = 1), "All n_visits estimates must be >= 0")
-  expect_error(cost_inpatient(n_visits = 1, cost_per_visit = -1), "Inpatient cost inputs must be >= 0")
+  expect_error(cost_inpatient(n_visits = -1, cost_per_day = 1), "All n_visits estimates must be >= 0")
+  expect_error(cost_inpatient(n_visits = 1, cost_per_day = -1), "Inpatient cost inputs must be >= 0")
 })

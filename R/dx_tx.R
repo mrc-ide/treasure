@@ -147,20 +147,20 @@ cost_outpatient <- function(n_visits, cost_per_visit){
 #' For information on country specific inpatient costs from WHO CHOICE see \code{?who_coice}
 #'
 #' @param n_visits Number of visits
-#' @param cost_per_visit Cost per visit
+#' @param cost_per_day Cost per day
 #' @param average_stay_duration Average duration of stay, defaults to 3 days following Patouillard et al 2017.
 #'
 #' @return Inpatient costs
 #' @export
-cost_inpatient <- function(n_visits, cost_per_visit, average_stay_duration = 3){
+cost_inpatient <- function(n_visits, cost_per_day, average_stay_duration = 3){
   if(any(n_visits < 0)){
     stop("All n_visits estimates must be >= 0")
   }
-  if(any(cost_per_visit < 0)){
+  if(any(cost_per_day < 0)){
     stop("Inpatient cost inputs must be >= 0")
   }
 
-  cost <- n_visits * cost_per_visit * average_stay_duration
+  cost <- n_visits * cost_per_day * average_stay_duration
   return(cost)
 }
 

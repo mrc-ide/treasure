@@ -4,7 +4,7 @@
 \alias{cost_pbo_itn}
 \title{Cost pyrethroid-PBO ITN}
 \usage{
-cost_pbo_itn(n_pbo_itn, pbo_itn_unit_cost = 3.51, pbo_itn_delivery_cost = 1.5)
+cost_pbo_itn(n_pbo_itn, pbo_itn_unit_cost = 2.63, pbo_itn_delivery_cost = 1.5)
 }
 \arguments{
 \item{n_pbo_itn}{Number of pyrethroid-PBO bed nets}
@@ -25,7 +25,7 @@ Cost pyrethroid-PBO ITN
 Current default is the average cost for a pyrethroid-PBO ITN, including,
   hooks, strings, bag and customisation.
 
-The Global Fund Pooled Procurement Mechanism Reference Pricing: Insecticide-Treated Nets, version: quarter 1, 2022
+The Global Fund Pooled Procurement Mechanism Reference Pricing: Insecticide-Treated Nets, accessed 16-12-2024
 
 \url{https://www.theglobalfund.org/en/sourcing-management/health-products/long-lasting-insecticidal-nets/}.
 

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# treasure <img src="man/figures/Treasure_hex.png" align="right" width=30% height=30% />
+# treasure <img src="man/figures/Treasure.png" align="right" width=30% height=30% />
 
 <!-- badges: start -->
 
@@ -37,7 +37,7 @@ al](https://www.sciencedirect.com/science/article/pii/S1098301521001479?via%3Dih
 :warning: When using treasure, please be sure to reference the original
 sources, not just the package.
 
-:warning: All costs are in USD$, however the reference year for costs
+:warning: All costs are in USD\$, however the reference year for costs
 may differ and costs have not be inflation-adjusted.
 
 ## Updates

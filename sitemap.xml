@@ -1,69 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cost_al.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cost_inpatient.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cost_ipti.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cost_iptp.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cost_ll_irs_person.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cost_ll_irs_structure.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cost_llin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cost_outpatient.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cost_pacd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cost_pbo_itn.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cost_primaquine.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cost_racd.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cost_rdt.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cost_rtss.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cost_smc.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cost_surveillance.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/who_choice.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/cost_al.html</loc></url>
+<url><loc>/reference/cost_inpatient.html</loc></url>
+<url><loc>/reference/cost_ipti.html</loc></url>
+<url><loc>/reference/cost_iptp.html</loc></url>
+<url><loc>/reference/cost_ll_irs_person.html</loc></url>
+<url><loc>/reference/cost_ll_irs_structure.html</loc></url>
+<url><loc>/reference/cost_llin.html</loc></url>
+<url><loc>/reference/cost_outpatient.html</loc></url>
+<url><loc>/reference/cost_pacd.html</loc></url>
+<url><loc>/reference/cost_pbo_itn.html</loc></url>
+<url><loc>/reference/cost_primaquine.html</loc></url>
+<url><loc>/reference/cost_racd.html</loc></url>
+<url><loc>/reference/cost_rdt.html</loc></url>
+<url><loc>/reference/cost_rtss.html</loc></url>
+<url><loc>/reference/cost_smc.html</loc></url>
+<url><loc>/reference/cost_surveillance.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/who_choice.html</loc></url>
 </urlset>
+

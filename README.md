@@ -1,16 +1,16 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# treasure <img src="man/figures/Treasure_hex.png" align="right" width=30% height=30% />
+# treasure <img src="man/figures/Treasure.png" align="right" width=30% height=30% />
 
 <!-- badges: start -->
 
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-[![R-CMD-check](https://github.com/mrc-ide/treasure/workflows/R-CMD-check/badge.svg)](https://github.com/mrc-ide/treasure/actions)
-[![Coverage
-status](https://codecov.io/gh/mrc-ide/treasure/branch/main/graph/badge.svg)](https://codecov.io/github/mrc-ide/treasure)
+[![R-CMD-check](https://github.com/mrc-ide/treasure/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mrc-ide/treasure/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/mrc-ide/treasure/graph/badge.svg)](https://app.codecov.io/gh/mrc-ide/treasure)
 <!-- badges: end -->
 
 The goal of treasure is to provide basic, generic unit-costing help for
@@ -37,7 +37,7 @@ al](https://www.sciencedirect.com/science/article/pii/S1098301521001479?via%3Dih
 :warning: When using treasure, please be sure to reference the original
 sources, not just the package.
 
-:warning: All costs are in USD$, however the reference year for costs
+:warning: All costs are in USD\$, however the reference year for costs
 may differ and costs have not be inflation-adjusted.
 
 ## Updates

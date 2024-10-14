@@ -4,7 +4,7 @@
 \alias{cost_llin}
 \title{Cost standard LLINS}
 \usage{
-cost_llin(n_llin, llin_unit_cost = 2.52, llin_delivery_cost = 1.5)
+cost_llin(n_llin, llin_unit_cost = 2.02, llin_delivery_cost = 1.5)
 }
 \arguments{
 \item{n_llin}{Number of standard LLIN bed nets}
@@ -25,7 +25,7 @@ Cost standard LLINS
 Current default is the average cost for a pyrethroid-only ITN, including,
   hooks, strings, bag and customisation.
 
-The Global Fund Pooled Procurement Mechanism Reference Pricing: Insecticide-Treated Nets, version: quarter 1, 2022
+The Global Fund Pooled Procurement Mechanism Reference Pricing: Insecticide-Treated Nets, accessed 16-12-2024
 
 \url{https://www.theglobalfund.org/en/sourcing-management/health-products/long-lasting-insecticidal-nets/}.
 

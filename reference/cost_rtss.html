@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">treasure</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,9 +39,9 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cost_rtss</span><span class="op">(</span></span>
 <span>  <span class="va">n_doses</span>,</span>
-<span>  rtss_cost_per_dose <span class="op">=</span> <span class="fl">5</span>,</span>
-<span>  rtss_cosumables_cost <span class="op">=</span> <span class="fl">1.52</span>,</span>
-<span>  rtss_delivery_cost <span class="op">=</span> <span class="fl">1.62</span></span>
+<span>  rtss_cost_per_dose <span class="op">=</span> <span class="fl">10.02</span>,</span>
+<span>  rtss_consumables_cost <span class="op">=</span> <span class="fl">1.52</span>,</span>
+<span>  rtss_delivery_cost <span class="op">=</span> <span class="fl">1.48</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -57,7 +57,7 @@
 <dd><p>Cost per RTS,S dose</p></dd>
 
 
-<dt id="arg-rtss-cosumables-cost">rtss_cosumables_cost<a class="anchor" aria-label="anchor" href="#arg-rtss-cosumables-cost"></a></dt>
+<dt id="arg-rtss-consumables-cost">rtss_consumables_cost<a class="anchor" aria-label="anchor" href="#arg-rtss-consumables-cost"></a></dt>
 <dd><p>Cost for consumables for one dose (e.g injection and reconstitution syringes, safety box etc.)</p></dd>
 
 
@@ -72,17 +72,8 @@
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p><strong>rtss_cost_per_dose</strong></p>
-<p>Current default is the middle value of a commonly used assumed range for dose
-costs ($2, $5, $10). The true cost per does is currently unknown.</p>
-<p>Penny et al (2016)
-<a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(15)00725-4/fulltext" class="external-link">https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(15)00725-4/fulltext</a>.</p>
-<p><strong>rtss_cosumables_cost</strong></p>
-<p>Penny et al (2016)
-<a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(15)00725-4/fulltext" class="external-link">https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(15)00725-4/fulltext</a>.</p>
-<p><strong>rtss_delivery_cost</strong></p>
-<p>Current default is the recurring economic cost of delivery per dose from the MVIP.</p>
-<p>WHO Full Evidence Report on the RTS,S/AS01 Malaria Vaccine (2021)
-<a href="https://cdn.who.int/media/docs/default-source/immunization/mvip/full-evidence-report-on-the-rtss-as01-malaria-vaccine-for-sage-mpag-(sept2021).pdf?sfvrsn=c9737be_5" class="external-link">https://cdn.who.int/media/docs/default-source/immunization/mvip/full-evidence-report-on-the-rtss-as01-malaria-vaccine-for-sage-mpag-(sept2021).pdf?sfvrsn=c9737be_5</a>.</p>
+<p>Current default is based on the EUR9.30 per dose quoted in
+<a href="https://www.unicef.org/supply/media/19456/file/Malaria%20-%20Vaccine%20-%20QA%20-%20October%202023%20-%20English%20.pdf" class="external-link">https://www.unicef.org/supply/media/19456/file/Malaria%20-%20Vaccine%20-%20QA%20-%20October%202023%20-%20English%20.pdf</a></p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -94,7 +85,7 @@ costs ($2, $5, $10). The true cost per does is currently unknown.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

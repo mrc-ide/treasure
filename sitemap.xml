@@ -4,8 +4,8 @@
 <url><loc>/authors.html</loc></url>
 <url><loc>/index.html</loc></url>
 <url><loc>/reference/cost_al.html</loc></url>
+<url><loc>/reference/cost_dualai_itn.html</loc></url>
 <url><loc>/reference/cost_inpatient.html</loc></url>
-<url><loc>/reference/cost_ipti.html</loc></url>
 <url><loc>/reference/cost_iptp.html</loc></url>
 <url><loc>/reference/cost_ll_irs_person.html</loc></url>
 <url><loc>/reference/cost_ll_irs_structure.html</loc></url>
@@ -13,7 +13,9 @@
 <url><loc>/reference/cost_outpatient.html</loc></url>
 <url><loc>/reference/cost_pacd.html</loc></url>
 <url><loc>/reference/cost_pbo_itn.html</loc></url>
+<url><loc>/reference/cost_pmc.html</loc></url>
 <url><loc>/reference/cost_primaquine.html</loc></url>
+<url><loc>/reference/cost_r21.html</loc></url>
 <url><loc>/reference/cost_racd.html</loc></url>
 <url><loc>/reference/cost_rdt.html</loc></url>
 <url><loc>/reference/cost_rtss.html</loc></url>

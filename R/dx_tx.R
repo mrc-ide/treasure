@@ -1,3 +1,126 @@
+#' Estimate total number of RDT diagnostics required
+#'
+#' @param n_cases Vector of malaria case numbers
+#' @param treatment_coverage Treatment coverage
+#' @param proportion_rdt Proportion of diagnostics that are RDT
+#' @param proportion_tested Proportion of treated cases that are tested
+commodity_rdt_tests <- function(n_cases, treatment_coverage, proportion_rdt, proportion_tested = 1){
+  round(n_cases * treatment_coverage * proportion_rdt * proportion_tested)
+}
+
+#' Estimate total number of microscopy diagnostics required
+#'
+#' @inheritParams commodity_rdt_tests
+#' @param proportion_microscopy Proportion of diagnostics that are microscopy
+commodity_microscopy_tests <- function(n_cases, treatment_coverage, proportion_microscopy, proportion_tested = 1){
+  round(n_cases * treatment_coverage * proportion_microscopy * proportion_tested)
+}
+
+#' Estimate total number of RDT diagnostics required as a result of non malarial fevers
+#'
+#' @param n_cases Vector of malaria case numbers
+#' @param treatment_coverage Treatment coverage
+#' @param proportion_rdt Proportion of diagnostics that are RDT
+#' @param proportion_tested Proportion of nmfs that are tested
+#' @param pfpr Prevalence
+#' @param pfpr_threshold Prevalence threshold at which it is assummed NMF are not suspected (and subsequently tested) to be malaria
+commodity_nmf_rdt_tests <- function(n_nmf, treatment_coverage, proportion_rdt, proportion_tested = 1, pfpr, pfpr_threshold = 0.05){
+  ifelse(pfpr > pfpr_threshold, round(n_nmf * treatment_coverage * proportion_rdt * proportion_tested), 0)
+}
+
+#' Estimate total number of microscopy diagnostics required as a result of non malarial fevers
+#'
+#' @param inheritparams commodity_nmf_rdt_tests
+#' @param proportion_microscopy Proportion of diagnostics that are microscopy
+commodity_nmf_microscopy_tests <- function(n_nmf, treatment_coverage, proportion_microscopy, proportion_tested = 1, pfpr, pfpr_threshold = 0.05){
+  ifelse(pfpr > pfpr_threshold, round(n_nmf * treatment_coverage * proportion_microscopy * proportion_tested), 0)
+}
+
+#' Estimate total number of AL doses required
+#'
+#' Note the cost per dose is for a single dose (20/120 mg). A treatment course typically
+#' constitutes Artemether + lumefantrine given twice a day for 3 days following
+#' weight-based guidelines:
+#' \itemize{
+#'   \item 5 to <15 kg: 20/120 mg
+#'   \item 15 to <25 kg: 40/240 mg
+#'   \item 25 to <35 kg: 60/360 mg
+#'   \item >=35 kg: 80/480 mg
+#' }
+#' So course for a single adult (weighing >=35kg) may constitute
+#' 3 days x 2 times daily x 4 doses (4 x 20/120mg = 80/480mg) = 24 doses.
+#'
+#' @param n_cases Vector of malaria case numbers by age band.
+#' @param treatment_coverage Vector of treatment coverage proportions.
+#' @param proportion_act Vector of proportion of treatments that are ACTs.
+#' @param age_upper Vector of upper bounds for each age group.
+#'
+#' @return A vector giving the number of 20/120mg Artemether + lumefantrine ACT doses required per age group.
+#' @export
+commodity_al_doses <- function(n_cases, treatment_coverage, proportion_act, age_upper) {
+  stopifnot(
+    length(n_cases) == length(treatment_coverage),
+    length(n_cases) == length(age_upper)
+  )
+
+  # Dose multipliers per age band (number of 20/120mg doses per course)
+  doses_per_course_child   <- 3 * 2 * 1     # 6 doses
+  doses_per_course_child2  <- 3 * 2 * 2.5   # 15 doses
+  doses_per_course_adult   <- 3 * 2 * 4     # 24 doses
+
+  doses_per_course <- dplyr::case_when(
+    age_upper <= 5  ~ doses_per_course_child,
+    age_upper <= 15 ~ doses_per_course_child2,
+    age_upper > 15  ~ doses_per_course_adult,
+    TRUE ~ NA_real_
+  )
+
+  round(n_cases * treatment_coverage * proportion_act * doses_per_course)
+}
+
+#' Estimate total number of AL doses required
+#'
+#' Note the cost per dose is for a single dose (20/120 mg). A treatment course typically
+#' constitutes Artemether + lumefantrine given twice a day for 3 days following
+#' weight-based guidelines:
+#' \itemize{
+#'   \item 5 to <15 kg: 20/120 mg
+#'   \item 15 to <25 kg: 40/240 mg
+#'   \item 25 to <35 kg: 60/360 mg
+#'   \item >=35 kg: 80/480 mg
+#' }
+#' So course for a single adult (weighing >=35kg) may constitute
+#' 3 days x 2 times daily x 4 doses (4 x 20/120mg = 80/480mg) = 24 doses.
+#'
+#' @param n_cases Vector of malaria case numbers by age band.
+#' @param treatment_coverage Vector of treatment coverage proportions.
+#' @param proportion_act Vector of proportion of treatments that are ACTs.
+#' @param age_upper Vector of upper bounds for each age group.
+#'
+#' @return A vector giving the number of 20/120mg Artemether + lumefantrine ACT doses required per age group.
+#' @export
+commodity_nmf_al_doses <- function(n_nmf, treatment_coverage, proportion_act, age_upper, pfpr) {
+  stopifnot(
+    length(n_cases) == length(treatment_coverage),
+    length(n_cases) == length(age_upper)
+  )
+
+  # Dose multipliers per age band (number of 20/120mg doses per course)
+  doses_per_course_child   <- 3 * 2 * 1     # 6 doses
+  doses_per_course_child2  <- 3 * 2 * 2.5   # 15 doses
+  doses_per_course_adult   <- 3 * 2 * 4     # 24 doses
+
+  doses_per_course <- dplyr::case_when(
+    age_upper <= 5  ~ doses_per_course_child,
+    age_upper <= 15 ~ doses_per_course_child2,
+    age_upper > 15  ~ doses_per_course_adult,
+    TRUE ~ NA_real_
+  )
+
+  ifelse(pfpr > pfpr_threshold, round(n_nmf * pfpr * treatment_coverage * proportion_act * doses_per_course), 0)
+}
+
+
 #' Cost RDTs
 #'
 #' RDTs are used for diagnosis of malaria. When costing it is also common to add
@@ -42,19 +165,9 @@ cost_rdt <- function(n_tests, rdt_unit_cost = 0.46, delivery_mark_up = 0.15){
 
 #' Cost Artemether/Lumefantrine treatment
 #'
-#' Note the cost per dose is for a single dose (20/120 mg). A treatment course typically
-#' constitutes Artemether + lumefantrine given twice a day for 3 days following
-#' weight-based guidelines:
-#' \itemize{
-#'   \item 5 to <15 kg: 20/120 mg
-#'   \item 15 to <25 kg: 40/240 mg
-#'   \item 25 to <35 kg: 60/360 mg
-#'   \item >=35 kg: 80/480 mg
-#' }
-#' So course for a single adult (weighing >=35kg) may constitute
-#' 3 days x 2 times daily x 4 doses (4 x 20/120mg = 80/480mg) = 24 doses.
+#' Note the cost per dose is for a single dose (20/120 mg), not a full treatment course.
 #'
-#' @param n_doses Number of tests
+#' @param n_doses Number of doses
 #' @param cost_per_dose Cost per dose is for a single dose (20/120 mg)
 #'
 #' @return AL costs

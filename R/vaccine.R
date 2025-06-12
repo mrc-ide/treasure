@@ -1,3 +1,22 @@
+#' Number of vaccine doses delivered
+#'
+#' Note, if duration for full course (primary + boosters) is >1 year, costs for
+#' the full course will be all assigned to the year of the primary series.
+#'
+#' @param vaccine_cov A single value or vector of vaccine coverage.
+#' @param par_vaccine Population at risk within vaccine-eligible age range estimates.
+#' @param n_dose_primary_series Number of doses in the primary series
+#' @param booster_coverage_downscale Drop off in coverage between primary series and
+#' boosters such that `booster coverage = vaccine_cov * booster_coverage_downscale`
+#' @param n_boosters Number of booster doses
+#'
+#' @returns The total number of vaccine doses delivered.
+commodity_doses_vaccine <- function(vaccine_cov, par_vaccine, n_dose_primary_series = 3, booster_coverage_downscale = 0.8, n_boosters = 1){
+  n_vaccine <- vaccine_cov * par_vaccine
+  n_doses_rtss <- round((n_vaccine * n_dose_primary_series) + (n_vaccine * booster_coverage_downscale * n_boosters))
+  return(n_doses_rtss)
+}
+
 #' Cost RTS,S
 #'
 #' @param n_doses Number of RTS,S doses

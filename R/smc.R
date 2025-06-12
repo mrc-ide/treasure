@@ -2,7 +2,7 @@
 #'
 #' @param smc_cov A single value or vector of SMC coverage.
 #' @param n_rounds The number of SMC rounds per year
-#' @param par_smc Population at risk within SMC-eligable age range estimates.
+#' @param par_smc Population at risk within SMC-eligible age range estimates.
 #'
 #' @return The total number of SMC doses delivered.
 #' @export

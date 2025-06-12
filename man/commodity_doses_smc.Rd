@@ -11,7 +11,7 @@ commodity_doses_smc(smc_cov, n_rounds, par_smc)
 
 \item{n_rounds}{The number of SMC rounds per year}
 
-\item{par_smc}{Population at risk within SMC-eligable age range estimates.}
+\item{par_smc}{Population at risk within SMC-eligible age range estimates.}
 }
 \value{
 The total number of SMC doses delivered.

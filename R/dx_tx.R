@@ -18,7 +18,7 @@ commodity_microscopy_tests <- function(n_cases, treatment_coverage, proportion_m
 
 #' Estimate total number of RDT diagnostics required as a result of non malarial fevers
 #'
-#' @param n_cases Vector of malaria case numbers
+#' @param n_nmf Vector of non malarial fever case numbers
 #' @param treatment_coverage Treatment coverage
 #' @param proportion_rdt Proportion of diagnostics that are RDT
 #' @param proportion_tested Proportion of nmfs that are tested
@@ -30,7 +30,7 @@ commodity_nmf_rdt_tests <- function(n_nmf, treatment_coverage, proportion_rdt, p
 
 #' Estimate total number of microscopy diagnostics required as a result of non malarial fevers
 #'
-#' @param inheritparams commodity_nmf_rdt_tests
+#' @inheritParams commodity_nmf_rdt_tests
 #' @param proportion_microscopy Proportion of diagnostics that are microscopy
 commodity_nmf_microscopy_tests <- function(n_nmf, treatment_coverage, proportion_microscopy, proportion_tested = 1, pfpr, pfpr_threshold = 0.05){
   ifelse(pfpr > pfpr_threshold, round(n_nmf * treatment_coverage * proportion_microscopy * proportion_tested), 0)

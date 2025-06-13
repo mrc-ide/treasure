@@ -1,15 +1,15 @@
 #' Estimate the number of bed nets required to match usage target
 #'
-#' @param itn_use A single value or vector of desired target usages to model.
+#' @param usage A single value or vector of desired target usages to model.
 #' @param use_rate A single value or vector of usage rates.
 #' @param distribution_timesteps Timesteps of distributions (days). By default,
 #' we can assume that net distributions happen on the first day of each year.
 #' For example c(1, 366)
 #' @param crop_timesteps Timesteps of crop estimates (days). If assuming distribtions
-#' occur on the first day of each year, a reasonable asumption would be that the
+#' occur on the first day of each year, a reasonable assumption would be that the
 #' crop (and therefore corresponding usage) estimates were taken at the mid-point of each year.
 #' For example c(1, 366) + 183.
-#' @param half_life Country-specific) half-life of nets in days.
+#' @param half_life Country-specific half-life of nets in days.
 #' @param par Population at risk estimates.
 #' @param ... additional arguments for the crop_to_distribution function in netz
 #'

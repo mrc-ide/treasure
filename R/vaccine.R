@@ -10,7 +10,8 @@
 #' boosters such that `booster coverage = vaccine_cov * booster_coverage_downscale`
 #' @param n_boosters Number of booster doses
 #'
-#' @returns The total number of vaccine doses delivered.
+#' @return The total number of vaccine doses delivered.
+#' @export
 commodity_doses_vaccine <- function(vaccine_cov, par_vaccine, n_dose_primary_series = 3, booster_coverage_downscale = 0.8, n_boosters = 1){
   n_vaccine <- vaccine_cov * par_vaccine
   n_doses_rtss <- round((n_vaccine * n_dose_primary_series) + (n_vaccine * booster_coverage_downscale * n_boosters))

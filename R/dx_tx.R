@@ -5,6 +5,24 @@
 #' @param proportion_rdt Proportion of diagnostics that are RDT
 #' @param proportion_tested Proportion of treated cases that are tested
 commodity_rdt_tests <- function(n_cases, treatment_coverage, proportion_rdt, proportion_tested = 1){
+  stopifnot(
+    is.numeric(n_cases),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_rdt),
+    is.numeric(proportion_tested)
+  )
+  stopifnot(
+    all(n_cases >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_rdt >= 0 & proportion_rdt <= 1),
+    all(proportion_tested >= 0 & proportion_tested <= 1)
+  )
+  stopifnot(
+    length(n_cases) == length(treatment_coverage),
+    length(n_cases) == length(proportion_rdt),
+    length(proportion_tested) == 1
+  )
+
   round(n_cases * treatment_coverage * proportion_rdt * proportion_tested)
 }
 
@@ -13,6 +31,24 @@ commodity_rdt_tests <- function(n_cases, treatment_coverage, proportion_rdt, pro
 #' @inheritParams commodity_rdt_tests
 #' @param proportion_microscopy Proportion of diagnostics that are microscopy
 commodity_microscopy_tests <- function(n_cases, treatment_coverage, proportion_microscopy, proportion_tested = 1){
+  stopifnot(
+    is.numeric(n_cases),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_microscopy),
+    is.numeric(proportion_tested)
+  )
+  stopifnot(
+    all(n_cases >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_microscopy >= 0 & proportion_microscopy <= 1),
+    all(proportion_tested >= 0 & proportion_tested <= 1)
+  )
+  stopifnot(
+    length(n_cases) == length(treatment_coverage),
+    length(n_cases) == length(proportion_microscopy),
+    length(proportion_tested) == 1
+  )
+
   round(n_cases * treatment_coverage * proportion_microscopy * proportion_tested)
 }
 
@@ -25,6 +61,30 @@ commodity_microscopy_tests <- function(n_cases, treatment_coverage, proportion_m
 #' @param pfpr Prevalence
 #' @param pfpr_threshold Prevalence threshold at which it is assummed NMF are not suspected (and subsequently tested) to be malaria
 commodity_nmf_rdt_tests <- function(n_nmf, treatment_coverage, proportion_rdt, proportion_tested = 1, pfpr, pfpr_threshold = 0.05){
+  stopifnot(
+    is.numeric(n_nmf),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_rdt),
+    is.numeric(proportion_tested),
+    is.numeric(pfpr),
+    is.numeric(pfpr_threshold)
+  )
+  stopifnot(
+    all(n_nmf >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_rdt >= 0 & proportion_rdt <= 1),
+    all(proportion_tested >= 0 & proportion_tested <= 1),
+    all(pfpr >= 0 & pfpr <= 1),
+    pfpr_threshold >= 0 & pfpr_threshold <= 1
+  )
+  stopifnot(
+    length(pfpr_threshold) == 1,
+    length(n_nmf) == length(treatment_coverage),
+    length(n_nmf) == length(proportion_rdt),
+    length(proportion_tested) == 1,
+    length(n_nmf) == length(pfpr)
+  )
+
   ifelse(pfpr > pfpr_threshold, round(n_nmf * treatment_coverage * proportion_rdt * proportion_tested), 0)
 }
 
@@ -33,6 +93,30 @@ commodity_nmf_rdt_tests <- function(n_nmf, treatment_coverage, proportion_rdt, p
 #' @param inheritparams commodity_nmf_rdt_tests
 #' @param proportion_microscopy Proportion of diagnostics that are microscopy
 commodity_nmf_microscopy_tests <- function(n_nmf, treatment_coverage, proportion_microscopy, proportion_tested = 1, pfpr, pfpr_threshold = 0.05){
+  stopifnot(
+    is.numeric(n_nmf),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_microscopy),
+    is.numeric(proportion_tested),
+    is.numeric(pfpr),
+    is.numeric(pfpr_threshold)
+  )
+  stopifnot(
+    all(n_nmf >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_microscopy >= 0 & proportion_microscopy <= 1),
+    all(proportion_tested >= 0 & proportion_tested <= 1),
+    all(pfpr >= 0 & pfpr <= 1),
+    pfpr_threshold >= 0 & pfpr_threshold <= 1
+  )
+  stopifnot(
+    length(pfpr_threshold) == 1,
+    length(n_nmf) == length(treatment_coverage),
+    length(n_nmf) == length(proportion_microscopy),
+    length(proportion_tested) == 1,
+    length(n_nmf) == length(pfpr)
+  )
+
   ifelse(pfpr > pfpr_threshold, round(n_nmf * treatment_coverage * proportion_microscopy * proportion_tested), 0)
 }
 
@@ -59,8 +143,21 @@ commodity_nmf_microscopy_tests <- function(n_nmf, treatment_coverage, proportion
 #' @export
 commodity_al_doses <- function(n_cases, treatment_coverage, proportion_act, age_upper) {
   stopifnot(
+    is.numeric(n_cases),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_act),
+    is.numeric(age_upper)
+  )
+  stopifnot(
+    all(n_cases >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_act >= 0 & proportion_act <= 1),
+    all(age_upper >= 0)
+  )
+  stopifnot(
     length(n_cases) == length(treatment_coverage),
-    length(n_cases) == length(age_upper)
+    length(n_cases) == length(age_upper),
+    length(n_cases) == length(proportion_act)
   )
 
   # Dose multipliers per age band (number of 20/120mg doses per course)
@@ -103,8 +200,27 @@ commodity_al_doses <- function(n_cases, treatment_coverage, proportion_act, age_
 #' @export
 commodity_nmf_al_doses <- function(n_nmf, treatment_coverage, proportion_act, age_upper, pfpr, pfpr_threshold = 0.05) {
   stopifnot(
+    is.numeric(n_nmf),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_act),
+    is.numeric(age_upper),
+    is.numeric(pfpr),
+    is.numeric(pfpr_threshold)
+  )
+  stopifnot(
+    all(n_nmf >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_act >= 0 & proportion_act <= 1),
+    all(age_upper >= 0),
+    all(pfpr >= 0 & pfpr <= 1),
+    pfpr_threshold >= 0 & pfpr_threshold <= 1
+  )
+  stopifnot(
+    length(pfpr_threshold) == 1,
     length(n_nmf) == length(treatment_coverage),
-    length(n_nmf) == length(age_upper)
+    length(n_nmf) == length(age_upper),
+    length(n_nmf) == length(proportion_act),
+    length(n_nmf) == length(pfpr)
   )
 
   # Dose multipliers per age band (number of 20/120mg doses per course)

@@ -27,3 +27,17 @@ test_that("R21 costing", {
   expect_error(cost_r21(n_doses = 1, r21_consumables_cost = -1), "R21 cost inputs must be >= 0")
   expect_error(cost_r21(n_doses = 1, r21_delivery_cost = -1), "R21 cost inputs must be >= 0")
 })
+
+test_that("Vaccine commodity doses", {
+  expect_equal(
+    commodity_doses_vaccine(vaccine_cov = 0.5, par_vaccine = 100),
+    round((0.5 * 100 * 3) + (0.5 * 100 * 0.8 * 1))
+  )
+  expect_equal(
+    commodity_doses_vaccine(vaccine_cov = c(0.5, 0.6), par_vaccine = c(100, 50)),
+    round(c(
+      (0.5 * 100 * 3) + (0.5 * 100 * 0.8 * 1),
+      (0.6 * 50 * 3) + (0.6 * 50 * 0.8 * 1)
+    ))
+  )
+})

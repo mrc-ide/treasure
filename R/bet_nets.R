@@ -18,6 +18,7 @@
 #' @references
 #' Uses a version of the net stock and flow model as described by:
 #' Bertozzi-Villa, Amelia, et al. Nature communications 12.1 (2021): 1-12.
+#' @export
 commodity_nets <- function(usage, use_rate, distribution_timesteps, crop_timesteps, half_life, par, ...){
   stopifnot(length(usage) == length(par))
 

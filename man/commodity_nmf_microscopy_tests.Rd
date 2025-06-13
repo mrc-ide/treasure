@@ -14,9 +14,17 @@ commodity_nmf_microscopy_tests(
 )
 }
 \arguments{
+\item{n_nmf}{Vector of non malarial fever case numbers}
+
+\item{treatment_coverage}{Treatment coverage}
+
 \item{proportion_microscopy}{Proportion of diagnostics that are microscopy}
 
-\item{inheritparams}{commodity_nmf_rdt_tests}
+\item{proportion_tested}{Proportion of nmfs that are tested}
+
+\item{pfpr}{Prevalence}
+
+\item{pfpr_threshold}{Prevalence threshold at which it is assummed NMF are not suspected (and subsequently tested) to be malaria}
 }
 \description{
 Estimate total number of microscopy diagnostics required as a result of non malarial fevers

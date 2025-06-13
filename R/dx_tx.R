@@ -169,11 +169,18 @@ commodity_al_doses <- function(n_cases, treatment_coverage, proportion_act, age_
   doses_per_course_child2  <- 3 * 2 * 2.5   # 15 doses
   doses_per_course_adult   <- 3 * 2 * 4     # 24 doses
 
-  doses_per_course <- dplyr::case_when(
-    age_upper <= 5  ~ doses_per_course_child,
-    age_upper <= 15 ~ doses_per_course_child2,
-    age_upper > 15  ~ doses_per_course_adult,
-    TRUE ~ NA_real_
+  doses_per_course <- ifelse(
+    age_upper <= 5,
+    doses_per_course_child,
+    ifelse(
+      age_upper <= 15,
+      doses_per_course_child2,
+      ifelse(
+        age_upper > 15,
+        doses_per_course_adult,
+        NA_real_
+      )
+    )
   )
 
   round(n_cases * treatment_coverage * proportion_act * doses_per_course)
@@ -232,11 +239,18 @@ commodity_nmf_al_doses <- function(n_nmf, treatment_coverage, proportion_act, ag
   doses_per_course_child2  <- 3 * 2 * 2.5   # 15 doses
   doses_per_course_adult   <- 3 * 2 * 4     # 24 doses
 
-  doses_per_course <- dplyr::case_when(
-    age_upper <= 5  ~ doses_per_course_child,
-    age_upper <= 15 ~ doses_per_course_child2,
-    age_upper > 15  ~ doses_per_course_adult,
-    TRUE ~ NA_real_
+  doses_per_course <- ifelse(
+    age_upper <= 5,
+    doses_per_course_child,
+    ifelse(
+      age_upper <= 15,
+      doses_per_course_child2,
+      ifelse(
+        age_upper > 15,
+        doses_per_course_adult,
+        NA_real_
+      )
+    )
   )
 
   ifelse(pfpr > pfpr_threshold, round(n_nmf * pfpr * treatment_coverage * proportion_act * doses_per_course), 0)

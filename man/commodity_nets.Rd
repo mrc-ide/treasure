@@ -15,6 +15,8 @@ commodity_nets(
 )
 }
 \arguments{
+\item{usage}{A single value or vector of desired target usages to model.}
+
 \item{use_rate}{A single value or vector of usage rates.}
 
 \item{distribution_timesteps}{Timesteps of distributions (days). By default,
@@ -22,17 +24,15 @@ we can assume that net distributions happen on the first day of each year.
 For example c(1, 366)}
 
 \item{crop_timesteps}{Timesteps of crop estimates (days). If assuming distribtions
-occur on the first day of each year, a reasonable asumption would be that the
+occur on the first day of each year, a reasonable assumption would be that the
 crop (and therefore corresponding usage) estimates were taken at the mid-point of each year.
 For example c(1, 366) + 183.}
 
-\item{half_life}{Country-specific) half-life of nets in days.}
+\item{half_life}{Country-specific half-life of nets in days.}
 
 \item{par}{Population at risk estimates.}
 
 \item{...}{additional arguments for the crop_to_distribution function in netz}
-
-\item{itn_use}{A single value or vector of desired target usages to model.}
 }
 \value{
 Number of nets

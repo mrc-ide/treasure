@@ -14,6 +14,8 @@ commodity_nmf_rdt_tests(
 )
 }
 \arguments{
+\item{n_nmf}{Vector of non malarial fever case numbers}
+
 \item{treatment_coverage}{Treatment coverage}
 
 \item{proportion_rdt}{Proportion of diagnostics that are RDT}
@@ -23,8 +25,6 @@ commodity_nmf_rdt_tests(
 \item{pfpr}{Prevalence}
 
 \item{pfpr_threshold}{Prevalence threshold at which it is assummed NMF are not suspected (and subsequently tested) to be malaria}
-
-\item{n_cases}{Vector of malaria case numbers}
 }
 \description{
 Estimate total number of RDT diagnostics required as a result of non malarial fevers

@@ -9,7 +9,7 @@ commodity_doses_pmc(pmc_cov, par_pmc, n_rounds = 3)
 \arguments{
 \item{pmc_cov}{A single value or vector of pmc coverage.}
 
-\item{par_pmc}{Population at risk within pmc-eligable age range estimates.}
+\item{par_pmc}{Population at risk within pmc-eligible age range estimates.}
 
 \item{n_rounds}{The number of pmc rounds per year}
 }

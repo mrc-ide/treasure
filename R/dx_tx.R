@@ -92,17 +92,19 @@ commodity_al_doses <- function(n_cases, treatment_coverage, proportion_act, age_
 #' So course for a single adult (weighing >=35kg) may constitute
 #' 3 days x 2 times daily x 4 doses (4 x 20/120mg = 80/480mg) = 24 doses.
 #'
-#' @param n_cases Vector of malaria case numbers by age band.
+#' @param n_nmf Vector of non malarial fever case numbers by age band.
 #' @param treatment_coverage Vector of treatment coverage proportions.
 #' @param proportion_act Vector of proportion of treatments that are ACTs.
 #' @param age_upper Vector of upper bounds for each age group.
+#' @param pfpr Prevalence
+#' @param pfpr_threshold Prevalence threshold at which it is assummed NMF are not suspected (and subsequently tested) to be malaria
 #'
 #' @return A vector giving the number of 20/120mg Artemether + lumefantrine ACT doses required per age group.
 #' @export
-commodity_nmf_al_doses <- function(n_nmf, treatment_coverage, proportion_act, age_upper, pfpr) {
+commodity_nmf_al_doses <- function(n_nmf, treatment_coverage, proportion_act, age_upper, pfpr, pfpr_threshold = 0.05) {
   stopifnot(
-    length(n_cases) == length(treatment_coverage),
-    length(n_cases) == length(age_upper)
+    length(n_nmf) == length(treatment_coverage),
+    length(n_nmf) == length(age_upper)
   )
 
   # Dose multipliers per age band (number of 20/120mg doses per course)

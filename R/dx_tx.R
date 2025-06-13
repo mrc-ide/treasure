@@ -4,6 +4,7 @@
 #' @param treatment_coverage Treatment coverage
 #' @param proportion_rdt Proportion of diagnostics that are RDT
 #' @param proportion_tested Proportion of treated cases that are tested
+#' @export
 commodity_rdt_tests <- function(n_cases, treatment_coverage, proportion_rdt, proportion_tested = 1){
   stopifnot(
     is.numeric(n_cases),
@@ -30,6 +31,7 @@ commodity_rdt_tests <- function(n_cases, treatment_coverage, proportion_rdt, pro
 #'
 #' @inheritParams commodity_rdt_tests
 #' @param proportion_microscopy Proportion of diagnostics that are microscopy
+#' @export
 commodity_microscopy_tests <- function(n_cases, treatment_coverage, proportion_microscopy, proportion_tested = 1){
   stopifnot(
     is.numeric(n_cases),
@@ -59,7 +61,8 @@ commodity_microscopy_tests <- function(n_cases, treatment_coverage, proportion_m
 #' @param proportion_rdt Proportion of diagnostics that are RDT
 #' @param proportion_tested Proportion of nmfs that are tested
 #' @param pfpr Prevalence
-#' @param pfpr_threshold Prevalence threshold at which it is assumed NMF are not suspected (and subsequently tested) to be malaria
+#' @param pfpr_threshold Prevalence threshold at which it is assummed NMF are not suspected (and subsequently tested) to be malaria
+#' @export
 commodity_nmf_rdt_tests <- function(n_nmf, treatment_coverage, proportion_rdt, proportion_tested = 1, pfpr, pfpr_threshold = 0.05){
   stopifnot(
     is.numeric(n_nmf),
@@ -92,6 +95,7 @@ commodity_nmf_rdt_tests <- function(n_nmf, treatment_coverage, proportion_rdt, p
 #'
 #' @inheritParams commodity_nmf_rdt_tests
 #' @param proportion_microscopy Proportion of diagnostics that are microscopy
+#' @export
 commodity_nmf_microscopy_tests <- function(n_nmf, treatment_coverage, proportion_microscopy, proportion_tested = 1, pfpr, pfpr_threshold = 0.05){
   stopifnot(
     is.numeric(n_nmf),

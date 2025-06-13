@@ -120,7 +120,6 @@ commodity_nmf_al_doses <- function(n_nmf, treatment_coverage, proportion_act, ag
   ifelse(pfpr > pfpr_threshold, round(n_nmf * pfpr * treatment_coverage * proportion_act * doses_per_course), 0)
 }
 
-
 #' Cost RDTs
 #'
 #' RDTs are used for diagnosis of malaria. When costing it is also common to add

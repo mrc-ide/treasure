@@ -1,3 +1,59 @@
+#' Estimate the number of bed nets required to match usage target
+#'
+#' @param usage A single value or vector of desired target usages to model.
+#' @param use_rate A single value or vector of usage rates.
+#' @param distribution_timesteps Timesteps of distributions (days). By default,
+#' we can assume that net distributions happen on the first day of each year.
+#' For example c(1, 366)
+#' @param crop_timesteps Timesteps of crop estimates (days). If assuming distribtions
+#' occur on the first day of each year, a reasonable assumption would be that the
+#' crop (and therefore corresponding usage) estimates were taken at the mid-point of each year.
+#' For example c(1, 366) + 183.
+#' @param half_life Country-specific half-life of nets in days.
+#' @param par Population at risk estimates.
+#' @param ... additional arguments for the crop_to_distribution function in netz
+#'
+#' @return Number of nets
+#'
+#' @references
+#' Uses a version of the net stock and flow model as described by:
+#' Bertozzi-Villa, Amelia, et al. Nature communications 12.1 (2021): 1-12.
+#' @export
+commodity_nets <- function(usage, use_rate, distribution_timesteps, crop_timesteps, half_life, par, ...){
+  stopifnot(
+    is.numeric(usage),
+    is.numeric(use_rate),
+    is.numeric(distribution_timesteps),
+    is.numeric(crop_timesteps),
+    is.numeric(half_life),
+    is.numeric(par)
+  )
+  stopifnot(
+    all(usage >= 0 & usage <= 1),
+    all(use_rate >= 0 & use_rate <= 1),
+    all(distribution_timesteps >= 0),
+    all(crop_timesteps >= 0),
+    half_life >= 0,
+    all(par >= 0)
+  )
+  stopifnot(
+    length(half_life) == 1,
+    length(usage) == length(par)
+  )
+
+  access <- netz::usage_to_access(usage = usage, use_rate = use_rate)
+  crop <- netz::access_to_crop(access = access)
+  dist <- netz::crop_to_distribution(
+    crop = crop,
+    crop_timesteps = crop_timesteps,
+    distribution_timesteps = distribution_timesteps,
+    half_life = half_life,
+    ...
+  )
+  n_nets <- round(dist * par)
+  return(n_nets)
+}
+
 #' Cost standard LLINS
 #'
 #' @param n_llin Number of standard LLIN bed nets

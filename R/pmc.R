@@ -1,3 +1,30 @@
+#' Number of doses of PMC
+#'
+#' @param pmc_cov A single value or vector of pmc coverage.
+#' @param n_rounds The number of pmc rounds per year
+#' @param par_pmc Population at risk within pmc-eligible age range estimates.
+#'
+#' @return The total number of pmc doses delivered.
+#' @export
+commodity_doses_pmc <- function(pmc_cov, par_pmc, n_rounds = 3){
+  stopifnot(
+    is.numeric(pmc_cov),
+    is.numeric(par_pmc),
+    is.numeric(n_rounds)
+  )
+  stopifnot(
+    all(pmc_cov >= 0 & pmc_cov <= 1),
+    n_rounds >= 0,
+    all(par_pmc >= 0)
+  )
+  stopifnot(
+    length(n_rounds) == 1,
+    length(pmc_cov) == length(par_pmc)
+  )
+
+  round(pmc_cov * n_rounds * par_pmc)
+}
+
 #' Cost PMC
 #'
 #' @param n_doses Number of PMC doses

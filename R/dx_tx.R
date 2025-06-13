@@ -1,3 +1,261 @@
+#' Estimate total number of RDT diagnostics required
+#'
+#' @param n_cases Vector of malaria case numbers
+#' @param treatment_coverage Treatment coverage
+#' @param proportion_rdt Proportion of diagnostics that are RDT
+#' @param proportion_tested Proportion of treated cases that are tested
+#' @export
+commodity_rdt_tests <- function(n_cases, treatment_coverage, proportion_rdt, proportion_tested = 1){
+  stopifnot(
+    is.numeric(n_cases),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_rdt),
+    is.numeric(proportion_tested)
+  )
+  stopifnot(
+    all(n_cases >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_rdt >= 0 & proportion_rdt <= 1),
+    all(proportion_tested >= 0 & proportion_tested <= 1)
+  )
+  stopifnot(
+    length(n_cases) == length(treatment_coverage),
+    length(n_cases) == length(proportion_rdt),
+    length(proportion_tested) == 1
+  )
+
+  round(n_cases * treatment_coverage * proportion_rdt * proportion_tested)
+}
+
+#' Estimate total number of microscopy diagnostics required
+#'
+#' @inheritParams commodity_rdt_tests
+#' @param proportion_microscopy Proportion of diagnostics that are microscopy
+#' @export
+commodity_microscopy_tests <- function(n_cases, treatment_coverage, proportion_microscopy, proportion_tested = 1){
+  stopifnot(
+    is.numeric(n_cases),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_microscopy),
+    is.numeric(proportion_tested)
+  )
+  stopifnot(
+    all(n_cases >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_microscopy >= 0 & proportion_microscopy <= 1),
+    all(proportion_tested >= 0 & proportion_tested <= 1)
+  )
+  stopifnot(
+    length(n_cases) == length(treatment_coverage),
+    length(n_cases) == length(proportion_microscopy),
+    length(proportion_tested) == 1
+  )
+
+  round(n_cases * treatment_coverage * proportion_microscopy * proportion_tested)
+}
+
+#' Estimate total number of RDT diagnostics required as a result of non malarial fevers
+#'
+#' @param n_nmf Vector of non malarial fever case numbers
+#' @param treatment_coverage Treatment coverage
+#' @param proportion_rdt Proportion of diagnostics that are RDT
+#' @param proportion_tested Proportion of nmfs that are tested
+#' @param pfpr Prevalence
+#' @param pfpr_threshold Prevalence threshold at which it is assummed NMF are not suspected (and subsequently tested) to be malaria
+#' @export
+commodity_nmf_rdt_tests <- function(n_nmf, treatment_coverage, proportion_rdt, proportion_tested = 1, pfpr, pfpr_threshold = 0.05){
+  stopifnot(
+    is.numeric(n_nmf),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_rdt),
+    is.numeric(proportion_tested),
+    is.numeric(pfpr),
+    is.numeric(pfpr_threshold)
+  )
+  stopifnot(
+    all(n_nmf >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_rdt >= 0 & proportion_rdt <= 1),
+    all(proportion_tested >= 0 & proportion_tested <= 1),
+    all(pfpr >= 0 & pfpr <= 1),
+    pfpr_threshold >= 0 & pfpr_threshold <= 1
+  )
+  stopifnot(
+    length(pfpr_threshold) == 1,
+    length(n_nmf) == length(treatment_coverage),
+    length(n_nmf) == length(proportion_rdt),
+    length(proportion_tested) == 1,
+    length(n_nmf) == length(pfpr)
+  )
+
+  ifelse(pfpr > pfpr_threshold, round(n_nmf * treatment_coverage * proportion_rdt * proportion_tested), 0)
+}
+
+#' Estimate total number of microscopy diagnostics required as a result of non malarial fevers
+#'
+#' @inheritParams commodity_nmf_rdt_tests
+#' @param proportion_microscopy Proportion of diagnostics that are microscopy
+#' @export
+commodity_nmf_microscopy_tests <- function(n_nmf, treatment_coverage, proportion_microscopy, proportion_tested = 1, pfpr, pfpr_threshold = 0.05){
+  stopifnot(
+    is.numeric(n_nmf),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_microscopy),
+    is.numeric(proportion_tested),
+    is.numeric(pfpr),
+    is.numeric(pfpr_threshold)
+  )
+  stopifnot(
+    all(n_nmf >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_microscopy >= 0 & proportion_microscopy <= 1),
+    all(proportion_tested >= 0 & proportion_tested <= 1),
+    all(pfpr >= 0 & pfpr <= 1),
+    pfpr_threshold >= 0 & pfpr_threshold <= 1
+  )
+  stopifnot(
+    length(pfpr_threshold) == 1,
+    length(n_nmf) == length(treatment_coverage),
+    length(n_nmf) == length(proportion_microscopy),
+    length(proportion_tested) == 1,
+    length(n_nmf) == length(pfpr)
+  )
+
+  ifelse(pfpr > pfpr_threshold, round(n_nmf * treatment_coverage * proportion_microscopy * proportion_tested), 0)
+}
+
+#' Estimate total number of AL doses required
+#'
+#' Note the cost per dose is for a single dose (20/120 mg). A treatment course typically
+#' constitutes Artemether + lumefantrine given twice a day for 3 days following
+#' weight-based guidelines:
+#' \itemize{
+#'   \item 5 to <15 kg: 20/120 mg
+#'   \item 15 to <25 kg: 40/240 mg
+#'   \item 25 to <35 kg: 60/360 mg
+#'   \item >=35 kg: 80/480 mg
+#' }
+#' So course for a single adult (weighing >=35kg) may constitute
+#' 3 days x 2 times daily x 4 doses (4 x 20/120mg = 80/480mg) = 24 doses.
+#'
+#' @param n_cases Vector of malaria case numbers by age band.
+#' @param treatment_coverage Vector of treatment coverage proportions.
+#' @param proportion_act Vector of proportion of treatments that are ACTs.
+#' @param age_upper Vector of upper bounds for each age group.
+#'
+#' @return A vector giving the number of 20/120mg Artemether + lumefantrine ACT doses required per age group.
+#' @export
+commodity_al_doses <- function(n_cases, treatment_coverage, proportion_act, age_upper) {
+  stopifnot(
+    is.numeric(n_cases),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_act),
+    is.numeric(age_upper)
+  )
+  stopifnot(
+    all(n_cases >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_act >= 0 & proportion_act <= 1),
+    all(age_upper >= 0)
+  )
+  stopifnot(
+    length(n_cases) == length(treatment_coverage),
+    length(n_cases) == length(age_upper),
+    length(n_cases) == length(proportion_act)
+  )
+
+  # Dose multipliers per age band (number of 20/120mg doses per course)
+  doses_per_course_child   <- 3 * 2 * 1     # 6 doses
+  doses_per_course_child2  <- 3 * 2 * 2.5   # 15 doses
+  doses_per_course_adult   <- 3 * 2 * 4     # 24 doses
+
+  doses_per_course <- ifelse(
+    age_upper <= 5,
+    doses_per_course_child,
+    ifelse(
+      age_upper <= 15,
+      doses_per_course_child2,
+      ifelse(
+        age_upper > 15,
+        doses_per_course_adult,
+        NA_real_
+      )
+    )
+  )
+
+  round(n_cases * treatment_coverage * proportion_act * doses_per_course)
+}
+
+#' Estimate total number of AL doses required
+#'
+#' Note the cost per dose is for a single dose (20/120 mg). A treatment course typically
+#' constitutes Artemether + lumefantrine given twice a day for 3 days following
+#' weight-based guidelines:
+#' \itemize{
+#'   \item 5 to <15 kg: 20/120 mg
+#'   \item 15 to <25 kg: 40/240 mg
+#'   \item 25 to <35 kg: 60/360 mg
+#'   \item >=35 kg: 80/480 mg
+#' }
+#' So course for a single adult (weighing >=35kg) may constitute
+#' 3 days x 2 times daily x 4 doses (4 x 20/120mg = 80/480mg) = 24 doses.
+#'
+#' @param n_nmf Vector of non malarial fever case numbers by age band.
+#' @param treatment_coverage Vector of treatment coverage proportions.
+#' @param proportion_act Vector of proportion of treatments that are ACTs.
+#' @param age_upper Vector of upper bounds for each age group.
+#' @param pfpr Prevalence
+#' @param pfpr_threshold Prevalence threshold at which it is assummed NMF are not suspected (and subsequently tested) to be malaria
+#'
+#' @return A vector giving the number of 20/120mg Artemether + lumefantrine ACT doses required per age group.
+#' @export
+commodity_nmf_al_doses <- function(n_nmf, treatment_coverage, proportion_act, age_upper, pfpr, pfpr_threshold = 0.05) {
+  stopifnot(
+    is.numeric(n_nmf),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_act),
+    is.numeric(age_upper),
+    is.numeric(pfpr),
+    is.numeric(pfpr_threshold)
+  )
+  stopifnot(
+    all(n_nmf >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_act >= 0 & proportion_act <= 1),
+    all(age_upper >= 0),
+    all(pfpr >= 0 & pfpr <= 1),
+    pfpr_threshold >= 0 & pfpr_threshold <= 1
+  )
+  stopifnot(
+    length(pfpr_threshold) == 1,
+    length(n_nmf) == length(treatment_coverage),
+    length(n_nmf) == length(age_upper),
+    length(n_nmf) == length(proportion_act),
+    length(n_nmf) == length(pfpr)
+  )
+
+  # Dose multipliers per age band (number of 20/120mg doses per course)
+  doses_per_course_child   <- 3 * 2 * 1     # 6 doses
+  doses_per_course_child2  <- 3 * 2 * 2.5   # 15 doses
+  doses_per_course_adult   <- 3 * 2 * 4     # 24 doses
+
+  doses_per_course <- ifelse(
+    age_upper <= 5,
+    doses_per_course_child,
+    ifelse(
+      age_upper <= 15,
+      doses_per_course_child2,
+      ifelse(
+        age_upper > 15,
+        doses_per_course_adult,
+        NA_real_
+      )
+    )
+  )
+
+  ifelse(pfpr > pfpr_threshold, round(n_nmf * pfpr * treatment_coverage * proportion_act * doses_per_course), 0)
+}
+
 #' Cost RDTs
 #'
 #' RDTs are used for diagnosis of malaria. When costing it is also common to add
@@ -42,19 +300,9 @@ cost_rdt <- function(n_tests, rdt_unit_cost = 0.46, delivery_mark_up = 0.15){
 
 #' Cost Artemether/Lumefantrine treatment
 #'
-#' Note the cost per dose is for a single dose (20/120 mg). A treatment course typically
-#' constitutes Artemether + lumefantrine given twice a day for 3 days following
-#' weight-based guidelines:
-#' \itemize{
-#'   \item 5 to <15 kg: 20/120 mg
-#'   \item 15 to <25 kg: 40/240 mg
-#'   \item 25 to <35 kg: 60/360 mg
-#'   \item >=35 kg: 80/480 mg
-#' }
-#' So course for a single adult (weighing >=35kg) may constitute
-#' 3 days x 2 times daily x 4 doses (4 x 20/120mg = 80/480mg) = 24 doses.
+#' Note the cost per dose is for a single dose (20/120 mg), not a full treatment course.
 #'
-#' @param n_doses Number of tests
+#' @param n_doses Number of doses
 #' @param cost_per_dose Cost per dose is for a single dose (20/120 mg)
 #'
 #' @return AL costs

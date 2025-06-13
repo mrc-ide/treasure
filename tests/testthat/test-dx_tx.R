@@ -55,3 +55,68 @@ test_that("WHO CHOICE costing", {
   expect_error(cost_inpatient(n_visits = -1, cost_per_day = 1), "All n_visits estimates must be >= 0")
   expect_error(cost_inpatient(n_visits = 1, cost_per_day = -1), "Inpatient cost inputs must be >= 0")
 })
+
+test_that("commodity diagnostic calculations", {
+  expect_equal(
+    commodity_rdt_tests(n_cases = 100, treatment_coverage = 0.5, proportion_rdt = 0.8, proportion_tested = 0.5),
+    round(100 * 0.5 * 0.8 * 0.5)
+  )
+  expect_equal(
+    commodity_microscopy_tests(n_cases = c(100, 50), treatment_coverage = c(0.5, 0.5), proportion_microscopy = c(0.6, 0.4), proportion_tested = 1),
+    round(c(100 * 0.5 * 0.6 * 1, 50 * 0.5 * 0.4 * 1))
+  )
+
+  expect_equal(
+    commodity_nmf_rdt_tests(n_nmf = 10, treatment_coverage = 0.5, proportion_rdt = 1, proportion_tested = 1, pfpr = 0.1, pfpr_threshold = 0.05),
+    round(10 * 0.5 * 1 * 1)
+  )
+  expect_equal(
+    commodity_nmf_rdt_tests(n_nmf = 10, treatment_coverage = 0.5, proportion_rdt = 1, proportion_tested = 1, pfpr = 0.02, pfpr_threshold = 0.05),
+    0
+  )
+
+  expect_equal(
+    commodity_nmf_microscopy_tests(n_nmf = 10, treatment_coverage = 0.5, proportion_microscopy = 1, proportion_tested = 1, pfpr = 0.1, pfpr_threshold = 0.05),
+    round(10 * 0.5 * 1 * 1)
+  )
+  expect_equal(
+    commodity_nmf_microscopy_tests(n_nmf = 10, treatment_coverage = 0.5, proportion_microscopy = 1, proportion_tested = 1, pfpr = 0.03, pfpr_threshold = 0.05),
+    0
+  )
+})
+
+test_that("commodity treatment doses", {
+  expect_equal(
+    commodity_al_doses(
+      n_cases = c(10, 20, 30),
+      treatment_coverage = c(1, 1, 1),
+      proportion_act = c(1, 1, 1),
+      age_upper = c(5, 15, 20)
+    ),
+    c(60, 300, 720)
+  )
+
+  expect_equal(
+    commodity_nmf_al_doses(
+      n_nmf = c(10, 20, 30),
+      treatment_coverage = c(1, 1, 1),
+      proportion_act = c(1, 1, 1),
+      age_upper = c(5, 15, 20),
+      pfpr = c(0.1, 0.06, 0.1),
+      pfpr_threshold = 0.05
+    ),
+    round(c(10, 20, 30) * c(0.1, 0.06, 0.1) * c(1, 1, 1) * c(1, 1, 1) * c(6, 15, 24))
+  )
+
+  expect_equal(
+    commodity_nmf_al_doses(
+      n_nmf = 10,
+      treatment_coverage = 1,
+      proportion_act = 1,
+      age_upper = 5,
+      pfpr = 0.01,
+      pfpr_threshold = 0.05
+    ),
+    0
+  )
+})

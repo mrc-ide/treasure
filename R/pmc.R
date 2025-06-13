@@ -2,7 +2,7 @@
 #'
 #' @param pmc_cov A single value or vector of pmc coverage.
 #' @param n_rounds The number of pmc rounds per year
-#' @param par_pmc Population at risk within pmc-eligable age range estimates.
+#' @param par_pmc Population at risk within pmc-eligible age range estimates.
 #'
 #' @return The total number of pmc doses delivered.
 #' @export

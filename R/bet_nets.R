@@ -1,15 +1,15 @@
 #' Estimate the number of bed nets required to match usage target
 #'
-#' @param itn_use A single value or vector of desired target usages to model.
+#' @param usage A single value or vector of desired target usages to model.
 #' @param use_rate A single value or vector of usage rates.
 #' @param distribution_timesteps Timesteps of distributions (days). By default,
 #' we can assume that net distributions happen on the first day of each year.
 #' For example c(1, 366)
 #' @param crop_timesteps Timesteps of crop estimates (days). If assuming distribtions
-#' occur on the first day of each year, a reasonable asumption would be that the
+#' occur on the first day of each year, a reasonable assumption would be that the
 #' crop (and therefore corresponding usage) estimates were taken at the mid-point of each year.
 #' For example c(1, 366) + 183.
-#' @param half_life Country-specific) half-life of nets in days.
+#' @param half_life Country-specific half-life of nets in days.
 #' @param par Population at risk estimates.
 #' @param ... additional arguments for the crop_to_distribution function in netz
 #'
@@ -20,7 +20,26 @@
 #' Bertozzi-Villa, Amelia, et al. Nature communications 12.1 (2021): 1-12.
 #' @export
 commodity_nets <- function(usage, use_rate, distribution_timesteps, crop_timesteps, half_life, par, ...){
-  stopifnot(length(usage) == length(par))
+  stopifnot(
+    is.numeric(usage),
+    is.numeric(use_rate),
+    is.numeric(distribution_timesteps),
+    is.numeric(crop_timesteps),
+    is.numeric(half_life),
+    is.numeric(par)
+  )
+  stopifnot(
+    all(usage >= 0 & usage <= 1),
+    all(use_rate >= 0 & use_rate <= 1),
+    all(distribution_timesteps >= 0),
+    all(crop_timesteps >= 0),
+    half_life >= 0,
+    all(par >= 0)
+  )
+  stopifnot(
+    length(half_life) == 1,
+    length(usage) == length(par)
+  )
 
   access <- netz::usage_to_access(usage = usage, use_rate = use_rate)
   crop <- netz::access_to_crop(access = access)

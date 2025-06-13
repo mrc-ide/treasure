@@ -33,3 +33,37 @@ test_that("Pyrethroid-chlorfenapyr costing", {
   expect_error(cost_dualai_itn(n_dualai_itn = 1, dualai_itn_unit_cost = -1), "Dual ai cost inputs must be >= 0")
   expect_error(cost_dualai_itn(n_dualai_itn = 1, dualai_itn_delivery_cost = -1), "Dual ai cost inputs must be >= 0")
 })
+
+test_that("Commodity nets", {
+  skip_if_not_installed("netz")
+  usage <- c(0.5, 0.6)
+  use_rate <- 0.5
+  dist_steps <- c(1, 366)
+  crop_steps <- dist_steps + 183
+  half_life <- 730
+  par <- c(100, 100)
+
+  expected <- {
+    access <- netz::usage_to_access(usage = usage, use_rate = use_rate)
+    crop <- netz::access_to_crop(access = access)
+    dist <- netz::crop_to_distribution(
+      crop = crop,
+      crop_timesteps = crop_steps,
+      distribution_timesteps = dist_steps,
+      half_life = half_life
+    )
+    round(dist * par)
+  }
+
+  expect_equal(
+    commodity_nets(
+      usage = usage,
+      use_rate = use_rate,
+      distribution_timesteps = dist_steps,
+      crop_timesteps = crop_steps,
+      half_life = half_life,
+      par = par
+    ),
+    expected
+  )
+})

@@ -7,7 +7,21 @@
 #' @return The total number of SMC doses delivered.
 #' @export
 commodity_doses_smc <- function(smc_cov, n_rounds, par_smc){
-  stopifnot(length(smc_cov) == length(par_smc))
+  stopifnot(
+    is.numeric(smc_cov),
+    is.numeric(n_rounds),
+    is.numeric(par_smc)
+  )
+  stopifnot(
+    all(smc_cov >= 0 & smc_cov <= 1),
+    n_rounds >= 0,
+    all(par_smc >= 0)
+  )
+  stopifnot(
+    length(n_rounds) == 1,
+    length(smc_cov) == length(par_smc)
+  )
+
   round(smc_cov * n_rounds * par_smc)
 }
 

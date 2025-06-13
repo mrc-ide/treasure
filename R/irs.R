@@ -7,7 +7,21 @@
 #' @return The total number of person-rounds of IRS protection.
 #' @export
 commodity_person_rounds_irs <- function(irs_cov, n_rounds, par){
-  stopifnot(length(irs_cov) == length(par))
+  stopifnot(
+    is.numeric(irs_cov),
+    is.numeric(n_rounds),
+    is.numeric(par)
+  )
+  stopifnot(
+    all(irs_cov >= 0 & irs_cov <= 1),
+    n_rounds >= 0,
+    all(par >= 0)
+  )
+  stopifnot(
+    length(n_rounds) == 1,
+    length(irs_cov) == length(par)
+  )
+
   round(irs_cov * n_rounds * par)
 }
 
@@ -21,8 +35,24 @@ commodity_person_rounds_irs <- function(irs_cov, n_rounds, par){
 #' @return The total number of structure-rounds of IRS protection.
 #' @export
 commodity_structure_rounds_irs <- function(irs_cov, n_rounds, par, hh_size){
-  stopifnot(length(irs_cov) == length(par))
-  stopifnot(length(hh_size) == 1)
+  stopifnot(
+    is.numeric(irs_cov),
+    is.numeric(n_rounds),
+    is.numeric(par),
+    is.numeric(hh_size)
+  )
+  stopifnot(
+    all(irs_cov >= 0 & irs_cov <= 1),
+    n_rounds >= 0,
+    all(par >= 0),
+    hh_size >= 0
+  )
+  stopifnot(
+    length(n_rounds) == 1,
+    length(hh_size) == 1,
+    length(irs_cov) == length(par)
+  )
+
   round((irs_cov * n_rounds * par) / hh_size)
 }
 

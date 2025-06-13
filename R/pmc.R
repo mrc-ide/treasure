@@ -7,7 +7,21 @@
 #' @return The total number of pmc doses delivered.
 #' @export
 commodity_doses_pmc <- function(pmc_cov, par_pmc, n_rounds = 3){
-  stopifnot(length(pmc_cov) == length(par_pmc))
+  stopifnot(
+    is.numeric(pmc_cov),
+    is.numeric(par_pmc),
+    is.numeric(n_rounds)
+  )
+  stopifnot(
+    all(pmc_cov >= 0 & pmc_cov <= 1),
+    n_rounds >= 0,
+    all(par_pmc >= 0)
+  )
+  stopifnot(
+    length(n_rounds) == 1,
+    length(pmc_cov) == length(par_pmc)
+  )
+
   round(pmc_cov * n_rounds * par_pmc)
 }
 

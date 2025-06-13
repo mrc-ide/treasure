@@ -19,7 +19,26 @@
 #' Uses a version of the net stock and flow model as described by:
 #' Bertozzi-Villa, Amelia, et al. Nature communications 12.1 (2021): 1-12.
 commodity_nets <- function(usage, use_rate, distribution_timesteps, crop_timesteps, half_life, par, ...){
-  stopifnot(length(usage) == length(par))
+  stopifnot(
+    is.numeric(usage),
+    is.numeric(use_rate),
+    is.numeric(distribution_timesteps),
+    is.numeric(crop_timesteps),
+    is.numeric(half_life),
+    is.numeric(par)
+  )
+  stopifnot(
+    all(usage >= 0 & usage <= 1),
+    all(use_rate >= 0 & use_rate <= 1),
+    all(distribution_timesteps >= 0),
+    all(crop_timesteps >= 0),
+    half_life >= 0,
+    all(par >= 0)
+  )
+  stopifnot(
+    length(half_life) == 1,
+    length(usage) == length(par)
+  )
 
   access <- netz::usage_to_access(usage = usage, use_rate = use_rate)
   crop <- netz::access_to_crop(access = access)

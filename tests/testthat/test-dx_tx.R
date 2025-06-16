@@ -1,16 +1,16 @@
 test_that("RDT costing", {
-  unit <- inflation_adjust(0.46 + (0.46 * 0.15), 1999, 2024)
+  unit <- inflation_adjust(0.46 + (0.46 * 0.15), 2022, 2024)
   expect_equal(cost_rdt(n_tests = 1), 1 * unit)
   expect_equal(cost_rdt(n_tests = 2), 2 * unit)
   expect_equal(cost_rdt(n_tests = c(1, 2)), c(1, 2) * unit)
 
   expect_equal(
     cost_rdt(n_tests = 1, rdt_unit_cost  = 2, target_year = 2024),
-    1 * inflation_adjust(2 + (2 * 0.15), 1999, 2024)
+    1 * inflation_adjust(2 + (2 * 0.15), 2022, 2024)
   )
   expect_equal(
     cost_rdt(n_tests = 1, delivery_mark_up  = 0.5, target_year = 2024),
-    1 * inflation_adjust(0.46 + (0.46 * 0.5), 1999, 2024)
+    1 * inflation_adjust(0.46 + (0.46 * 0.5), 2022, 2024)
   )
 
   expect_error(cost_rdt(n_tests = -1), "All n_tests estimates must be >= 0")
@@ -19,14 +19,14 @@ test_that("RDT costing", {
 })
 
 test_that("Microscopy costing", {
-  unit <- inflation_adjust(0.67, 1999, 2024)
+  unit <- inflation_adjust(0.26, 2007, 2024)
   expect_equal(cost_microscopy(n_tests = 1), 1 * unit)
   expect_equal(cost_microscopy(n_tests = 2), 2 * unit)
   expect_equal(cost_microscopy(n_tests = c(1, 2)), c(1, 2) * unit)
 
   expect_equal(
     cost_microscopy(n_tests = 1, cost_per_slide = 2, target_year = 2024),
-    1 * inflation_adjust(2, 1999, 2024)
+    1 * inflation_adjust(2, 2007, 2024)
   )
 
   expect_error(cost_microscopy(n_tests = -1), "All n_tests estimates must be >= 0")
@@ -34,14 +34,14 @@ test_that("Microscopy costing", {
 })
 
 test_that("AL costing", {
-  unit <- inflation_adjust(0.3, 1999, 2024)
+  unit <- inflation_adjust(0.3, 2022, 2024)
   expect_equal(cost_al(n_doses = 1), 1 * unit)
   expect_equal(cost_al(n_doses = 2), 2 * unit)
   expect_equal(cost_al(n_doses = c(1, 2)), c(1, 2) * unit)
 
   expect_equal(
     cost_al(n_doses = 1, cost_per_dose  = 2, target_year = 2024),
-    1 * inflation_adjust(2, 1999, 2024)
+    1 * inflation_adjust(2, 2022, 2024)
   )
 
   expect_error(cost_al(n_doses = -1), "All n_doses estimates must be >= 0")
@@ -49,14 +49,14 @@ test_that("AL costing", {
 })
 
 test_that("Chloroquine costing", {
-  unit <- inflation_adjust(0.10 / 10, 1999, 2024)
+  unit <- inflation_adjust(0.10 / 10, 2003, 2024)
   expect_equal(cost_chloroquine(n_doses = 1), 1 * unit)
   expect_equal(cost_chloroquine(n_doses = 2), 2 * unit)
   expect_equal(cost_chloroquine(n_doses = c(1, 2)), c(1, 2) * unit)
 
   expect_equal(
     cost_chloroquine(n_doses = 1, cost_per_dose = 2, target_year = 2024),
-    1 * inflation_adjust(2, 1999, 2024)
+    1 * inflation_adjust(2, 2003, 2024)
   )
 
   expect_error(cost_chloroquine(n_doses = -1), "All n_doses estimates must be >= 0")
@@ -64,14 +64,14 @@ test_that("Chloroquine costing", {
 })
 
 test_that("Primaquine costing", {
-  unit <- inflation_adjust(0.4, 1999, 2024)
+  unit <- inflation_adjust(0.4, 2022, 2024)
   expect_equal(cost_primaquine(n_doses = 1), 1 * unit)
   expect_equal(cost_primaquine(n_doses = 2), 2 * unit)
   expect_equal(cost_primaquine(n_doses = c(1, 2)), c(1, 2) * unit)
 
   expect_equal(
     cost_primaquine(n_doses = 1, cost_per_dose  = 2, target_year = 2024),
-    1 * inflation_adjust(2, 1999, 2024)
+    1 * inflation_adjust(2, 2022, 2024)
   )
 
   expect_error(cost_primaquine(n_doses = -1), "All n_doses estimates must be >= 0")
@@ -80,21 +80,21 @@ test_that("Primaquine costing", {
 
 test_that("WHO CHOICE costing", {
   # Outpatient
-  unit_out <- inflation_adjust(1, 1999, 2024)
+  unit_out <- inflation_adjust(1, 2021, 2024)
   expect_equal(cost_outpatient(n_visits = 1, cost_per_visit = 1), 1 * unit_out)
   expect_equal(cost_outpatient(n_visits = 2, cost_per_visit = 1), 2 * unit_out)
   expect_equal(cost_outpatient(n_visits = c(1, 2), cost_per_visit = 1), c(1, 2) * unit_out)
 
   expect_equal(
     cost_outpatient(n_visits = 1, cost_per_visit = 2, target_year = 2024),
-    1 * inflation_adjust(2, 1999, 2024)
+    1 * inflation_adjust(2, 2021, 2024)
   )
 
   expect_error(cost_outpatient(n_visits = -1, cost_per_visit = 1), "All n_visits estimates must be >= 0")
   expect_error(cost_outpatient(n_visits = 1, cost_per_visit = -1), "Outpatient cost inputs must be >= 0")
 
   # Inpatient
-  unit_in <- inflation_adjust(1, 1999, 2024)
+  unit_in <- inflation_adjust(1, 2021, 2024)
   expect_equal(cost_inpatient(n_visits = 1, cost_per_day = 1), 1 * unit_in * 3)
   expect_equal(
     cost_inpatient(n_visits = 1, cost_per_day = 1, average_stay_duration = 4),
@@ -105,7 +105,7 @@ test_that("WHO CHOICE costing", {
 
   expect_equal(
     cost_inpatient(n_visits = 1, cost_per_day = 2, target_year = 2024),
-    1 * inflation_adjust(2, 1999, 2024) * 3
+    1 * inflation_adjust(2, 2021, 2024) * 3
   )
 
   expect_error(cost_inpatient(n_visits = -1, cost_per_day = 1), "All n_visits estimates must be >= 0")

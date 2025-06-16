@@ -29,6 +29,8 @@ commodity_doses_pmc <- function(pmc_cov, par_pmc, n_rounds = 3){
 #'
 #' @param n_doses Number of PMC doses
 #' @param pmc_cost_per_dose_delivered Cost per dose delivered
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return PMC costs
 #' @export
@@ -46,7 +48,9 @@ commodity_doses_pmc <- function(pmc_cov, par_pmc, n_rounds = 3){
 #' Conteh et al (2010) table S4
 #'
 #' \url{https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0010313}.
-cost_pmc <- function(n_doses, pmc_cost_per_dose_delivered = 0.3894){
+cost_pmc <- function(n_doses, pmc_cost_per_dose_delivered = 0.3894,
+                     input_year = 1999,
+                     ...){
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
   }
@@ -54,6 +58,8 @@ cost_pmc <- function(n_doses, pmc_cost_per_dose_delivered = 0.3894){
     stop("PMC cost inputs must be >= 0")
   }
 
-  cost <- n_doses * pmc_cost_per_dose_delivered
+  unit_cost <- inflation_adjust(pmc_cost_per_dose_delivered, input_year,
+                                ...)
+  cost <- n_doses * unit_cost
   return(cost)
 }

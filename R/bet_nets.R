@@ -59,6 +59,8 @@ commodity_nets <- function(usage, use_rate, distribution_timesteps, crop_timeste
 #' @param n_llin Number of standard LLIN bed nets
 #' @param llin_unit_cost Commodity unit cost per standard LLIN bed net.
 #' @param llin_delivery_cost Cost to deliver one standard LLIN bet net.
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return LLIN costs
 #' @export
@@ -78,7 +80,8 @@ commodity_nets <- function(usage, use_rate, distribution_timesteps, crop_timeste
 #' Sherrard-Smith et al (2022)
 #'
 #' \url{https://www.thelancet.com/journals/lanplh/article/PIIS2542-5196(21)00296-5/fulltext}.
-cost_llin <- function(n_llin, llin_unit_cost = 2.02, llin_delivery_cost = 1.50) {
+cost_llin <- function(n_llin, llin_unit_cost = 2.02, llin_delivery_cost = 1.50,
+                      input_year = 1999, ...) {
   if(any(n_llin < 0)){
     stop("All llin_n estimates must be >= 0")
   }
@@ -86,8 +89,9 @@ cost_llin <- function(n_llin, llin_unit_cost = 2.02, llin_delivery_cost = 1.50) 
     stop("LLIN cost inputs must be >= 0")
   }
 
-  cost_per_net_delivered <- llin_unit_cost + llin_delivery_cost
-  cost <- n_llin * cost_per_net_delivered
+  unit_cost <- llin_unit_cost + llin_delivery_cost
+  unit_cost <- inflation_adjust(unit_cost, input_year, ...)
+  cost <- n_llin * unit_cost
   return(cost)
 }
 
@@ -96,6 +100,8 @@ cost_llin <- function(n_llin, llin_unit_cost = 2.02, llin_delivery_cost = 1.50) 
 #' @param n_pbo_itn Number of pyrethroid-PBO bed nets
 #' @param pbo_itn_unit_cost Commodity unit cost per pyrethroid-PBO ITN bed net.
 #' @param pbo_itn_delivery_cost Cost to deliver one pyrethroid-PBO ITN bet net.
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return LLIN costs
 #' @export
@@ -114,7 +120,9 @@ cost_llin <- function(n_llin, llin_unit_cost = 2.02, llin_delivery_cost = 1.50) 
 #' Sherrard-Smith et al (2022)
 #'
 #' \url{https://www.thelancet.com/journals/lanplh/article/PIIS2542-5196(21)00296-5/fulltext}.
-cost_pbo_itn <- function(n_pbo_itn, pbo_itn_unit_cost = 2.63, pbo_itn_delivery_cost = 1.50) {
+cost_pbo_itn <- function(n_pbo_itn, pbo_itn_unit_cost = 2.63,
+                         pbo_itn_delivery_cost = 1.50, input_year = 1999,
+                         ...) {
   if(any(n_pbo_itn < 0)){
     stop("All llin_n estimates must be >= 0")
   }
@@ -122,8 +130,9 @@ cost_pbo_itn <- function(n_pbo_itn, pbo_itn_unit_cost = 2.63, pbo_itn_delivery_c
     stop("PBO cost inputs must be >= 0")
   }
 
-  cost_per_net_delivered <- pbo_itn_unit_cost + pbo_itn_delivery_cost
-  cost <- n_pbo_itn * cost_per_net_delivered
+  unit_cost <- pbo_itn_unit_cost + pbo_itn_delivery_cost
+  unit_cost <- inflation_adjust(unit_cost, input_year, ...)
+  cost <- n_pbo_itn * unit_cost
   return(cost)
 }
 
@@ -132,6 +141,8 @@ cost_pbo_itn <- function(n_pbo_itn, pbo_itn_unit_cost = 2.63, pbo_itn_delivery_c
 #' @param n_dualai_itn Number of pyrethroid-chlorfenapyr bed nets
 #' @param dualai_itn_unit_cost Commodity unit cost per pyrethroid-chlorfenapyr ITN bed net.
 #' @param dualai_itn_delivery_cost Cost to deliver one pyrethroid-chlorfenapyr ITN bet net.
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return LLIN costs
 #' @export
@@ -150,7 +161,9 @@ cost_pbo_itn <- function(n_pbo_itn, pbo_itn_unit_cost = 2.63, pbo_itn_delivery_c
 #' Sherrard-Smith et al (2022)
 #'
 #' \url{https://www.thelancet.com/journals/lanplh/article/PIIS2542-5196(21)00296-5/fulltext}.
-cost_dualai_itn <- function(n_dualai_itn, dualai_itn_unit_cost = 2.70, dualai_itn_delivery_cost = 1.50) {
+cost_dualai_itn <- function(n_dualai_itn, dualai_itn_unit_cost = 2.70,
+                            dualai_itn_delivery_cost = 1.50, input_year = 1999,
+                            ...) {
   if(any(n_dualai_itn < 0)){
     stop("All llin_n estimates must be >= 0")
   }
@@ -158,8 +171,9 @@ cost_dualai_itn <- function(n_dualai_itn, dualai_itn_unit_cost = 2.70, dualai_it
     stop("Dual ai cost inputs must be >= 0")
   }
 
-  cost_per_net_delivered <- dualai_itn_unit_cost + dualai_itn_delivery_cost
-  cost <- n_dualai_itn * cost_per_net_delivered
+  unit_cost <- dualai_itn_unit_cost + dualai_itn_delivery_cost
+  unit_cost <- inflation_adjust(unit_cost, input_year, ...)
+  cost <- n_dualai_itn * unit_cost
   return(cost)
 }
 

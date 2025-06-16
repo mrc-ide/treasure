@@ -60,6 +60,8 @@ commodity_structure_rounds_irs <- function(irs_cov, n_rounds, par, hh_size){
 #'
 #' @param n_protected Number of people protected
 #' @param cost_per_person_protected Cost per person protected
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return Long lasting IRS costs
 #' @export
@@ -76,14 +78,18 @@ commodity_structure_rounds_irs <- function(irs_cov, n_rounds, par, hh_size){
 #' PMI IRS Country Programs: 2020, Comparative Cost Analysis, table CC2
 #'
 #' \url{https://www.pmi.gov/pmi-vectorlink-cost-study-report_2020_approved-june-14-2021-sxf-508/}.
-cost_ll_irs_person <- function(n_protected, cost_per_person_protected = 7.44){
+cost_ll_irs_person <- function(n_protected, cost_per_person_protected = 7.44,
+                               input_year = 1999,
+                               ...){
   if(any(n_protected < 0)){
     stop("All n_protected estimates must be >= 0")
   }
   if(any(cost_per_person_protected < 0)){
     stop("Long lasting IRS cost inputs must be >= 0")
   }
-  cost <- n_protected * cost_per_person_protected
+  unit_cost <- inflation_adjust(cost_per_person_protected, input_year,
+                                ...)
+  cost <- n_protected * unit_cost
   return(cost)
 }
 
@@ -91,6 +97,8 @@ cost_ll_irs_person <- function(n_protected, cost_per_person_protected = 7.44){
 #'
 #' @param n_sprayed Number of structures sprayed
 #' @param cost_per_structure_sprayed Cost per structure sprayed
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return Long lasting IRS costs
 #' @export
@@ -107,13 +115,17 @@ cost_ll_irs_person <- function(n_protected, cost_per_person_protected = 7.44){
 #' PMI IRS Country Programs: 2020, Comparative Cost Analysis, table CC2
 #'
 #' \url{https://www.pmi.gov/pmi-vectorlink-cost-study-report_2020_approved-june-14-2021-sxf-508/}.
-cost_ll_irs_structure <- function(n_sprayed, cost_per_structure_sprayed = 26.36){
+cost_ll_irs_structure <- function(n_sprayed, cost_per_structure_sprayed = 26.36,
+                                  input_year = 1999,
+                                  ...){
   if(any(n_sprayed < 0)){
     stop("All n_sprayed estimates must be >= 0")
   }
   if(any(cost_per_structure_sprayed < 0)){
     stop("Long lasting IRS cost inputs must be >= 0")
   }
-  cost <- n_sprayed * cost_per_structure_sprayed
+  unit_cost <- inflation_adjust(cost_per_structure_sprayed, input_year,
+                                ...)
+  cost <- n_sprayed * unit_cost
   return(cost)
 }

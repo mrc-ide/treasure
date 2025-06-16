@@ -45,6 +45,8 @@ commodity_doses_vaccine <- function(vaccine_cov, par_vaccine, n_dose_primary_ser
 #' @param rtss_cost_per_dose Cost per RTS,S dose
 #' @param rtss_consumables_cost Cost for consumables for one dose (e.g injection and reconstitution syringes, safety box etc.)
 #' @param rtss_delivery_cost Cost for delivery of one dose
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return RTS,S costs
 #' @export
@@ -55,15 +57,19 @@ commodity_doses_vaccine <- function(vaccine_cov, par_vaccine, n_dose_primary_ser
 #' Current default is based on the EUR9.30 per dose quoted in
 #' \url{https://www.unicef.org/supply/media/19456/file/Malaria\%20-\%20Vaccine\%20-\%20QA\%20-\%20October\%202023\%20-\%20English\%20.pdf}
 #'
-cost_rtss <- function(n_doses, rtss_cost_per_dose = 10.02, rtss_consumables_cost = 1.52, rtss_delivery_cost = 1.48){
+cost_rtss <- function(n_doses, rtss_cost_per_dose = 10.02,
+                      rtss_consumables_cost = 1.52, rtss_delivery_cost = 1.48,
+                      input_year = 1999,
+                      ...){
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
   }
   if(any(rtss_cost_per_dose < 0) | any(rtss_consumables_cost < 0) | any(rtss_delivery_cost < 0)){
     stop("RTSS cost inputs must be >= 0")
   }
-  rtss_cost_per_dose_delivered <- rtss_cost_per_dose + rtss_consumables_cost + rtss_delivery_cost
-  cost <- n_doses * rtss_cost_per_dose_delivered
+  unit_cost <- rtss_cost_per_dose + rtss_consumables_cost + rtss_delivery_cost
+  unit_cost <- inflation_adjust(unit_cost, input_year, ...)
+  cost <- n_doses * unit_cost
   return(cost)
 }
 
@@ -73,6 +79,8 @@ cost_rtss <- function(n_doses, rtss_cost_per_dose = 10.02, rtss_consumables_cost
 #' @param r21_cost_per_dose Cost per R21 dose
 #' @param r21_consumables_cost Cost for consumables for one dose (e.g injection and reconstitution syringes, safety box etc.)
 #' @param r21_delivery_cost Cost for delivery of one dose
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return R21 costs
 #' @export
@@ -100,14 +108,17 @@ cost_rtss <- function(n_doses, rtss_cost_per_dose = 10.02, rtss_consumables_cost
 #' Age-based: $1.48 (default)
 #' Seasonal: $3.75
 #' Hybrid: $2.36
-cost_r21 <- function(n_doses, r21_cost_per_dose = 4, r21_consumables_cost = 1.52, r21_delivery_cost = 1.48){
+cost_r21 <- function(n_doses, r21_cost_per_dose = 4, r21_consumables_cost = 1.52,
+                     r21_delivery_cost = 1.48, input_year = 1999,
+                     ...){
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
   }
   if(any(r21_cost_per_dose < 0) | any(r21_consumables_cost < 0) | any(r21_delivery_cost < 0)){
     stop("R21 cost inputs must be >= 0")
   }
-  r21_cost_per_dose_delivered <- r21_cost_per_dose + r21_consumables_cost + r21_delivery_cost
-  cost <- n_doses * r21_cost_per_dose_delivered
+  unit_cost <- r21_cost_per_dose + r21_consumables_cost + r21_delivery_cost
+  unit_cost <- inflation_adjust(unit_cost, input_year, ...)
+  cost <- n_doses * unit_cost
   return(cost)
 }

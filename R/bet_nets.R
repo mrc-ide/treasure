@@ -81,7 +81,7 @@ commodity_nets <- function(usage, use_rate, distribution_timesteps, crop_timeste
 #'
 #' \url{https://www.thelancet.com/journals/lanplh/article/PIIS2542-5196(21)00296-5/fulltext}.
 cost_llin <- function(n_llin, llin_unit_cost = 2.02, llin_delivery_cost = 1.50,
-                      input_year = 1999, ...) {
+                      input_year = 2024, ...) {
   if(any(n_llin < 0)){
     stop("All llin_n estimates must be >= 0")
   }
@@ -121,7 +121,7 @@ cost_llin <- function(n_llin, llin_unit_cost = 2.02, llin_delivery_cost = 1.50,
 #'
 #' \url{https://www.thelancet.com/journals/lanplh/article/PIIS2542-5196(21)00296-5/fulltext}.
 cost_pbo_itn <- function(n_pbo_itn, pbo_itn_unit_cost = 2.63,
-                         pbo_itn_delivery_cost = 1.50, input_year = 1999,
+                         pbo_itn_delivery_cost = 1.50, input_year = 2024,
                          ...) {
   if(any(n_pbo_itn < 0)){
     stop("All llin_n estimates must be >= 0")
@@ -162,7 +162,7 @@ cost_pbo_itn <- function(n_pbo_itn, pbo_itn_unit_cost = 2.63,
 #'
 #' \url{https://www.thelancet.com/journals/lanplh/article/PIIS2542-5196(21)00296-5/fulltext}.
 cost_dualai_itn <- function(n_dualai_itn, dualai_itn_unit_cost = 2.70,
-                            dualai_itn_delivery_cost = 1.50, input_year = 1999,
+                            dualai_itn_delivery_cost = 1.50, input_year = 2024,
                             ...) {
   if(any(n_dualai_itn < 0)){
     stop("All llin_n estimates must be >= 0")

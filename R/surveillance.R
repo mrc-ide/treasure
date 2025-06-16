@@ -18,8 +18,7 @@
 #'
 #' \url{https://gh.bmj.com/content/2/2/e000176}.
 cost_surveillance <- function(pop_at_risk, cost_per_pop_at_risk = 0.05,
-                              input_year = 1999,
-                              ...){
+                              input_year = 2017, ..){
   if(any(pop_at_risk < 0)){
     stop("All pop_at_risk estimates must be >= 0")
   }

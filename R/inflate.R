@@ -11,6 +11,7 @@
 #'   supplied, the value of `getOption("treasure.target_year")` is used.
 #' @param region World region. If not supplied, the value of
 #'   `getOption("treasure.region")` is used.
+#' @param adjust Logical indicator if inflation adjustment should be made. Default is true.
 #'
 #' @return Numeric value of the inflation-adjusted cost in `target_year` dollars.
 #'
@@ -26,30 +27,21 @@
 #' inflation_adjust(0.26, 2007, 2024)
 #'
 #' @export
-inflation_adjust <- function(cost, cost_year, target_year = NULL, region = NULL) {
+inflation_adjust <- function(cost, cost_year, target_year = NULL, region = NULL, adjust = TRUE) {
+
+  # In the unlikely event no inflation adjustment needed
+  if(!adjust){
+    return(cost)
+  }
+  # If the user does not override arguments we take package default parameters for adjustment
   if (is.null(target_year)) {
     target_year <- getOption("treasure.target_year")
   }
   if (is.null(region)) {
     region <- getOption("treasure.region")
   }
-
-  n <- max(length(cost), length(cost_year), length(target_year), length(region))
-  cost <- rep(cost, length.out = n)
-  cost_year <- rep(cost_year, length.out = n)
-  target_year <- rep(target_year, length.out = n)
-  region <- rep(region, length.out = n)
-
-  mapply(function(cst, cy, ty, reg) {
-    cpi_region <- cpi[cpi$region == reg, ]
-    if (!(cy %in% cpi_region$year)) {
-      stop(paste("cost_year not found for region:", cy))
-    }
-    if (!(ty %in% cpi_region$year)) {
-      stop(paste("target_year not found for region:", ty))
-    }
-    cpi_base   <- cpi_region$cpi[cpi_region$year == cy]
-    cpi_target <- cpi_region$cpi[cpi_region$year == ty]
-    cst * (cpi_target / cpi_base)
-  }, cost, cost_year, target_year, region, SIMPLIFY = TRUE)
+  cpi_region <- cpi[cpi$region == region, ]
+  cpi_base   <- cpi_region$cpi[cpi_region$year == cost_year]
+  cpi_target <- cpi_region$cpi[cpi_region$year == target_year]
+  cost * (cpi_target / cpi_base)
 }

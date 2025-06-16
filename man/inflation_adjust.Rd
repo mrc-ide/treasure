@@ -4,16 +4,26 @@
 \alias{inflation_adjust}
 \title{Inflate cost to a target year using SSA CPI}
 \usage{
-inflation_adjust(cost, cost_year, target_year, region = "Sub-Saharan Africa")
+inflation_adjust(
+  cost,
+  cost_year,
+  target_year = NULL,
+  region = NULL,
+  adjust = TRUE
+)
 }
 \arguments{
 \item{cost}{Numeric value of the original cost.}
 
 \item{cost_year}{Integer indicating the year corresponding to `cost`.}
 
-\item{target_year}{Integer indicating the year to adjust the cost to.}
+\item{target_year}{Integer indicating the year to adjust the cost to. If not
+supplied, the value of `getOption("treasure.target_year")` is used.}
 
-\item{region}{World region, defaults to SSA}
+\item{region}{World region. If not supplied, the value of
+`getOption("treasure.region")` is used.}
+
+\item{adjust}{Logical indicator if inflation adjustment should be made. Default is true.}
 }
 \value{
 Numeric value of the inflation-adjusted cost in `target_year` dollars.
@@ -28,6 +38,8 @@ level see \url{https://linkinghub.elsevier.com/retrieve/pii/S1098-3015(19)32149-
 The `ssa_cpi` dataset must be included in the package and contain columns:
 - `year`: Calendar year.
 - `cpi`: CPI index value for that year.
+
+This function is vectorised over all arguments.
 }
 \examples{
 # Adjust $0.26 from 2007 to 2024

@@ -4,12 +4,14 @@
 \alias{cost_racd}
 \title{Cost rACD}
 \usage{
-cost_racd(n_tested, cost_per_person_tested = 38.63)
+cost_racd(n_tested, cost_per_person_tested = 38.63, input_year = 2016, ...)
 }
 \arguments{
 \item{n_tested}{Number of people tested}
 
 \item{cost_per_person_tested}{Cost per person tested}
+
+\item{...}{Additional arguments passed to `inflation_adjust()`}
 }
 \value{
 pACD costs

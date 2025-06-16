@@ -57,9 +57,15 @@ commodity_doses_vaccine <- function(vaccine_cov, par_vaccine, n_dose_primary_ser
 #' Current default is based on the EUR9.30 per dose quoted in
 #' \url{https://www.unicef.org/supply/media/19456/file/Malaria\%20-\%20Vaccine\%20-\%20QA\%20-\%20October\%202023\%20-\%20English\%20.pdf}
 #'
+#' \strong{rtss_consumables_cost}
+#'
+#' Penny et al (2016)
+#' \url{https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(15)00725-4/fulltext}.
+#' Pre-inflated so year is the same as dose cost: inflation_adjust(2.52, 2016, 2024) = 3.8
+#'
 cost_rtss <- function(n_doses, rtss_cost_per_dose = 10.02,
-                      rtss_consumables_cost = 1.52, rtss_delivery_cost = 1.48,
-                      input_year = 1999,
+                      rtss_consumables_cost = 3.80, rtss_delivery_cost = 1.48,
+                      input_year = 2024,
                       ...){
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
@@ -98,6 +104,7 @@ cost_rtss <- function(n_doses, rtss_cost_per_dose = 10.02,
 #'
 #' Penny et al (2016)
 #' \url{https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(15)00725-4/fulltext}.
+#' Pre-inflated so year is the same as dose cost: inflation_adjust(2.52, 2016, 2024) = 3.8
 #'
 #' \strong{r21_delivery_cost}
 #'
@@ -108,8 +115,8 @@ cost_rtss <- function(n_doses, rtss_cost_per_dose = 10.02,
 #' Age-based: $1.48 (default)
 #' Seasonal: $3.75
 #' Hybrid: $2.36
-cost_r21 <- function(n_doses, r21_cost_per_dose = 4, r21_consumables_cost = 1.52,
-                     r21_delivery_cost = 1.48, input_year = 1999,
+cost_r21 <- function(n_doses, r21_cost_per_dose = 4, r21_consumables_cost = 3.80,
+                     r21_delivery_cost = 1.48, input_year = 2024,
                      ...){
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")

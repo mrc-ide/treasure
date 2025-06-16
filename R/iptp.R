@@ -33,7 +33,7 @@
 #'
 #' \url{https://malariajournal.biomedcentral.com/articles/10.1186/s12936-016-1539-4}
 cost_iptp <- function(n_administrations, iptp_cost_per_administration = 0.79,
-                      input_year = 1999, ...){
+                      input_year = 2012, ...){
   if(any(n_administrations < 0)){
     stop("All n_administrations estimates must be >= 0")
   }
@@ -41,8 +41,7 @@ cost_iptp <- function(n_administrations, iptp_cost_per_administration = 0.79,
     stop("IPTp cost inputs must be >= 0")
   }
 
-  unit_cost <- inflation_adjust(iptp_cost_per_administration, input_year,
-                                ...)
+  unit_cost <- inflation_adjust(iptp_cost_per_administration, input_year,...)
   cost <- n_administrations * unit_cost
   return(cost)
 }

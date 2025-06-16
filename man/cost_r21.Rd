@@ -7,8 +7,10 @@
 cost_r21(
   n_doses,
   r21_cost_per_dose = 4,
-  r21_consumables_cost = 1.52,
-  r21_delivery_cost = 1.48
+  r21_consumables_cost = 3.8,
+  r21_delivery_cost = 1.48,
+  input_year = 2024,
+  ...
 )
 }
 \arguments{
@@ -19,6 +21,10 @@ cost_r21(
 \item{r21_consumables_cost}{Cost for consumables for one dose (e.g injection and reconstitution syringes, safety box etc.)}
 
 \item{r21_delivery_cost}{Cost for delivery of one dose}
+
+\item{input_year}{Year the unit costs are reported in}
+
+\item{...}{Additional arguments passed to `inflation_adjust()`}
 }
 \value{
 R21 costs
@@ -39,6 +45,7 @@ Penny et al (2016)
 
 Penny et al (2016)
 \url{https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(15)00725-4/fulltext}.
+Pre-inflated so year is the same as dose cost: inflation_adjust(2.52, 2016, 2024) = 3.8
 
 \strong{r21_delivery_cost}
 

@@ -4,12 +4,21 @@
 \alias{cost_surveillance}
 \title{Cost surveillance}
 \usage{
-cost_surveillance(pop_at_risk, cost_per_pop_at_risk = 0.05)
+cost_surveillance(
+  pop_at_risk,
+  cost_per_pop_at_risk = 0.05,
+  input_year = 2017,
+  ..
+)
 }
 \arguments{
 \item{pop_at_risk}{Population at risk}
 
 \item{cost_per_pop_at_risk}{Cost per population at risk}
+
+\item{input_year}{Year the unit costs are reported in}
+
+\item{...}{Additional arguments passed to `inflation_adjust()`}
 }
 \value{
 Surveillance costs

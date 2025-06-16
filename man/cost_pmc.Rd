@@ -4,12 +4,16 @@
 \alias{cost_pmc}
 \title{Cost PMC}
 \usage{
-cost_pmc(n_doses, pmc_cost_per_dose_delivered = 0.3894)
+cost_pmc(n_doses, pmc_cost_per_dose_delivered = 0.3894, input_year = 2007, ...)
 }
 \arguments{
 \item{n_doses}{Number of PMC doses}
 
 \item{pmc_cost_per_dose_delivered}{Cost per dose delivered}
+
+\item{input_year}{Year the unit costs are reported in}
+
+\item{...}{Additional arguments passed to `inflation_adjust()`}
 }
 \value{
 PMC costs
@@ -24,7 +28,7 @@ Current default is the average economic cost of administering 3 rounds of PMC
   (annually), of sulfadoxine–pyrimethamine in Tanzania, Ghana, Mozambique and Gabon.
    The cost per dose delivered is the average cost of trial results for
    three PMC cycles divided by the number of cycles (0.39 / 3). Costs
-   are in 2007 USD$. Cost have been inclfated to adjust for a roughly 3 fold
+   are in 2007 USD$. Cost have been inflated to adjust for a roughly 3 fold
    increase in SP costs (GF price reference data)
 
 Conteh et al (2010) table S4

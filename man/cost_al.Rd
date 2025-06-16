@@ -4,12 +4,16 @@
 \alias{cost_al}
 \title{Cost Artemether/Lumefantrine treatment}
 \usage{
-cost_al(n_doses, cost_per_dose = 0.3)
+cost_al(n_doses, cost_per_dose = 0.3, input_year = 2022, ...)
 }
 \arguments{
 \item{n_doses}{Number of doses}
 
 \item{cost_per_dose}{Cost per dose is for a single dose (20/120 mg)}
+
+\item{input_year}{Year the unit costs are reported in}
+
+\item{...}{Additional arguments passed to `inflation_adjust()`}
 }
 \value{
 AL costs

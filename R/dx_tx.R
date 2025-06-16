@@ -348,7 +348,7 @@ commodity_nmf_al_doses <- function(n_nmf, treatment_coverage, proportion_act, ag
 #'
 #' \url{https://gh.bmj.com/content/2/2/e000176}
 cost_rdt <- function(n_tests, rdt_unit_cost = 0.46, delivery_mark_up = 0.15,
-                     input_year = 1999, ...){
+                     input_year = 2022, ...){
   if(any(n_tests < 0)){
     stop("All n_tests estimates must be >= 0")
   }
@@ -377,10 +377,8 @@ cost_rdt <- function(n_tests, rdt_unit_cost = 0.46, delivery_mark_up = 0.15,
 #'
 #' Estimate of $0.26 per slide taken from Lubell et all (2007)
 #'
-#' `inflation_adjust(0.26, 2007, 2024)`
-#'
 #' \url{https://pubmed.ncbi.nlm.nih.gov/18165484/}.
-cost_microscopy <- function(n_tests, cost_per_slide = 0.67, input_year = 1999,
+cost_microscopy <- function(n_tests, cost_per_slide = 0.26, input_year = 2007,
                            ...){
   if(any(n_tests < 0)){
     stop("All n_tests estimates must be >= 0")
@@ -418,7 +416,7 @@ cost_microscopy <- function(n_tests, cost_per_slide = 0.67, input_year = 1999,
 #' The Global Fund Pooled Procurement Mechanism Reference Pricing: Antimalarial medicines, version: quarter 1, 2022
 #'
 #' \url{https://www.theglobalfund.org/en/sourcing-management/health-products/antimalarial-medicines/}.
-cost_al <- function(n_doses, cost_per_dose = 0.30, input_year = 1999,
+cost_al <- function(n_doses, cost_per_dose = 0.30, input_year = 2022,
                     ...){
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
@@ -449,7 +447,7 @@ cost_al <- function(n_doses, cost_per_dose = 0.30, input_year = 1999,
 #' costs $0.10 total
 #'
 #' \url{https://www.msf.org/qa-act-now-get-malaria-treatment-works-africa}.
-cost_chloroquine <- function(n_doses, cost_per_dose = 0.10 / 10, input_year = 1999,
+cost_chloroquine <- function(n_doses, cost_per_dose = 0.10 / 10, input_year = 2003,
                              ...){
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
@@ -490,7 +488,7 @@ cost_chloroquine <- function(n_doses, cost_per_dose = 0.10 / 10, input_year = 19
 #' The Global Fund Pooled Procurement Mechanism Reference Pricing: Antimalarial medicines, version: quarter 1, 2022
 #'
 #' \url{https://www.theglobalfund.org/en/sourcing-management/health-products/antimalarial-medicines/}.
-cost_primaquine <- function(n_doses, cost_per_dose = 0.40, input_year = 1999,
+cost_primaquine <- function(n_doses, cost_per_dose = 0.40, input_year = 2022,
                             ...){
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
@@ -515,7 +513,7 @@ cost_primaquine <- function(n_doses, cost_per_dose = 0.40, input_year = 1999,
 #'
 #' @return Outpatient costs
 #' @export
-cost_outpatient <- function(n_visits, cost_per_visit, input_year = 1999,
+cost_outpatient <- function(n_visits, cost_per_visit, input_year = 2021,
                            ...){
   if(any(n_visits < 0)){
     stop("All n_visits estimates must be >= 0")
@@ -542,7 +540,7 @@ cost_outpatient <- function(n_visits, cost_per_visit, input_year = 1999,
 #' @return Inpatient costs
 #' @export
 cost_inpatient <- function(n_visits, cost_per_day, average_stay_duration = 3,
-                          input_year = 1999,
+                          input_year = 2021,
                           ...){
   if(any(n_visits < 0)){
     stop("All n_visits estimates must be >= 0")

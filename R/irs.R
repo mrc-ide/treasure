@@ -79,7 +79,7 @@ commodity_structure_rounds_irs <- function(irs_cov, n_rounds, par, hh_size){
 #'
 #' \url{https://www.pmi.gov/pmi-vectorlink-cost-study-report_2020_approved-june-14-2021-sxf-508/}.
 cost_ll_irs_person <- function(n_protected, cost_per_person_protected = 7.44,
-                               input_year = 1999,
+                               input_year = 2020,
                                ...){
   if(any(n_protected < 0)){
     stop("All n_protected estimates must be >= 0")
@@ -87,8 +87,7 @@ cost_ll_irs_person <- function(n_protected, cost_per_person_protected = 7.44,
   if(any(cost_per_person_protected < 0)){
     stop("Long lasting IRS cost inputs must be >= 0")
   }
-  unit_cost <- inflation_adjust(cost_per_person_protected, input_year,
-                                ...)
+  unit_cost <- inflation_adjust(cost_per_person_protected, input_year,...)
   cost <- n_protected * unit_cost
   return(cost)
 }
@@ -116,7 +115,7 @@ cost_ll_irs_person <- function(n_protected, cost_per_person_protected = 7.44,
 #'
 #' \url{https://www.pmi.gov/pmi-vectorlink-cost-study-report_2020_approved-june-14-2021-sxf-508/}.
 cost_ll_irs_structure <- function(n_sprayed, cost_per_structure_sprayed = 26.36,
-                                  input_year = 1999,
+                                  input_year = 2020,
                                   ...){
   if(any(n_sprayed < 0)){
     stop("All n_sprayed estimates must be >= 0")
@@ -124,8 +123,7 @@ cost_ll_irs_structure <- function(n_sprayed, cost_per_structure_sprayed = 26.36,
   if(any(cost_per_structure_sprayed < 0)){
     stop("Long lasting IRS cost inputs must be >= 0")
   }
-  unit_cost <- inflation_adjust(cost_per_structure_sprayed, input_year,
-                                ...)
+  unit_cost <- inflation_adjust(cost_per_structure_sprayed, input_year,...)
   cost <- n_sprayed * unit_cost
   return(cost)
 }

@@ -51,7 +51,7 @@ commodity_doses_smc <- function(smc_cov, n_rounds, par_smc){
 #'
 #' \url{https://www.thelancet.com/journals/langlo/article/PIIS2214-109X(20)30475-7/fulltext}.
 cost_smc <- function(n_doses, smc_cost_per_dose_delivered = 0.9075,
-                     input_year = 1999,
+                     input_year = 2016.,
                      ...){
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
@@ -60,8 +60,7 @@ cost_smc <- function(n_doses, smc_cost_per_dose_delivered = 0.9075,
     stop("SMC cost inputs must be >= 0")
   }
 
-  unit_cost <- inflation_adjust(smc_cost_per_dose_delivered, input_year,
-                                ...)
+  unit_cost <- inflation_adjust(smc_cost_per_dose_delivered, input_year,...)
   cost <- n_doses * unit_cost
   return(cost)
 }

@@ -186,6 +186,66 @@ commodity_al_doses <- function(n_cases, treatment_coverage, proportion_act, age_
   round(n_cases * treatment_coverage * proportion_act * doses_per_course)
 }
 
+#' Estimate total number of Chloroquine doses required
+#'
+#' Note the cost per dose is for a single dose (250 mg chloroquine phosphate).
+#' A treatment course typically constitutes 41mg/kg (max 2500mg) for adults
+#' \itemize{
+#'   \item 5 to <15 kg: 2 doses
+#'   \item 15 to <25 kg: 4 doses
+#'   \item 25 to <35 kg: 5 doses
+#'   \item >=35 kg: 10 doses
+#' }
+#' So course for a single adult may constitute approximately 10 doses.
+#'
+#' @param n_cases Vector of malaria case numbers by age band.
+#' @param treatment_coverage Vector of treatment coverage proportions.
+#' @param proportion_non_act Vector of proportion of treatments that are non-ACT (assumed chloroquine).
+#' @param age_upper Vector of upper bounds for each age group.
+#'
+#' @return A vector giving the number of 250mg chloroquine doses required per age group.
+#' @export
+commodity_al_doses <- function(n_cases, treatment_coverage, proportion_non_act, age_upper) {
+  stopifnot(
+    is.numeric(n_cases),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_act),
+    is.numeric(age_upper)
+  )
+  stopifnot(
+    all(n_cases >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_non_act >= 0 & proportion_non_act <= 1),
+    all(age_upper >= 0)
+  )
+  stopifnot(
+    length(n_cases) == length(treatment_coverage),
+    length(n_cases) == length(age_upper),
+    length(n_cases) == length(proportion_non_act)
+  )
+
+  # Dose multipliers per age band
+  doses_per_course_child   <- 3
+  doses_per_course_child2  <- 5
+  doses_per_course_adult   <- 10
+
+  doses_per_course <- ifelse(
+    age_upper <= 5,
+    doses_per_course_child,
+    ifelse(
+      age_upper <= 15,
+      doses_per_course_child2,
+      ifelse(
+        age_upper > 15,
+        doses_per_course_adult,
+        NA_real_
+      )
+    )
+  )
+
+  round(n_cases * treatment_coverage * proportion_non_act * doses_per_course)
+}
+
 #' Estimate total number of AL doses required
 #'
 #' Note the cost per dose is for a single dose (20/120 mg). A treatment course typically
@@ -326,6 +386,33 @@ cost_al <- function(n_doses, cost_per_dose = 0.30){
   }
   if(any(cost_per_dose < 0)){
     stop("AL cost inputs must be >= 0")
+  }
+
+  cost <- n_doses * cost_per_dose
+  return(cost)
+}
+
+#' Cost Chloroquine treatment
+#'
+#' @param n_doses Number of doses
+#' @param cost_per_dose Cost per dose is for a single dose (250mg base each)
+#'
+#' @return Chloroquine costs
+#' @export
+#'
+#' @references
+#' \strong{cost_per_dose}
+#'
+#' Assumes a full adult course is ~10 tablets of 250mg chloroquine base, and
+#' costs $0.10 total
+#'
+#' \url{https://www.msf.org/qa-act-now-get-malaria-treatment-works-africa}.
+cost_chloroquine <- function(n_doses, cost_per_dose = 0.10 / 10){
+  if(any(n_doses < 0)){
+    stop("All n_doses estimates must be >= 0")
+  }
+  if(any(cost_per_course < 0)){
+    stop("Chloroquine cost inputs must be >= 0")
   }
 
   cost <- n_doses * cost_per_dose

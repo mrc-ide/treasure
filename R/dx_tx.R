@@ -358,6 +358,34 @@ cost_rdt <- function(n_tests, rdt_unit_cost = 0.46, delivery_mark_up = 0.15){
   return(cost)
 }
 
+#' Cost Microscopy
+#'
+#' @param n_tests Number of tests
+#' @param cost_per_slide Cost per slide diagnostic performed
+#'
+#' @return Microscopy costs
+#' @export
+#'
+#' @references
+#' \strong{Microsopy_unit_cost}
+#'
+#' Estimate of $0.26 per slide taken from Lubell et all (2007)
+#'
+#' `inflation_adjust(0.26, 2007, 2024)`
+#'
+#' \url{https://pubmed.ncbi.nlm.nih.gov/18165484/}.
+cost_microscopy <- function(n_tests, cost_per_slide = 0.67){
+  if(any(n_tests < 0)){
+    stop("All n_tests estimates must be >= 0")
+  }
+  if(cost_per_slide < 0){
+    stop("Microscopy cost inputs must be >= 0")
+  }
+
+  cost <- n_tests * cost_per_slide
+  return(cost)
+}
+
 #' Cost Artemether/Lumefantrine treatment
 #'
 #' Note the cost per dose is for a single dose (20/120 mg), not a full treatment course.

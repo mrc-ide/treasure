@@ -205,11 +205,11 @@ commodity_al_doses <- function(n_cases, treatment_coverage, proportion_act, age_
 #'
 #' @return A vector giving the number of 250mg chloroquine doses required per age group.
 #' @export
-commodity_al_doses <- function(n_cases, treatment_coverage, proportion_non_act, age_upper) {
+commodity_chloroquine_doses <- function(n_cases, treatment_coverage, proportion_non_act, age_upper) {
   stopifnot(
     is.numeric(n_cases),
     is.numeric(treatment_coverage),
-    is.numeric(proportion_act),
+    is.numeric(proportion_non_act),
     is.numeric(age_upper)
   )
   stopifnot(
@@ -411,7 +411,7 @@ cost_chloroquine <- function(n_doses, cost_per_dose = 0.10 / 10){
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
   }
-  if(any(cost_per_course < 0)){
+  if(any(cost_per_dose < 0)){
     stop("Chloroquine cost inputs must be >= 0")
   }
 

@@ -22,6 +22,17 @@ test_that("AL costing", {
   expect_error(cost_al(n_doses = 1, cost_per_dose = -1), "AL cost inputs must be >= 0")
 })
 
+test_that("Chloroquine costing", {
+  expect_equal(cost_chloroquine(n_doses = 1), 1 * (0.10 / 10))
+  expect_equal(cost_chloroquine(n_doses = 2), 2 * (0.10 / 10))
+  expect_equal(cost_chloroquine(n_doses = c(1, 2)), c(1, 2) * (0.10 / 10))
+
+  expect_equal(cost_chloroquine(n_doses = 1, cost_per_dose = 2), 1 * 2)
+
+  expect_error(cost_chloroquine(n_doses = -1), "All n_doses estimates must be >= 0")
+  expect_error(cost_chloroquine(n_doses = 1, cost_per_dose = -1), "Chloroquine cost inputs must be >= 0")
+})
+
 test_that("Primaquine costing", {
   expect_equal(cost_primaquine(n_doses = 1), 1 * 0.4)
   expect_equal(cost_primaquine(n_doses = 2), 2 * 0.4)
@@ -118,5 +129,17 @@ test_that("commodity treatment doses", {
       pfpr_threshold = 0.05
     ),
     0
+  )
+})
+
+test_that("chloroquine commodity doses", {
+  expect_equal(
+    commodity_chloroquine_doses(
+      n_cases = c(10, 20, 30),
+      treatment_coverage = c(1, 1, 1),
+      proportion_non_act = c(1, 1, 1),
+      age_upper = c(5, 15, 20)
+    ),
+    c(30, 100, 300)
   )
 })

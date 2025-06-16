@@ -35,13 +35,15 @@ inflation_adjust <- function(cost, cost_year, target_year = NULL, region = NULL,
   }
   # If the user does not override arguments we take package default parameters for adjustment
   if (is.null(target_year)) {
-    target_year <- getOption("treasure.target_year")
+    target_year <- getOption("treasure.target_year", default = 2024)
   }
   if (is.null(region)) {
-    region <- getOption("treasure.region")
+    region <- getOption("treasure.region", default = "Sub-Saharan Africa")
   }
   cpi_region <- cpi[cpi$region == region, ]
   cpi_base   <- cpi_region$cpi[cpi_region$year == cost_year]
   cpi_target <- cpi_region$cpi[cpi_region$year == target_year]
+  #print(cpi_base)
+  #print(cpi_target)
   cost * (cpi_target / cpi_base)
 }

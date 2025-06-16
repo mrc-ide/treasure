@@ -19,6 +19,7 @@ test_that("LLIN costing uses global region", {
   set_region("South Asia")
   unit <- inflation_adjust(2.02 + 1.50, 2024, 2024, region = "South Asia")
   expect_equal(cost_llin(n_llin = 1, target_year = 2024), 1 * unit)
+  set_region("Sub-Saharan Africa")
 })
 
 test_that("Pyrethroid-PBO costing", {

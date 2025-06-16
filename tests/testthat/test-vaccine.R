@@ -1,5 +1,5 @@
 test_that("RTSS costing", {
-  unit <- inflation_adjust(10.02 + 1.52 + 1.48, 1999, 2024)
+  unit <- inflation_adjust(10.02 + 3.80 + 1.48, 2024, 2024)
   expect_equal(cost_rtss(n_doses = 1), 1 * unit)
   expect_equal(cost_rtss(n_doses = 2), 2 * unit)
   expect_equal(cost_rtss(n_doses = c(1, 2)), c(1, 2) * unit)
@@ -8,7 +8,7 @@ test_that("RTSS costing", {
     cost_rtss(n_doses = 1, rtss_cost_per_dose  = 2,
                rtss_consumables_cost  = 3, rtss_delivery_cost = 4,
                target_year = 2024),
-    1 * inflation_adjust(2 + 3 + 4, 1999, 2024)
+    1 * inflation_adjust(2 + 3 + 4, 2024, 2024)
   )
 
   expect_error(cost_rtss(n_doses = -1), "All n_doses estimates must be >= 0")
@@ -18,7 +18,7 @@ test_that("RTSS costing", {
 })
 
 test_that("R21 costing", {
-  unit <- inflation_adjust(4 + 1.52 + 1.48, 1999, 2024)
+  unit <- inflation_adjust(4 + 3.80 + 1.48, 2024, 2024)
   expect_equal(cost_r21(n_doses = 1), 1 * unit)
   expect_equal(cost_r21(n_doses = 2), 2 * unit)
   expect_equal(cost_r21(n_doses = c(1, 2)), c(1, 2) * unit)
@@ -27,7 +27,7 @@ test_that("R21 costing", {
     cost_r21(n_doses = 1, r21_cost_per_dose  = 2,
               r21_consumables_cost  = 3, r21_delivery_cost = 4,
               target_year = 2024),
-    1 * inflation_adjust(2 + 3 + 4, 1999, 2024)
+    1 * inflation_adjust(2 + 3 + 4, 2024, 2024)
   )
 
   expect_error(cost_r21(n_doses = -1), "All n_doses estimates must be >= 0")

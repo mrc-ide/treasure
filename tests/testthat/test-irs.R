@@ -1,27 +1,27 @@
 test_that("IRS costing", {
   # Long lasting per person
-  unit_person <- inflation_adjust(7.44, 1999, 2024)
+  unit_person <- inflation_adjust(7.44, 2020, 2024)
   expect_equal(cost_ll_irs_person(n_protected = 1), 1 * unit_person)
   expect_equal(cost_ll_irs_person(n_protected = 2), 2 * unit_person)
   expect_equal(cost_ll_irs_person(n_protected = c(1, 2)), c(1, 2) * unit_person)
 
   expect_equal(
     cost_ll_irs_person(n_protected = 1, cost_per_person_protected  = 2, target_year = 2024),
-    1 * inflation_adjust(2, 1999, 2024)
+    1 * inflation_adjust(2, 2020, 2024)
   )
 
   expect_error(cost_ll_irs_person(n_protected = -1), "All n_protected estimates must be >= 0")
   expect_error(cost_ll_irs_person(n_protected = 1, cost_per_person_protected = -1), "Long lasting IRS cost inputs must be >= 0")
 
   # Long lasting per structure
-  unit_struct <- inflation_adjust(26.36, 1999, 2024)
+  unit_struct <- inflation_adjust(26.36, 2020, 2024)
   expect_equal(cost_ll_irs_structure(n_sprayed = 1), 1 * unit_struct)
   expect_equal(cost_ll_irs_structure(n_sprayed = 2), 2 * unit_struct)
   expect_equal(cost_ll_irs_structure(n_sprayed = c(1, 2)), c(1, 2) * unit_struct)
 
   expect_equal(
     cost_ll_irs_structure(n_sprayed = 1, cost_per_structure_sprayed  = 2, target_year = 2024),
-    1 * inflation_adjust(2, 1999, 2024)
+    1 * inflation_adjust(2, 2020, 2024)
   )
 
   expect_error(cost_ll_irs_structure(n_sprayed = -1), "All n_sprayed estimates must be >= 0")

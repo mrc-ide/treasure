@@ -8,7 +8,7 @@ cost_surveillance(
   pop_at_risk,
   cost_per_pop_at_risk = 0.05,
   input_year = 2017,
-  ..
+  ...
 )
 }
 \arguments{

@@ -497,7 +497,7 @@ cost_primaquine <- function(n_doses, cost_per_dose = 0.40, input_year = 2022,
     stop("Primaquine cost inputs must be >= 0")
   }
 
-  unit_cost <- inflation_adjust(cost_per_dose, input_year, ...)
+  unit_cost <- inflation_adjust(cost_per_dose, input_year, region = "South Asia", ...)
   cost <- n_doses * unit_cost
   return(cost)
 }

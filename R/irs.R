@@ -87,7 +87,7 @@ cost_ll_irs_person <- function(n_protected, cost_per_person_protected = 7.44,
   if(any(cost_per_person_protected < 0)){
     stop("Long lasting IRS cost inputs must be >= 0")
   }
-  unit_cost <- inflation_adjust(cost_per_person_protected, input_year,...)
+  unit_cost <- inflation_adjust(cost_per_person_protected, input_year, ...)
   cost <- n_protected * unit_cost
   return(cost)
 }
@@ -123,7 +123,7 @@ cost_ll_irs_structure <- function(n_sprayed, cost_per_structure_sprayed = 26.36,
   if(any(cost_per_structure_sprayed < 0)){
     stop("Long lasting IRS cost inputs must be >= 0")
   }
-  unit_cost <- inflation_adjust(cost_per_structure_sprayed, input_year,...)
+  unit_cost <- inflation_adjust(cost_per_structure_sprayed, input_year, ...)
   cost <- n_sprayed * unit_cost
   return(cost)
 }

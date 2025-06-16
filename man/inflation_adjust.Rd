@@ -4,24 +4,18 @@
 \alias{inflation_adjust}
 \title{Inflate cost to a target year using SSA CPI}
 \usage{
-inflation_adjust(
-  cost,
-  cost_year,
-  target_year = NULL,
-  region = NULL,
-  adjust = TRUE
-)
+inflation_adjust(cost, cost_year, region, target_year = NULL, adjust = TRUE)
 }
 \arguments{
 \item{cost}{Numeric value of the original cost.}
 
 \item{cost_year}{Integer indicating the year corresponding to `cost`.}
 
-\item{target_year}{Integer indicating the year to adjust the cost to. If not
-supplied, the value of `getOption("treasure.target_year")` is used.}
-
 \item{region}{World region. If not supplied, the value of
 `getOption("treasure.region")` is used.}
+
+\item{target_year}{Integer indicating the year to adjust the cost to. If not
+supplied, the value of `getOption("treasure.target_year")` is used.}
 
 \item{adjust}{Logical indicator if inflation adjustment should be made. Default is true.}
 }

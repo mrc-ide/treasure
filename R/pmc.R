@@ -58,7 +58,7 @@ cost_pmc <- function(n_doses, pmc_cost_per_dose_delivered = 0.3894,
     stop("PMC cost inputs must be >= 0")
   }
 
-  unit_cost <- inflation_adjust(pmc_cost_per_dose_delivered, input_year,...)
+  unit_cost <- inflation_adjust(pmc_cost_per_dose_delivered, input_year, ...)
   cost <- n_doses * unit_cost
   return(cost)
 }

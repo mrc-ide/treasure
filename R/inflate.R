@@ -27,7 +27,7 @@
 #' inflation_adjust(0.26, 2007, 2024)
 #'
 #' @export
-inflation_adjust <- function(cost, cost_year, target_year = NULL, region = NULL, adjust = TRUE) {
+inflation_adjust <- function(cost, cost_year, target_year = NULL, region = "Sub-Saharan Africa", adjust = TRUE) {
 
   # In the unlikely event no inflation adjustment needed
   if(!adjust){
@@ -37,13 +37,18 @@ inflation_adjust <- function(cost, cost_year, target_year = NULL, region = NULL,
   if (is.null(target_year)) {
     target_year <- getOption("treasure.target_year", default = 2024)
   }
-  if (is.null(region)) {
-    region <- getOption("treasure.region", default = "Sub-Saharan Africa")
-  }
   cpi_region <- cpi[cpi$region == region, ]
   cpi_base   <- cpi_region$cpi[cpi_region$year == cost_year]
   cpi_target <- cpi_region$cpi[cpi_region$year == target_year]
-  #print(cpi_base)
-  #print(cpi_target)
+
   cost * (cpi_target / cpi_base)
+}
+
+
+#' Set the global target year for inflation adjustments
+#'
+#' @param year Target year to use when adjusting for inflation
+#' @export
+set_target_year <- function(year) {
+  options(treasure.target_year = year)
 }

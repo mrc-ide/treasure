@@ -64,14 +64,14 @@ test_that("Chloroquine costing", {
 })
 
 test_that("Primaquine costing", {
-  unit <- inflation_adjust(0.4, 2022, 2024)
+  unit <- inflation_adjust(0.4, 2022, 2024, region = "South Asia")
   expect_equal(cost_primaquine(n_doses = 1), 1 * unit)
   expect_equal(cost_primaquine(n_doses = 2), 2 * unit)
   expect_equal(cost_primaquine(n_doses = c(1, 2)), c(1, 2) * unit)
 
   expect_equal(
     cost_primaquine(n_doses = 1, cost_per_dose  = 2, target_year = 2024),
-    1 * inflation_adjust(2, 2022, 2024)
+    1 * inflation_adjust(2, 2022, 2024, region = "South Asia")
   )
 
   expect_error(cost_primaquine(n_doses = -1), "All n_doses estimates must be >= 0")

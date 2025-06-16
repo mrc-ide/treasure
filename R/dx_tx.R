@@ -378,7 +378,7 @@ cost_microscopy <- function(n_tests, cost_per_slide = 0.67){
   if(any(n_tests < 0)){
     stop("All n_tests estimates must be >= 0")
   }
-  if(cost_per_slide < 0){
+  if(any(cost_per_slide < 0)){
     stop("Microscopy cost inputs must be >= 0")
   }
 

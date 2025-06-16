@@ -28,18 +28,18 @@ inflation_adjust <- function(cost, cost_year, target_year, region = "Sub-Saharan
     stop("cost, cost_year, and target_year must be single values")
   }
 
-  # Check presence in CPI data
-  if (!(cost_year %in% cpi$year)) {
-    stop(paste("cost_year not found in cpi dataset:", cost_year))
+  # Filter CPI data for region and check years exist
+  cpi_region <- cpi[cpi$region == region, ]
+  if (!(cost_year %in% cpi_region$year)) {
+    stop(paste("cost_year not found for region:", cost_year))
   }
-  if (!(target_year %in% cpi$year)) {
-    stop(paste("target_year not found in cpi dataset:", target_year))
+  if (!(target_year %in% cpi_region$year)) {
+    stop(paste("target_year not found for region:", target_year))
   }
 
   # Retrieve CPI values
-  cpi <- cpi[cpi$region == region, ]
-  cpi_base   <- cpi$cpi[cpi$year == cost_year]
-  cpi_target <- cpi$cpi[cpi$year == target_year]
+  cpi_base   <- cpi_region$cpi[cpi_region$year == cost_year]
+  cpi_target <- cpi_region$cpi[cpi_region$year == target_year]
 
   # Compute and return adjusted cost
   cost * (cpi_target / cpi_base)

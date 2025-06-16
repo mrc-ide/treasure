@@ -11,6 +11,17 @@ test_that("RDT costing", {
   expect_error(cost_rdt(n_tests = 1, delivery_mark_up = -1), "RDT cost inputs must be >= 0")
 })
 
+test_that("Microscopy costing", {
+  expect_equal(cost_microscopy(n_tests = 1), 1 * 0.67)
+  expect_equal(cost_microscopy(n_tests = 2), 2 * 0.67)
+  expect_equal(cost_microscopy(n_tests = c(1, 2)), c(1, 2) * 0.67)
+
+  expect_equal(cost_microscopy(n_tests = 1, cost_per_slide = 2), 1 * 2)
+
+  expect_error(cost_microscopy(n_tests = -1), "All n_tests estimates must be >= 0")
+  expect_error(cost_microscopy(n_tests = 1, cost_per_slide = -1), "Microscopy cost inputs must be >= 0")
+})
+
 test_that("AL costing", {
   expect_equal(cost_al(n_doses = 1), 1 * 0.3)
   expect_equal(cost_al(n_doses = 2), 2 * 0.3)

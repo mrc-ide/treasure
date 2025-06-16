@@ -19,4 +19,4 @@ Depends:
 Imports: 
     netz
 Remotes:
-    mrc-ide/malariasimulation
+    mrc-ide/netz

@@ -26,6 +26,20 @@ test_that("IRS costing", {
 
   expect_error(cost_ll_irs_structure(n_sprayed = -1), "All n_sprayed estimates must be >= 0")
   expect_error(cost_ll_irs_structure(n_sprayed = 1, cost_per_structure_sprayed = -1), "Long lasting IRS cost inputs must be >= 0")
+
+  # DDT per structure
+  unit_struct <- inflation_adjust(2.25, 1999, 2024)
+  expect_equal(cost_ddt_irs_structure(n_sprayed = 1), 1 * unit_struct)
+  expect_equal(cost_ddt_irs_structure(n_sprayed = 2), 2 * unit_struct)
+  expect_equal(cost_ddt_irs_structure(n_sprayed = c(1, 2)), c(1, 2) * unit_struct)
+
+  expect_equal(
+    cost_ddt_irs_structure(n_sprayed = 1, cost_per_structure_sprayed  = 2, target_year = 2024),
+    1 * inflation_adjust(2, 1999, 2024)
+  )
+
+  expect_error(cost_ddt_irs_structure(n_sprayed = -1), "All n_sprayed estimates must be >= 0")
+  expect_error(cost_ddt_irs_structure(n_sprayed = 1, cost_per_structure_sprayed = -1), "DDT IRS cost inputs must be >= 0")
 })
 
 test_that("IRS commodity people rounds", {

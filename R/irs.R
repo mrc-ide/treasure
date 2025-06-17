@@ -127,3 +127,34 @@ cost_ll_irs_structure <- function(n_sprayed, cost_per_structure_sprayed = 26.36,
   cost <- n_sprayed * unit_cost
   return(cost)
 }
+
+#' Cost DDT IRS
+#'
+#' @param n_sprayed Number of structures sprayed
+#' @param cost_per_structure_sprayed Cost per structure sprayed
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
+#'
+#' @return DDT IRS costs
+#' @export
+#'
+#' @references
+#' \strong{cost_per_structure_sprayed}
+#'
+#' Current default is the (mid point) average cost for DDT IRS
+#' from Table 3 of Walker (2008)
+#'
+#' \url{https://resjournals.onlinelibrary.wiley.com/doi/10.1046/j.1365-2915.2000.00262.x}.
+cost_ddt_irs_structure <- function(n_sprayed, cost_per_structure_sprayed = 2.25,
+                                   input_year = 1999,
+                                   ...){
+  if(any(n_sprayed < 0)){
+    stop("All n_sprayed estimates must be >= 0")
+  }
+  if(any(cost_per_structure_sprayed < 0)){
+    stop("DDT IRS cost inputs must be >= 0")
+  }
+  unit_cost <- inflation_adjust(cost_per_structure_sprayed, input_year, ...)
+  cost <- n_sprayed * unit_cost
+  return(cost)
+}

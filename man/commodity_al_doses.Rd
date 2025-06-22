@@ -9,9 +9,9 @@ commodity_al_doses(n_cases, treatment_coverage, proportion_act, age_upper)
 \arguments{
 \item{n_cases}{Vector of malaria case numbers by age band.}
 
-\item{treatment_coverage}{Vector of treatment coverage proportions.}
+\item{treatment_coverage}{Vector of treatment coverage proportions by age band.}
 
-\item{proportion_act}{Vector of proportion of treatments that are ACTs.}
+\item{proportion_act}{Vector of proportion of treatments that are ACTs by age band.}
 
 \item{age_upper}{Vector of upper bounds for each age group.}
 }

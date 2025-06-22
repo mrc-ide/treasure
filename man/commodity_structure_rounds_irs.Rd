@@ -7,13 +7,13 @@
 commodity_structure_rounds_irs(irs_cov, n_rounds, par, hh_size)
 }
 \arguments{
-\item{irs_cov}{A single value or vector of IRS coverage.}
+\item{irs_cov}{A vector of IRS coverage per year.}
 
-\item{n_rounds}{The number of spray rounds per year}
+\item{n_rounds}{A vector of the number of spray rounds per year}
 
 \item{par}{Population at risk estimates.}
 
-\item{hh_size}{The average number of occupants per household}
+\item{hh_size}{A vector of the average number of occupants per household}
 }
 \value{
 The total number of structure-rounds of IRS protection.

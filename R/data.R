@@ -19,7 +19,7 @@
 #' @source \url{https://www.who.int/publications/m/item/who-choice-estimates-of-cost-for-inpatient-and-outpatient-health-service-delivery}
 "who_choice"
 
-#' World Bank Consumer Price Index
+#' World Bank Consumer Price Index (CPI)
 #'
 #' Regional CPI by year, taken as median of country-level CPI
 #'

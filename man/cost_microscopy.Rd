@@ -7,7 +7,7 @@
 cost_microscopy(n_tests, cost_per_slide = 0.67)
 }
 \arguments{
-\item{n_tests}{Number of tests}
+\item{n_tests}{Number of tests performed}
 
 \item{cost_per_slide}{Cost per slide diagnostic performed}
 }

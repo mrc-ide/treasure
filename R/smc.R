@@ -1,7 +1,7 @@
 #' Number of doses of SMC
 #'
 #' @param smc_cov A single value or vector of SMC coverage.
-#' @param n_rounds The number of SMC rounds per year
+#' @param n_rounds A vector of the number of SMC rounds per year
 #' @param par_smc Population at risk within SMC-eligible age range estimates.
 #'
 #' @return The total number of SMC doses delivered.
@@ -18,7 +18,7 @@ commodity_doses_smc <- function(smc_cov, n_rounds, par_smc){
     all(par_smc >= 0)
   )
   stopifnot(
-    length(n_rounds) == 1,
+    length(smc_cov) == length(n_rounds),
     length(smc_cov) == length(par_smc)
   )
 

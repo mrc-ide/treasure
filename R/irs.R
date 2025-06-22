@@ -1,7 +1,7 @@
 #' Number of people-rounds of IRS
 #'
-#' @param irs_cov A single value or vector of IRS coverage.
-#' @param n_rounds The number of spray rounds per year
+#' @param irs_cov A vector of IRS coverage per year.
+#' @param n_rounds A vector of the number of spray rounds per year
 #' @param par Population at risk estimates.
 #'
 #' @return The total number of person-rounds of IRS protection.
@@ -18,7 +18,7 @@ commodity_person_rounds_irs <- function(irs_cov, n_rounds, par){
     all(par >= 0)
   )
   stopifnot(
-    length(n_rounds) == 1,
+    length(irs_cov) == length(n_rounds),
     length(irs_cov) == length(par)
   )
 
@@ -30,7 +30,7 @@ commodity_person_rounds_irs <- function(irs_cov, n_rounds, par){
 #' Assumes 1 structure per household
 #'
 #' @inherit commodity_person_rounds_irs
-#' @param hh_size The average number of occupants per household
+#' @param hh_size A vector of the average number of occupants per household
 #'
 #' @return The total number of structure-rounds of IRS protection.
 #' @export
@@ -48,8 +48,8 @@ commodity_structure_rounds_irs <- function(irs_cov, n_rounds, par, hh_size){
     hh_size >= 0
   )
   stopifnot(
-    length(n_rounds) == 1,
-    length(hh_size) == 1,
+    length(irs_cov) == length(n_rounds),
+    length(irs_cov) == length(hh_size),
     length(irs_cov) == length(par)
   )
 

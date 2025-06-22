@@ -6,7 +6,7 @@
 #' @param vaccine_cov A single value or vector of vaccine coverage.
 #' @param par_vaccine Population at risk within vaccine-eligible age range estimates.
 #' @param n_dose_primary_series Number of doses in the primary series
-#' @param booster_coverage_downscale Drop off in coverage between primary series and
+#' @param booster_coverage_downscale Captures the drop off in coverage between primary series and
 #' boosters such that `booster coverage = vaccine_cov * booster_coverage_downscale`
 #' @param n_boosters Number of booster doses
 #'
@@ -35,8 +35,8 @@ commodity_doses_vaccine <- function(vaccine_cov, par_vaccine, n_dose_primary_ser
   )
 
   n_vaccine <- vaccine_cov * par_vaccine
-  n_doses_rtss <- round((n_vaccine * n_dose_primary_series) + (n_vaccine * booster_coverage_downscale * n_boosters))
-  return(n_doses_rtss)
+  n_doses_vaccine <- round((n_vaccine * n_dose_primary_series) + (n_vaccine * booster_coverage_downscale * n_boosters))
+  return(n_doses_vaccine)
 }
 
 #' Cost RTS,S

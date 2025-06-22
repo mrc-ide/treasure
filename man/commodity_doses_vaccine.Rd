@@ -19,7 +19,7 @@ commodity_doses_vaccine(
 
 \item{n_dose_primary_series}{Number of doses in the primary series}
 
-\item{booster_coverage_downscale}{Drop off in coverage between primary series and
+\item{booster_coverage_downscale}{Captures the drop off in coverage between primary series and
 boosters such that `booster coverage = vaccine_cov * booster_coverage_downscale`}
 
 \item{n_boosters}{Number of booster doses}

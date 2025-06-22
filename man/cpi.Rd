@@ -3,7 +3,7 @@
 \docType{data}
 \name{cpi}
 \alias{cpi}
-\title{World Bank Consumer Price Index}
+\title{World Bank Consumer Price Index (CPI)}
 \format{
 A data frame with 1816 rows and 10 variables:
 \describe{

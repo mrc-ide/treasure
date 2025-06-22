@@ -15,7 +15,7 @@ commodity_nets(
 )
 }
 \arguments{
-\item{usage}{A single value or vector of desired target usages to model.}
+\item{usage}{A single value or vector of desired target usages (%) to model.}
 
 \item{use_rate}{A single value or vector of usage rates.}
 
@@ -30,17 +30,18 @@ For example c(1, 366) + 183.}
 
 \item{half_life}{Country-specific half-life of nets in days.}
 
-\item{par}{Population at risk estimates.}
+\item{par}{Population at risk estimates. A vector the same length as usage}
 
 \item{...}{additional arguments for the crop_to_distribution function in netz}
 }
 \value{
-Number of nets
+Number of nets required to match usage targets
 }
 \description{
 Estimate the number of bed nets required to match usage target
 }
 \references{
+reference
 Uses a version of the net stock and flow model as described by:
 Bertozzi-Villa, Amelia, et al. Nature communications 12.1 (2021): 1-12.
 }

@@ -1,6 +1,6 @@
 #' Estimate the number of bed nets required to match usage target
 #'
-#' @param usage A single value or vector of desired target usages to model.
+#' @param usage A single value or vector of desired target usages (%) to model.
 #' @param use_rate A single value or vector of usage rates.
 #' @param distribution_timesteps Timesteps of distributions (days). By default,
 #' we can assume that net distributions happen on the first day of each year.
@@ -10,12 +10,12 @@
 #' crop (and therefore corresponding usage) estimates were taken at the mid-point of each year.
 #' For example c(1, 366) + 183.
 #' @param half_life Country-specific half-life of nets in days.
-#' @param par Population at risk estimates.
+#' @param par Population at risk estimates. A vector the same length as usage
 #' @param ... additional arguments for the crop_to_distribution function in netz
 #'
-#' @return Number of nets
+#' @return Number of nets required to match usage targets
 #'
-#' @references
+#' @references reference
 #' Uses a version of the net stock and flow model as described by:
 #' Bertozzi-Villa, Amelia, et al. Nature communications 12.1 (2021): 1-12.
 #' @export

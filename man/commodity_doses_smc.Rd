@@ -9,7 +9,7 @@ commodity_doses_smc(smc_cov, n_rounds, par_smc)
 \arguments{
 \item{smc_cov}{A single value or vector of SMC coverage.}
 
-\item{n_rounds}{The number of SMC rounds per year}
+\item{n_rounds}{A vector of the number of SMC rounds per year}
 
 \item{par_smc}{Population at risk within SMC-eligible age range estimates.}
 }

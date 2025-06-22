@@ -14,11 +14,14 @@ commodity_rdt_tests(
 \arguments{
 \item{n_cases}{Vector of malaria case numbers}
 
-\item{treatment_coverage}{Treatment coverage}
+\item{treatment_coverage}{Vector of treatment coverage}
 
-\item{proportion_rdt}{Proportion of diagnostics that are RDT}
+\item{proportion_rdt}{Vector of proportion of diagnostics that are RDT}
 
-\item{proportion_tested}{Proportion of treated cases that are tested}
+\item{proportion_tested}{A scalar value of proportion of treated cases that are tested}
+}
+\value{
+Vector of the number of RDT tests
 }
 \description{
 Estimate total number of RDT diagnostics required

@@ -2,7 +2,7 @@
 % Please edit documentation in R/dx_tx.R
 \name{commodity_nmf_al_doses}
 \alias{commodity_nmf_al_doses}
-\title{Estimate total number of AL doses required}
+\title{Estimate total number of AL doses required for test +ve non-malarial fevers}
 \usage{
 commodity_nmf_al_doses(
   n_nmf,

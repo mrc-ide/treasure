@@ -7,9 +7,9 @@
 commodity_person_rounds_irs(irs_cov, n_rounds, par)
 }
 \arguments{
-\item{irs_cov}{A single value or vector of IRS coverage.}
+\item{irs_cov}{A vector of IRS coverage per year.}
 
-\item{n_rounds}{The number of spray rounds per year}
+\item{n_rounds}{A vector of the number of spray rounds per year}
 
 \item{par}{Population at risk estimates.}
 }

@@ -10,9 +10,12 @@ cpi <- cpi_raw |>
     iso3c = "Country.Code"
   ) |>
   tidyr::pivot_longer(
-    cols = -c(country, iso3c), names_to = "year",
-                      values_to = "cpi", names_prefix = "X", names_transform = list(year = "as.integer")
-    ) |>
+    cols = -c(country, iso3c),
+    names_to = "year",
+    values_to = "cpi",
+    names_prefix = "X",
+    names_transform = list(year = "as.integer")
+  ) |>
   dplyr::mutate(region = countrycode::countrycode(iso3c, "iso3c", "region")) |>
   dplyr::summarise(
     cpi = median(cpi, na.rm = TRUE),

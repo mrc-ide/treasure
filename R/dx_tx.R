@@ -1,9 +1,12 @@
 #' Estimate total number of RDT diagnostics required
 #'
 #' @param n_cases Vector of malaria case numbers
-#' @param treatment_coverage Treatment coverage
-#' @param proportion_rdt Proportion of diagnostics that are RDT
-#' @param proportion_tested Proportion of treated cases that are tested
+#' @param treatment_coverage Vector of treatment coverage
+#' @param proportion_rdt Vector of proportion of diagnostics that are RDT
+#' @param proportion_tested A scalar value of proportion of treated cases that are tested
+#'
+#' @return Vector of the number of RDT tests
+#'
 #' @export
 commodity_rdt_tests <- function(n_cases, treatment_coverage, proportion_rdt, proportion_tested = 1){
   stopifnot(
@@ -30,7 +33,10 @@ commodity_rdt_tests <- function(n_cases, treatment_coverage, proportion_rdt, pro
 #' Estimate total number of microscopy diagnostics required
 #'
 #' @inheritParams commodity_rdt_tests
-#' @param proportion_microscopy Proportion of diagnostics that are microscopy
+#' @param proportion_microscopy Vector of proportion of diagnostics that are microscopy
+#'
+#' @return Vector of the number of microscopy tests
+#'
 #' @export
 commodity_microscopy_tests <- function(n_cases, treatment_coverage, proportion_microscopy, proportion_tested = 1){
   stopifnot(
@@ -57,11 +63,14 @@ commodity_microscopy_tests <- function(n_cases, treatment_coverage, proportion_m
 #' Estimate total number of RDT diagnostics required as a result of non malarial fevers
 #'
 #' @param n_nmf Vector of non malarial fever case numbers
-#' @param treatment_coverage Treatment coverage
-#' @param proportion_rdt Proportion of diagnostics that are RDT
+#' @param treatment_coverage Vector of treatment coverage
+#' @param proportion_rdt Vector of proportion of diagnostics that are RDT
 #' @param proportion_tested Proportion of nmfs that are tested
 #' @param pfpr Prevalence
 #' @param pfpr_threshold Prevalence threshold at which it is assummed NMF are not suspected (and subsequently tested) to be malaria
+#'
+#' @return Vector of the number of RDTs tests used on NMFs
+#'
 #' @export
 commodity_nmf_rdt_tests <- function(n_nmf, treatment_coverage, proportion_rdt, proportion_tested = 1, pfpr, pfpr_threshold = 0.05){
   stopifnot(
@@ -94,7 +103,10 @@ commodity_nmf_rdt_tests <- function(n_nmf, treatment_coverage, proportion_rdt, p
 #' Estimate total number of microscopy diagnostics required as a result of non malarial fevers
 #'
 #' @inheritParams commodity_nmf_rdt_tests
-#' @param proportion_microscopy Proportion of diagnostics that are microscopy
+#' @param proportion_microscopy Vector of proportion of diagnostics that are microscopy
+#'
+#' @return Vector of the number of microscopy tests used on NMFs
+#'
 #' @export
 commodity_nmf_microscopy_tests <- function(n_nmf, treatment_coverage, proportion_microscopy, proportion_tested = 1, pfpr, pfpr_threshold = 0.05){
   stopifnot(
@@ -139,8 +151,8 @@ commodity_nmf_microscopy_tests <- function(n_nmf, treatment_coverage, proportion
 #' 3 days x 2 times daily x 4 doses (4 x 20/120mg = 80/480mg) = 24 doses.
 #'
 #' @param n_cases Vector of malaria case numbers by age band.
-#' @param treatment_coverage Vector of treatment coverage proportions.
-#' @param proportion_act Vector of proportion of treatments that are ACTs.
+#' @param treatment_coverage Vector of treatment coverage proportions by age band.
+#' @param proportion_act Vector of proportion of treatments that are ACTs by age band.
 #' @param age_upper Vector of upper bounds for each age group.
 #'
 #' @return A vector giving the number of 20/120mg Artemether + lumefantrine ACT doses required per age group.
@@ -246,7 +258,7 @@ commodity_chloroquine_doses <- function(n_cases, treatment_coverage, proportion_
   round(n_cases * treatment_coverage * proportion_non_act * doses_per_course)
 }
 
-#' Estimate total number of AL doses required
+#' Estimate total number of AL doses required for test +ve non-malarial fevers
 #'
 #' Note the cost per dose is for a single dose (20/120 mg). A treatment course typically
 #' constitutes Artemether + lumefantrine given twice a day for 3 days following
@@ -360,7 +372,7 @@ cost_rdt <- function(n_tests, rdt_unit_cost = 0.46, delivery_mark_up = 0.15){
 
 #' Cost Microscopy
 #'
-#' @param n_tests Number of tests
+#' @param n_tests Number of tests performed
 #' @param cost_per_slide Cost per slide diagnostic performed
 #'
 #' @return Microscopy costs

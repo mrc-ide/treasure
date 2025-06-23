@@ -12,12 +12,12 @@ commodity_doses_pmc <- function(pmc_cov, par_pmc, n_rounds = 3){
     is.numeric(par_pmc),
     is.numeric(n_rounds)
   )
+  check_lengths(pmc_cov, par_pmc, n_rounds)
   stopifnot(
     all(pmc_cov >= 0 & pmc_cov <= 1),
     all(n_rounds >= 0),
     all(par_pmc >= 0)
   )
-  check_lengths(pmc_cov, par_pmc, n_rounds)
 
   round(pmc_cov * n_rounds * par_pmc)
 }

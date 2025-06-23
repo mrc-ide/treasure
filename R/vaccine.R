@@ -19,6 +19,7 @@ commodity_doses_vaccine <- function(vaccine_cov, par_vaccine, n_dose_primary_ser
     is.numeric(booster_coverage_downscale),
     is.numeric(n_boosters)
   )
+  check_lengths(vaccine_cov, par_vaccine, n_dose_primary_series, booster_coverage_downscale, n_boosters)
   stopifnot(
     all(vaccine_cov >= 0 & vaccine_cov <= 1),
     all(par_vaccine >= 0),
@@ -26,7 +27,6 @@ commodity_doses_vaccine <- function(vaccine_cov, par_vaccine, n_dose_primary_ser
     all(booster_coverage_downscale >= 0 & booster_coverage_downscale <= 1),
     all(n_boosters >= 0)
   )
-  check_lengths(vaccine_cov, par_vaccine, n_dose_primary_series, booster_coverage_downscale, n_boosters)
 
   n_vaccine <- vaccine_cov * par_vaccine
   n_doses_vaccine <- round((n_vaccine * n_dose_primary_series) + (n_vaccine * booster_coverage_downscale * n_boosters))

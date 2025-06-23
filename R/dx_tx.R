@@ -15,13 +15,13 @@ commodity_rdt_tests <- function(n_cases, treatment_coverage, proportion_rdt, pro
     is.numeric(proportion_rdt),
     is.numeric(proportion_tested)
   )
+  check_lengths(n_cases, treatment_coverage, proportion_rdt, proportion_tested)
   stopifnot(
     all(n_cases >= 0),
     all(treatment_coverage >= 0 & treatment_coverage <= 1),
     all(proportion_rdt >= 0 & proportion_rdt <= 1),
     all(proportion_tested >= 0 & proportion_tested <= 1)
   )
-  check_lengths(n_cases, treatment_coverage, proportion_rdt, proportion_tested)
 
   round(n_cases * treatment_coverage * proportion_rdt * proportion_tested)
 }
@@ -41,13 +41,13 @@ commodity_microscopy_tests <- function(n_cases, treatment_coverage, proportion_m
     is.numeric(proportion_microscopy),
     is.numeric(proportion_tested)
   )
+  check_lengths(n_cases, treatment_coverage, proportion_microscopy, proportion_tested)
   stopifnot(
     all(n_cases >= 0),
     all(treatment_coverage >= 0 & treatment_coverage <= 1),
     all(proportion_microscopy >= 0 & proportion_microscopy <= 1),
     all(proportion_tested >= 0 & proportion_tested <= 1)
   )
-  check_lengths(n_cases, treatment_coverage, proportion_microscopy, proportion_tested)
 
   round(n_cases * treatment_coverage * proportion_microscopy * proportion_tested)
 }
@@ -73,6 +73,7 @@ commodity_nmf_rdt_tests <- function(n_nmf, treatment_coverage, proportion_rdt, p
     is.numeric(pfpr),
     is.numeric(pfpr_threshold)
   )
+  check_lengths(n_nmf, treatment_coverage, proportion_rdt, proportion_tested, pfpr, pfpr_threshold)
   stopifnot(
     all(n_nmf >= 0),
     all(treatment_coverage >= 0 & treatment_coverage <= 1),
@@ -81,7 +82,6 @@ commodity_nmf_rdt_tests <- function(n_nmf, treatment_coverage, proportion_rdt, p
     all(pfpr >= 0 & pfpr <= 1),
     all(pfpr_threshold >= 0 & pfpr_threshold <= 1)
   )
-  check_lengths(n_nmf, treatment_coverage, proportion_rdt, proportion_tested, pfpr, pfpr_threshold)
 
   ifelse(pfpr > pfpr_threshold, round(n_nmf * treatment_coverage * proportion_rdt * proportion_tested), 0)
 }
@@ -103,6 +103,7 @@ commodity_nmf_microscopy_tests <- function(n_nmf, treatment_coverage, proportion
     is.numeric(pfpr),
     is.numeric(pfpr_threshold)
   )
+  check_lengths(n_nmf, treatment_coverage, proportion_microscopy, proportion_tested, pfpr, pfpr_threshold)
   stopifnot(
     all(n_nmf >= 0),
     all(treatment_coverage >= 0 & treatment_coverage <= 1),
@@ -111,7 +112,6 @@ commodity_nmf_microscopy_tests <- function(n_nmf, treatment_coverage, proportion
     all(pfpr >= 0 & pfpr <= 1),
     all(pfpr_threshold >= 0 & pfpr_threshold <= 1)
   )
-  check_lengths(n_nmf, treatment_coverage, proportion_microscopy, proportion_tested, pfpr, pfpr_threshold)
 
   ifelse(pfpr > pfpr_threshold, round(n_nmf * treatment_coverage * proportion_microscopy * proportion_tested), 0)
 }
@@ -144,13 +144,13 @@ commodity_al_doses <- function(n_cases, treatment_coverage, proportion_act, age_
     is.numeric(proportion_act),
     is.numeric(age_upper)
   )
+  check_lengths(n_cases, treatment_coverage, proportion_act, age_upper)
   stopifnot(
     all(n_cases >= 0),
     all(treatment_coverage >= 0 & treatment_coverage <= 1),
     all(proportion_act >= 0 & proportion_act <= 1),
     all(age_upper >= 0)
   )
-  check_lengths(n_cases, treatment_coverage, proportion_act, age_upper)
 
   # Dose multipliers per age band (number of 20/120mg doses per course)
   doses_per_course_child   <- 3 * 2 * 1     # 6 doses
@@ -200,13 +200,13 @@ commodity_chloroquine_doses <- function(n_cases, treatment_coverage, proportion_
     is.numeric(proportion_non_act),
     is.numeric(age_upper)
   )
+  check_lengths(n_cases, treatment_coverage, proportion_non_act, age_upper)
   stopifnot(
     all(n_cases >= 0),
     all(treatment_coverage >= 0 & treatment_coverage <= 1),
     all(proportion_non_act >= 0 & proportion_non_act <= 1),
     all(age_upper >= 0)
   )
-  check_lengths(n_cases, treatment_coverage, proportion_non_act, age_upper)
 
   # Dose multipliers per age band
   doses_per_course_child   <- 3
@@ -262,6 +262,7 @@ commodity_nmf_al_doses <- function(n_nmf, treatment_coverage, proportion_act, ag
     is.numeric(pfpr),
     is.numeric(pfpr_threshold)
   )
+  check_lengths(n_nmf, treatment_coverage, proportion_act, age_upper, pfpr, pfpr_threshold)
   stopifnot(
     all(n_nmf >= 0),
     all(treatment_coverage >= 0 & treatment_coverage <= 1),
@@ -270,7 +271,6 @@ commodity_nmf_al_doses <- function(n_nmf, treatment_coverage, proportion_act, ag
     all(pfpr >= 0 & pfpr <= 1),
     all(pfpr_threshold >= 0 & pfpr_threshold <= 1)
   )
-  check_lengths(n_nmf, treatment_coverage, proportion_act, age_upper, pfpr, pfpr_threshold)
 
   # Dose multipliers per age band (number of 20/120mg doses per course)
   doses_per_course_child   <- 3 * 2 * 1     # 6 doses

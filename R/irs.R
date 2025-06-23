@@ -12,12 +12,12 @@ commodity_person_rounds_irs <- function(irs_cov, n_rounds, par){
     is.numeric(n_rounds),
     is.numeric(par)
   )
+  check_lengths(irs_cov, n_rounds, par)
   stopifnot(
     all(irs_cov >= 0 & irs_cov <= 1),
     all(n_rounds >= 0),
     all(par >= 0)
   )
-  check_lengths(irs_cov, n_rounds, par)
 
   round(irs_cov * n_rounds * par)
 }
@@ -38,13 +38,13 @@ commodity_structure_rounds_irs <- function(irs_cov, n_rounds, par, hh_size){
     is.numeric(par),
     is.numeric(hh_size)
   )
+  check_lengths(irs_cov, n_rounds, par, hh_size)
   stopifnot(
     all(irs_cov >= 0 & irs_cov <= 1),
     all(n_rounds >= 0),
     all(par >= 0),
     all(hh_size >= 0)
   )
-  check_lengths(irs_cov, n_rounds, par, hh_size)
 
   round((irs_cov * n_rounds * par) / hh_size)
 }

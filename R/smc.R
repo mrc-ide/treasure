@@ -12,12 +12,12 @@ commodity_doses_smc <- function(smc_cov, n_rounds, par_smc){
     is.numeric(n_rounds),
     is.numeric(par_smc)
   )
+  check_lengths(smc_cov, n_rounds, par_smc)
   stopifnot(
     all(smc_cov >= 0 & smc_cov <= 1),
     all(n_rounds >= 0),
     all(par_smc >= 0)
   )
-  check_lengths(smc_cov, n_rounds, par_smc)
 
   round(smc_cov * n_rounds * par_smc)
 }

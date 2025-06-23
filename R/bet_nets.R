@@ -28,6 +28,14 @@ commodity_nets <- function(usage, use_rate, distribution_timesteps, crop_timeste
     is.numeric(half_life),
     is.numeric(par)
   )
+  check_lengths(
+    usage,
+    use_rate,
+    distribution_timesteps,
+    crop_timesteps,
+    half_life,
+    par
+  )
   stopifnot(
     all(usage >= 0 & usage <= 1),
     all(use_rate >= 0 & use_rate <= 1),
@@ -36,7 +44,6 @@ commodity_nets <- function(usage, use_rate, distribution_timesteps, crop_timeste
     all(half_life >= 0),
     all(par >= 0)
   )
-  check_lengths(usage, use_rate, distribution_timesteps, crop_timesteps, half_life, par)
 
   access <- netz::usage_to_access(usage = usage, use_rate = use_rate)
   crop <- netz::access_to_crop(access = access)

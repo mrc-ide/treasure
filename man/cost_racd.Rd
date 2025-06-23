@@ -11,6 +11,8 @@ cost_racd(n_tested, cost_per_person_tested = 38.63, input_year = 2016, ...)
 
 \item{cost_per_person_tested}{Cost per person tested}
 
+\item{input_year}{Year the unit costs are reported in}
+
 \item{...}{Additional arguments passed to `inflation_adjust()`}
 }
 \value{

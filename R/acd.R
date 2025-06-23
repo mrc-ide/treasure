@@ -35,6 +35,7 @@ cost_pacd <- function(n_tested, cost_per_person_tested = 4.79, input_year = 2015
 #'
 #' @param n_tested Number of people tested
 #' @param cost_per_person_tested Cost per person tested
+#' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return pACD costs

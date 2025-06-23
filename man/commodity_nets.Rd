@@ -15,7 +15,7 @@ commodity_nets(
 )
 }
 \arguments{
-\item{usage}{A single value or vector of desired target usages (%) to model.}
+\item{usage}{A single value or vector of desired target usages (\%) to model.}
 
 \item{use_rate}{A single value or vector of usage rates.}
 

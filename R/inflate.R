@@ -1,3 +1,5 @@
+utils::globalVariables("cpi")
+
 #' Inflate cost to a target year using SSA CPI
 #'
 #' Adjust a given cost from its original year to a specified target year using

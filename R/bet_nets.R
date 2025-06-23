@@ -1,6 +1,6 @@
 #' Estimate the number of bed nets required to match usage target
 #'
-#' @param usage A single value or vector of desired target usages (%) to model.
+#' @param usage A single value or vector of desired target usages (\%) to model.
 #' @param use_rate A single value or vector of usage rates.
 #' @param distribution_timesteps Timesteps of distributions (days). By default,
 #' we can assume that net distributions happen on the first day of each year.

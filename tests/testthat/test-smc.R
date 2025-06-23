@@ -24,6 +24,6 @@ test_that("SMC commodity doses", {
   )
   expect_error(
     commodity_doses_smc(smc_cov = c(0.1, 0.2), n_rounds = 3, par_smc = 100),
-    "is not TRUE"
+    "length"
   )
 })

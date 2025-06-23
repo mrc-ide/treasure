@@ -1,8 +1,8 @@
 #' Number of people-rounds of IRS
 #'
-#' @param irs_cov A vector of IRS coverage per year.
-#' @param n_rounds A vector of the number of spray rounds per year
-#' @param par Population at risk estimates.
+#' @param irs_cov IRS coverage per year. Numeric scalar or vector.
+#' @param n_rounds Number of spray rounds per year. Numeric scalar or vector.
+#' @param par Population at risk estimates. Numeric scalar or vector.
 #'
 #' @return The total number of person-rounds of IRS protection.
 #' @export
@@ -14,13 +14,10 @@ commodity_person_rounds_irs <- function(irs_cov, n_rounds, par){
   )
   stopifnot(
     all(irs_cov >= 0 & irs_cov <= 1),
-    n_rounds >= 0,
+    all(n_rounds >= 0),
     all(par >= 0)
   )
-  stopifnot(
-    length(irs_cov) == length(n_rounds),
-    length(irs_cov) == length(par)
-  )
+  check_lengths(irs_cov, n_rounds, par)
 
   round(irs_cov * n_rounds * par)
 }
@@ -30,7 +27,7 @@ commodity_person_rounds_irs <- function(irs_cov, n_rounds, par){
 #' Assumes 1 structure per household
 #'
 #' @inherit commodity_person_rounds_irs
-#' @param hh_size A vector of the average number of occupants per household
+#' @param hh_size Average number of occupants per household. Numeric scalar or vector.
 #'
 #' @return The total number of structure-rounds of IRS protection.
 #' @export
@@ -43,15 +40,11 @@ commodity_structure_rounds_irs <- function(irs_cov, n_rounds, par, hh_size){
   )
   stopifnot(
     all(irs_cov >= 0 & irs_cov <= 1),
-    n_rounds >= 0,
+    all(n_rounds >= 0),
     all(par >= 0),
-    hh_size >= 0
+    all(hh_size >= 0)
   )
-  stopifnot(
-    length(irs_cov) == length(n_rounds),
-    length(irs_cov) == length(hh_size),
-    length(irs_cov) == length(par)
-  )
+  check_lengths(irs_cov, n_rounds, par, hh_size)
 
   round((irs_cov * n_rounds * par) / hh_size)
 }

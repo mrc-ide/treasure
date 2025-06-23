@@ -3,12 +3,11 @@
 #' Note, if duration for full course (primary + boosters) is >1 year, costs for
 #' the full course will be all assigned to the year of the primary series.
 #'
-#' @param vaccine_cov A single value or vector of vaccine coverage.
-#' @param par_vaccine Population at risk within vaccine-eligible age range estimates.
-#' @param n_dose_primary_series Number of doses in the primary series
-#' @param booster_coverage_downscale Captures the drop off in coverage between primary series and
-#' boosters such that `booster coverage = vaccine_cov * booster_coverage_downscale`
-#' @param n_boosters Number of booster doses
+#' @param vaccine_cov Vaccine coverage. Numeric scalar or vector.
+#' @param par_vaccine Population at risk within vaccine-eligible age range. Numeric scalar or vector.
+#' @param n_dose_primary_series Number of doses in the primary series. Numeric scalar or vector.
+#' @param booster_coverage_downscale Capture the drop off in coverage between primary series and boosters such that `booster coverage = vaccine_cov * booster_coverage_downscale`. Numeric scalar or vector.
+#' @param n_boosters Number of booster doses. Numeric scalar or vector.
 #'
 #' @return The total number of vaccine doses delivered.
 #' @export
@@ -23,16 +22,11 @@ commodity_doses_vaccine <- function(vaccine_cov, par_vaccine, n_dose_primary_ser
   stopifnot(
     all(vaccine_cov >= 0 & vaccine_cov <= 1),
     all(par_vaccine >= 0),
-    n_dose_primary_series >= 0,
+    all(n_dose_primary_series >= 0),
     all(booster_coverage_downscale >= 0 & booster_coverage_downscale <= 1),
-    n_boosters >= 0
+    all(n_boosters >= 0)
   )
-  stopifnot(
-    length(n_dose_primary_series) == 1,
-    length(booster_coverage_downscale) == 1,
-    length(n_boosters) == 1,
-    length(vaccine_cov) == length(par_vaccine)
-  )
+  check_lengths(vaccine_cov, par_vaccine, n_dose_primary_series, booster_coverage_downscale, n_boosters)
 
   n_vaccine <- vaccine_cov * par_vaccine
   n_doses_vaccine <- round((n_vaccine * n_dose_primary_series) + (n_vaccine * booster_coverage_downscale * n_boosters))

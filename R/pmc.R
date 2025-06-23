@@ -1,8 +1,8 @@
 #' Number of doses of PMC
 #'
-#' @param pmc_cov A single value or vector of pmc coverage.
-#' @param n_rounds The number of pmc rounds per year
-#' @param par_pmc Population at risk within pmc-eligible age range estimates.
+#' @param pmc_cov PMC coverage. Numeric scalar or vector.
+#' @param n_rounds Number of pmc rounds per year. Numeric scalar or vector.
+#' @param par_pmc Population at risk within pmc-eligible age range. Numeric scalar or vector.
 #'
 #' @return The total number of pmc doses delivered.
 #' @export
@@ -14,13 +14,10 @@ commodity_doses_pmc <- function(pmc_cov, par_pmc, n_rounds = 3){
   )
   stopifnot(
     all(pmc_cov >= 0 & pmc_cov <= 1),
-    n_rounds >= 0,
+    all(n_rounds >= 0),
     all(par_pmc >= 0)
   )
-  stopifnot(
-    length(n_rounds) == 1,
-    length(pmc_cov) == length(par_pmc)
-  )
+  check_lengths(pmc_cov, par_pmc, n_rounds)
 
   round(pmc_cov * n_rounds * par_pmc)
 }

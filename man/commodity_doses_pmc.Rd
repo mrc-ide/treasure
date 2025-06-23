@@ -7,11 +7,11 @@
 commodity_doses_pmc(pmc_cov, par_pmc, n_rounds = 3)
 }
 \arguments{
-\item{pmc_cov}{A single value or vector of pmc coverage.}
+\item{pmc_cov}{PMC coverage. Numeric scalar or vector.}
 
-\item{par_pmc}{Population at risk within pmc-eligible age range estimates.}
+\item{par_pmc}{Population at risk within pmc-eligible age range. Numeric scalar or vector.}
 
-\item{n_rounds}{The number of pmc rounds per year}
+\item{n_rounds}{Number of pmc rounds per year. Numeric scalar or vector.}
 }
 \value{
 The total number of pmc doses delivered.

@@ -31,9 +31,9 @@ population at risk (`par`) and a target level of insecticide treated net
 
 ```{r itn-data}
 interventions <- data.frame(
-  year    = 1:6,
+  year = 1:6,
   itn_use = c(0, 0.6, 0.5, 0.2, 0.5, 0.4),
-  par     = rep(1000, 6)
+  par = rep(1000, 6)
 )
 interventions
 ```
@@ -49,12 +49,12 @@ half_life  <- 730
 use_rate   <- 0.5
 
 interventions$n_nets <- commodity_nets(
-  usage                 = interventions$itn_use,
-  use_rate              = use_rate,
+  usage = interventions$itn_use,
+  use_rate = use_rate,
   distribution_timesteps = dist_steps,
-  crop_timesteps        = crop_steps,
-  half_life             = half_life,
-  par                   = interventions$par
+  crop_timesteps = crop_steps,
+  half_life = half_life,
+  par = interventions$par
 )
 
 interventions$cost_nets <- cost_llin(interventions$n_nets)
@@ -78,12 +78,12 @@ simplicity we assume constant treatment coverage and diagnostic usage.
 
 ```{r case-data}
 cases <- data.frame(
-  year      = rep(1:6, each = 3),
+  year = rep(1:6, each = 3),
   age_lower = rep(c(0, 5, 15), 6),
   age_upper = rep(c(5, 15, 100), 6),
-  cases     = rep(rpois(6, 100), each = 3),
-  tx_cov    = rep(c(0, 0.3, 0.8), each = 3),
-  par       = rep(300, 6 * 3)
+  cases = rep(rpois(6, 100), each = 3),
+  tx_cov = rep(c(0, 0.3, 0.8), each = 3),
+  par = rep(300, 6 * 3)
 )
 cases
 ```
@@ -98,16 +98,16 @@ prop_rdt <- 1
 prop_act <- 1
 
 cases$n_rdt <- commodity_rdt_tests(
-  n_cases            = cases$cases,
+  n_cases = cases$cases,
   treatment_coverage = cases$tx_cov,
-  proportion_rdt     = prop_rdt
+  proportion_rdt = prop_rdt
 )
 
-cases$n_act <- commodity_al_doses(
-  n_cases            = cases$cases,
+cases$n_act_doses <- commodity_al_doses(
+  n_cases = cases$cases,
   treatment_coverage = cases$tx_cov,
-  proportion_act     = prop_act,
-  age_upper          = cases$age_upper
+  proportion_act = prop_act,
+  age_upper = cases$age_upper
 )
 
 cases
@@ -117,13 +117,13 @@ Costs can then be added using the corresponding costing functions.
 
 ```{r case-costs}
 cases$cost_rdt <- cost_rdt(cases$n_rdt)
-cases$cost_act <- cost_al(cases$n_act)
+cases$cost_act <- cost_al(cases$n_act_doses)
 head(cases)
 ```
 
 ```{r plot-cases, fig.cap="RDTs and ACT doses by year"}
 barplot(
-  rbind(cases$n_rdt, cases$n_act),
+  rbind(cases$n_rdt, cases$n_act_doses),
   beside = TRUE,
   names.arg = cases$year,
   legend.text = c("RDTs", "ACT doses"),

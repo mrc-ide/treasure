@@ -1,16 +1,16 @@
 #' Estimate the number of bed nets required to match usage target
 #'
-#' @param usage A single value or vector of desired target usages (\%) to model.
-#' @param use_rate A single value or vector of usage rates.
-#' @param distribution_timesteps Timesteps of distributions (days). By default,
+#' @param usage Desired target usages (\%) to model. Numeric scalar or vector.
+#' @param use_rate Usage rates. Numeric scalar or vector.
+#' @param distribution_timesteps Distribution timesteps (days). Numeric scalar or vector. By default,
 #' we can assume that net distributions happen on the first day of each year.
 #' For example c(1, 366)
-#' @param crop_timesteps Timesteps of crop estimates (days). If assuming distribtions
+#' @param crop_timesteps Crop estimate timesteps (days). Numeric scalar or vector. If assuming distributions
 #' occur on the first day of each year, a reasonable assumption would be that the
 #' crop (and therefore corresponding usage) estimates were taken at the mid-point of each year.
 #' For example c(1, 366) + 183.
-#' @param half_life Country-specific half-life of nets in days.
-#' @param par Population at risk estimates. A vector the same length as usage
+#' @param half_life Country-specific net half-life in days. Numeric scalar or vector.
+#' @param par Population at risk estimates. Numeric scalar or vector.
 #' @param ... additional arguments for the crop_to_distribution function in netz
 #'
 #' @return Number of nets required to match usage targets
@@ -28,17 +28,21 @@ commodity_nets <- function(usage, use_rate, distribution_timesteps, crop_timeste
     is.numeric(half_life),
     is.numeric(par)
   )
+  check_lengths(
+    usage,
+    use_rate,
+    distribution_timesteps,
+    crop_timesteps,
+    half_life,
+    par
+  )
   stopifnot(
     all(usage >= 0 & usage <= 1),
     all(use_rate >= 0 & use_rate <= 1),
     all(distribution_timesteps >= 0),
     all(crop_timesteps >= 0),
-    half_life >= 0,
+    all(half_life >= 0),
     all(par >= 0)
-  )
-  stopifnot(
-    length(half_life) == 1,
-    length(usage) == length(par)
   )
 
   access <- netz::usage_to_access(usage = usage, use_rate = use_rate)

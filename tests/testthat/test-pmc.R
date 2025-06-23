@@ -22,8 +22,16 @@ test_that("PMC commodity doses", {
     commodity_doses_pmc(pmc_cov = c(0.1, 0.2), par_pmc = c(100, 50), n_rounds = 3),
     round(c(0.1 * 3 * 100, 0.2 * 3 * 50))
   )
-  expect_error(
+  expect_equal(
     commodity_doses_pmc(pmc_cov = c(0.1, 0.2), par_pmc = 100, n_rounds = 3),
-    "is not TRUE"
+    round(c(0.1, 0.2) * 3 * 100)
+  )
+  expect_error(
+    commodity_doses_pmc(
+      pmc_cov = c(0.1, 0.2, 0.3),
+      par_pmc = c(100, 50),
+      n_rounds = c(3, 3, 3)
+    ),
+    "length"
   )
 })

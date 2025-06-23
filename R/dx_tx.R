@@ -1,9 +1,9 @@
 #' Estimate total number of RDT diagnostics required
 #'
-#' @param n_cases Vector of malaria case numbers
-#' @param treatment_coverage Vector of treatment coverage
-#' @param proportion_rdt Vector of proportion of diagnostics that are RDT
-#' @param proportion_tested A scalar value of proportion of treated cases that are tested
+#' @param n_cases Malaria case numbers. Numeric scalar or vector.
+#' @param treatment_coverage Treatment coverage. Numeric scalar or vector.
+#' @param proportion_rdt Proportion of diagnostics that are RDT. Numeric scalar or vector.
+#' @param proportion_tested Proportion of treated cases that are tested. Numeric scalar or vector.
 #'
 #' @return Vector of the number of RDT tests
 #'
@@ -15,16 +15,12 @@ commodity_rdt_tests <- function(n_cases, treatment_coverage, proportion_rdt, pro
     is.numeric(proportion_rdt),
     is.numeric(proportion_tested)
   )
+  check_lengths(n_cases, treatment_coverage, proportion_rdt, proportion_tested)
   stopifnot(
     all(n_cases >= 0),
     all(treatment_coverage >= 0 & treatment_coverage <= 1),
     all(proportion_rdt >= 0 & proportion_rdt <= 1),
     all(proportion_tested >= 0 & proportion_tested <= 1)
-  )
-  stopifnot(
-    length(n_cases) == length(treatment_coverage),
-    length(n_cases) == length(proportion_rdt),
-    length(proportion_tested) == 1
   )
 
   round(n_cases * treatment_coverage * proportion_rdt * proportion_tested)
@@ -33,7 +29,7 @@ commodity_rdt_tests <- function(n_cases, treatment_coverage, proportion_rdt, pro
 #' Estimate total number of microscopy diagnostics required
 #'
 #' @inheritParams commodity_rdt_tests
-#' @param proportion_microscopy Vector of proportion of diagnostics that are microscopy
+#' @param proportion_microscopy Proportion of diagnostics that are microscopy. Numeric scalar or vector.
 #'
 #' @return Vector of the number of microscopy tests
 #'
@@ -45,16 +41,12 @@ commodity_microscopy_tests <- function(n_cases, treatment_coverage, proportion_m
     is.numeric(proportion_microscopy),
     is.numeric(proportion_tested)
   )
+  check_lengths(n_cases, treatment_coverage, proportion_microscopy, proportion_tested)
   stopifnot(
     all(n_cases >= 0),
     all(treatment_coverage >= 0 & treatment_coverage <= 1),
     all(proportion_microscopy >= 0 & proportion_microscopy <= 1),
     all(proportion_tested >= 0 & proportion_tested <= 1)
-  )
-  stopifnot(
-    length(n_cases) == length(treatment_coverage),
-    length(n_cases) == length(proportion_microscopy),
-    length(proportion_tested) == 1
   )
 
   round(n_cases * treatment_coverage * proportion_microscopy * proportion_tested)
@@ -62,12 +54,12 @@ commodity_microscopy_tests <- function(n_cases, treatment_coverage, proportion_m
 
 #' Estimate total number of RDT diagnostics required as a result of non malarial fevers
 #'
-#' @param n_nmf Vector of non malarial fever case numbers
-#' @param treatment_coverage Vector of treatment coverage
-#' @param proportion_rdt Vector of proportion of diagnostics that are RDT
-#' @param proportion_tested Proportion of nmfs that are tested
-#' @param pfpr Prevalence
-#' @param pfpr_threshold Prevalence threshold at which it is assummed NMF are not suspected (and subsequently tested) to be malaria
+#' @param n_nmf Non malarial fever case numbers. Numeric scalar or vector.
+#' @param treatment_coverage Treatment coverage. Numeric scalar or vector.
+#' @param proportion_rdt Proportion of diagnostics that are RDT. Numeric scalar or vector.
+#' @param proportion_tested Proportion of NMFs that are tested. Numeric scalar or vector.
+#' @param pfpr Prevalence. Numeric scalar or vector.
+#' @param pfpr_threshold Prevalence threshold at which it is assumed NMF are not suspected (and subsequently tested) to be malaria. Numeric scalar or vector.
 #'
 #' @return Vector of the number of RDTs tests used on NMFs
 #'
@@ -81,20 +73,14 @@ commodity_nmf_rdt_tests <- function(n_nmf, treatment_coverage, proportion_rdt, p
     is.numeric(pfpr),
     is.numeric(pfpr_threshold)
   )
+  check_lengths(n_nmf, treatment_coverage, proportion_rdt, proportion_tested, pfpr, pfpr_threshold)
   stopifnot(
     all(n_nmf >= 0),
     all(treatment_coverage >= 0 & treatment_coverage <= 1),
     all(proportion_rdt >= 0 & proportion_rdt <= 1),
     all(proportion_tested >= 0 & proportion_tested <= 1),
     all(pfpr >= 0 & pfpr <= 1),
-    pfpr_threshold >= 0 & pfpr_threshold <= 1
-  )
-  stopifnot(
-    length(pfpr_threshold) == 1,
-    length(n_nmf) == length(treatment_coverage),
-    length(n_nmf) == length(proportion_rdt),
-    length(proportion_tested) == 1,
-    length(n_nmf) == length(pfpr)
+    all(pfpr_threshold >= 0 & pfpr_threshold <= 1)
   )
 
   ifelse(pfpr > pfpr_threshold, round(n_nmf * treatment_coverage * proportion_rdt * proportion_tested), 0)
@@ -103,7 +89,7 @@ commodity_nmf_rdt_tests <- function(n_nmf, treatment_coverage, proportion_rdt, p
 #' Estimate total number of microscopy diagnostics required as a result of non malarial fevers
 #'
 #' @inheritParams commodity_nmf_rdt_tests
-#' @param proportion_microscopy Vector of proportion of diagnostics that are microscopy
+#' @param proportion_microscopy Proportion of diagnostics that are microscopy. Numeric scalar or vector.
 #'
 #' @return Vector of the number of microscopy tests used on NMFs
 #'
@@ -117,20 +103,14 @@ commodity_nmf_microscopy_tests <- function(n_nmf, treatment_coverage, proportion
     is.numeric(pfpr),
     is.numeric(pfpr_threshold)
   )
+  check_lengths(n_nmf, treatment_coverage, proportion_microscopy, proportion_tested, pfpr, pfpr_threshold)
   stopifnot(
     all(n_nmf >= 0),
     all(treatment_coverage >= 0 & treatment_coverage <= 1),
     all(proportion_microscopy >= 0 & proportion_microscopy <= 1),
     all(proportion_tested >= 0 & proportion_tested <= 1),
     all(pfpr >= 0 & pfpr <= 1),
-    pfpr_threshold >= 0 & pfpr_threshold <= 1
-  )
-  stopifnot(
-    length(pfpr_threshold) == 1,
-    length(n_nmf) == length(treatment_coverage),
-    length(n_nmf) == length(proportion_microscopy),
-    length(proportion_tested) == 1,
-    length(n_nmf) == length(pfpr)
+    all(pfpr_threshold >= 0 & pfpr_threshold <= 1)
   )
 
   ifelse(pfpr > pfpr_threshold, round(n_nmf * treatment_coverage * proportion_microscopy * proportion_tested), 0)
@@ -150,10 +130,10 @@ commodity_nmf_microscopy_tests <- function(n_nmf, treatment_coverage, proportion
 #' So course for a single adult (weighing >=35kg) may constitute
 #' 3 days x 2 times daily x 4 doses (4 x 20/120mg = 80/480mg) = 24 doses.
 #'
-#' @param n_cases Vector of malaria case numbers by age band.
-#' @param treatment_coverage Vector of treatment coverage proportions by age band.
-#' @param proportion_act Vector of proportion of treatments that are ACTs by age band.
-#' @param age_upper Vector of upper bounds for each age group.
+#' @param n_cases Malaria case numbers by age band. Numeric scalar or vector.
+#' @param treatment_coverage Treatment coverage proportions by age band. Numeric scalar or vector.
+#' @param proportion_act Proportion of treatments that are ACTs by age band. Numeric scalar or vector.
+#' @param age_upper Upper bounds for each age group. Numeric scalar or vector.
 #'
 #' @return A vector giving the number of 20/120mg Artemether + lumefantrine ACT doses required per age group.
 #' @export
@@ -164,16 +144,12 @@ commodity_al_doses <- function(n_cases, treatment_coverage, proportion_act, age_
     is.numeric(proportion_act),
     is.numeric(age_upper)
   )
+  check_lengths(n_cases, treatment_coverage, proportion_act, age_upper)
   stopifnot(
     all(n_cases >= 0),
     all(treatment_coverage >= 0 & treatment_coverage <= 1),
     all(proportion_act >= 0 & proportion_act <= 1),
     all(age_upper >= 0)
-  )
-  stopifnot(
-    length(n_cases) == length(treatment_coverage),
-    length(n_cases) == length(age_upper),
-    length(n_cases) == length(proportion_act)
   )
 
   # Dose multipliers per age band (number of 20/120mg doses per course)
@@ -210,10 +186,10 @@ commodity_al_doses <- function(n_cases, treatment_coverage, proportion_act, age_
 #' }
 #' So course for a single adult may constitute approximately 10 doses.
 #'
-#' @param n_cases Vector of malaria case numbers by age band.
-#' @param treatment_coverage Vector of treatment coverage proportions.
-#' @param proportion_non_act Vector of proportion of treatments that are non-ACT (assumed chloroquine).
-#' @param age_upper Vector of upper bounds for each age group.
+#' @param n_cases Malaria case numbers by age band. Numeric scalar or vector.
+#' @param treatment_coverage Treatment coverage proportions. Numeric scalar or vector.
+#' @param proportion_non_act Proportion of treatments that are non-ACT (assumed chloroquine). Numeric scalar or vector.
+#' @param age_upper Upper bounds for each age group. Numeric scalar or vector.
 #'
 #' @return A vector giving the number of 250mg chloroquine doses required per age group.
 #' @export
@@ -224,16 +200,12 @@ commodity_chloroquine_doses <- function(n_cases, treatment_coverage, proportion_
     is.numeric(proportion_non_act),
     is.numeric(age_upper)
   )
+  check_lengths(n_cases, treatment_coverage, proportion_non_act, age_upper)
   stopifnot(
     all(n_cases >= 0),
     all(treatment_coverage >= 0 & treatment_coverage <= 1),
     all(proportion_non_act >= 0 & proportion_non_act <= 1),
     all(age_upper >= 0)
-  )
-  stopifnot(
-    length(n_cases) == length(treatment_coverage),
-    length(n_cases) == length(age_upper),
-    length(n_cases) == length(proportion_non_act)
   )
 
   # Dose multipliers per age band
@@ -272,12 +244,12 @@ commodity_chloroquine_doses <- function(n_cases, treatment_coverage, proportion_
 #' So course for a single adult (weighing >=35kg) may constitute
 #' 3 days x 2 times daily x 4 doses (4 x 20/120mg = 80/480mg) = 24 doses.
 #'
-#' @param n_nmf Vector of non malarial fever case numbers by age band.
-#' @param treatment_coverage Vector of treatment coverage proportions.
-#' @param proportion_act Vector of proportion of treatments that are ACTs.
-#' @param age_upper Vector of upper bounds for each age group.
-#' @param pfpr Prevalence
-#' @param pfpr_threshold Prevalence threshold at which it is assummed NMF are not suspected (and subsequently tested) to be malaria
+#' @param n_nmf Non malarial fever case numbers by age band. Numeric scalar or vector.
+#' @param treatment_coverage Treatment coverage proportions. Numeric scalar or vector.
+#' @param proportion_act Proportion of treatments that are ACTs. Numeric scalar or vector.
+#' @param age_upper Upper bounds for each age group. Numeric scalar or vector.
+#' @param pfpr Prevalence. Numeric scalar or vector.
+#' @param pfpr_threshold Prevalence threshold at which it is assumed NMF are not suspected (and subsequently tested) to be malaria. Numeric scalar or vector.
 #'
 #' @return A vector giving the number of 20/120mg Artemether + lumefantrine ACT doses required per age group.
 #' @export
@@ -290,20 +262,14 @@ commodity_nmf_al_doses <- function(n_nmf, treatment_coverage, proportion_act, ag
     is.numeric(pfpr),
     is.numeric(pfpr_threshold)
   )
+  check_lengths(n_nmf, treatment_coverage, proportion_act, age_upper, pfpr, pfpr_threshold)
   stopifnot(
     all(n_nmf >= 0),
     all(treatment_coverage >= 0 & treatment_coverage <= 1),
     all(proportion_act >= 0 & proportion_act <= 1),
     all(age_upper >= 0),
     all(pfpr >= 0 & pfpr <= 1),
-    pfpr_threshold >= 0 & pfpr_threshold <= 1
-  )
-  stopifnot(
-    length(pfpr_threshold) == 1,
-    length(n_nmf) == length(treatment_coverage),
-    length(n_nmf) == length(age_upper),
-    length(n_nmf) == length(proportion_act),
-    length(n_nmf) == length(pfpr)
+    all(pfpr_threshold >= 0 & pfpr_threshold <= 1)
   )
 
   # Dose multipliers per age band (number of 20/120mg doses per course)

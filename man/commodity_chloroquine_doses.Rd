@@ -12,13 +12,13 @@ commodity_chloroquine_doses(
 )
 }
 \arguments{
-\item{n_cases}{Vector of malaria case numbers by age band.}
+\item{n_cases}{Malaria case numbers by age band. Numeric scalar or vector.}
 
-\item{treatment_coverage}{Vector of treatment coverage proportions.}
+\item{treatment_coverage}{Treatment coverage proportions. Numeric scalar or vector.}
 
-\item{proportion_non_act}{Vector of proportion of treatments that are non-ACT (assumed chloroquine).}
+\item{proportion_non_act}{Proportion of treatments that are non-ACT (assumed chloroquine). Numeric scalar or vector.}
 
-\item{age_upper}{Vector of upper bounds for each age group.}
+\item{age_upper}{Upper bounds for each age group. Numeric scalar or vector.}
 }
 \value{
 A vector giving the number of 250mg chloroquine doses required per age group.

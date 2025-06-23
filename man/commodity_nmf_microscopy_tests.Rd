@@ -14,17 +14,17 @@ commodity_nmf_microscopy_tests(
 )
 }
 \arguments{
-\item{n_nmf}{Vector of non malarial fever case numbers}
+\item{n_nmf}{Non malarial fever case numbers. Numeric scalar or vector.}
 
-\item{treatment_coverage}{Vector of treatment coverage}
+\item{treatment_coverage}{Treatment coverage. Numeric scalar or vector.}
 
-\item{proportion_microscopy}{Vector of proportion of diagnostics that are microscopy}
+\item{proportion_microscopy}{Proportion of diagnostics that are microscopy. Numeric scalar or vector.}
 
-\item{proportion_tested}{Proportion of nmfs that are tested}
+\item{proportion_tested}{Proportion of NMFs that are tested. Numeric scalar or vector.}
 
-\item{pfpr}{Prevalence}
+\item{pfpr}{Prevalence. Numeric scalar or vector.}
 
-\item{pfpr_threshold}{Prevalence threshold at which it is assummed NMF are not suspected (and subsequently tested) to be malaria}
+\item{pfpr_threshold}{Prevalence threshold at which it is assumed NMF are not suspected (and subsequently tested) to be malaria. Numeric scalar or vector.}
 }
 \value{
 Vector of the number of microscopy tests used on NMFs

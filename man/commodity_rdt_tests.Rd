@@ -12,13 +12,13 @@ commodity_rdt_tests(
 )
 }
 \arguments{
-\item{n_cases}{Vector of malaria case numbers}
+\item{n_cases}{Malaria case numbers. Numeric scalar or vector.}
 
-\item{treatment_coverage}{Vector of treatment coverage}
+\item{treatment_coverage}{Treatment coverage. Numeric scalar or vector.}
 
-\item{proportion_rdt}{Vector of proportion of diagnostics that are RDT}
+\item{proportion_rdt}{Proportion of diagnostics that are RDT. Numeric scalar or vector.}
 
-\item{proportion_tested}{A scalar value of proportion of treated cases that are tested}
+\item{proportion_tested}{Proportion of treated cases that are tested. Numeric scalar or vector.}
 }
 \value{
 Vector of the number of RDT tests

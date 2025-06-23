@@ -12,13 +12,13 @@ commodity_microscopy_tests(
 )
 }
 \arguments{
-\item{n_cases}{Vector of malaria case numbers}
+\item{n_cases}{Malaria case numbers. Numeric scalar or vector.}
 
-\item{treatment_coverage}{Vector of treatment coverage}
+\item{treatment_coverage}{Treatment coverage. Numeric scalar or vector.}
 
-\item{proportion_microscopy}{Vector of proportion of diagnostics that are microscopy}
+\item{proportion_microscopy}{Proportion of diagnostics that are microscopy. Numeric scalar or vector.}
 
-\item{proportion_tested}{A scalar value of proportion of treated cases that are tested}
+\item{proportion_tested}{Proportion of treated cases that are tested. Numeric scalar or vector.}
 }
 \value{
 Vector of the number of microscopy tests

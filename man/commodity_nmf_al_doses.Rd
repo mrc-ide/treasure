@@ -14,17 +14,17 @@ commodity_nmf_al_doses(
 )
 }
 \arguments{
-\item{n_nmf}{Vector of non malarial fever case numbers by age band.}
+\item{n_nmf}{Non malarial fever case numbers by age band. Numeric scalar or vector.}
 
-\item{treatment_coverage}{Vector of treatment coverage proportions.}
+\item{treatment_coverage}{Treatment coverage proportions. Numeric scalar or vector.}
 
-\item{proportion_act}{Vector of proportion of treatments that are ACTs.}
+\item{proportion_act}{Proportion of treatments that are ACTs. Numeric scalar or vector.}
 
-\item{age_upper}{Vector of upper bounds for each age group.}
+\item{age_upper}{Upper bounds for each age group. Numeric scalar or vector.}
 
-\item{pfpr}{Prevalence}
+\item{pfpr}{Prevalence. Numeric scalar or vector.}
 
-\item{pfpr_threshold}{Prevalence threshold at which it is assummed NMF are not suspected (and subsequently tested) to be malaria}
+\item{pfpr_threshold}{Prevalence threshold at which it is assumed NMF are not suspected (and subsequently tested) to be malaria. Numeric scalar or vector.}
 }
 \value{
 A vector giving the number of 20/120mg Artemether + lumefantrine ACT doses required per age group.

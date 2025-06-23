@@ -13,16 +13,15 @@ commodity_doses_vaccine(
 )
 }
 \arguments{
-\item{vaccine_cov}{A single value or vector of vaccine coverage.}
+\item{vaccine_cov}{Vaccine coverage. Numeric scalar or vector.}
 
-\item{par_vaccine}{Population at risk within vaccine-eligible age range estimates.}
+\item{par_vaccine}{Population at risk within vaccine-eligible age range. Numeric scalar or vector.}
 
-\item{n_dose_primary_series}{Number of doses in the primary series}
+\item{n_dose_primary_series}{Number of doses in the primary series. Numeric scalar or vector.}
 
-\item{booster_coverage_downscale}{Captures the drop off in coverage between primary series and
-boosters such that `booster coverage = vaccine_cov * booster_coverage_downscale`}
+\item{booster_coverage_downscale}{Capture the drop off in coverage between primary series and boosters such that `booster coverage = vaccine_cov * booster_coverage_downscale`. Numeric scalar or vector.}
 
-\item{n_boosters}{Number of booster doses}
+\item{n_boosters}{Number of booster doses. Numeric scalar or vector.}
 }
 \value{
 The total number of vaccine doses delivered.

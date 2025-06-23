@@ -62,13 +62,21 @@ test_that("IRS commodity people rounds", {
     commodity_person_rounds_irs(irs_cov = c(0.1, 0.2), n_rounds = rep(3, 2), par = c(100, 50)),
     round(c(0.1 * 3 * 100, 0.2 * 3 * 50))
   )
-  expect_error(
+  expect_equal(
     commodity_person_rounds_irs(irs_cov = c(0.1, 0.2), n_rounds = 3, par = 100),
-    "is not TRUE"
+    round(c(0.1, 0.2) * 3 * 100)
+  )
+  expect_equal(
+    commodity_person_rounds_irs(irs_cov = c(0.1, 0.2), n_rounds = c(3, 2), par = 100),
+    round(c(0.1, 0.2) * c(3, 2) * 100)
   )
   expect_error(
-    commodity_person_rounds_irs(irs_cov = c(0.1, 0.2), n_rounds = c(3, 2), par = 100),
-    "is not TRUE"
+    commodity_person_rounds_irs(
+      irs_cov = c(0.1, 0.2, 0.3),
+      n_rounds = c(3, 3),
+      par = c(100, 100, 100)
+    ),
+    "length"
   )
 })
 
@@ -83,12 +91,21 @@ test_that("IRS commodity structure rounds", {
     ),
     round(c(0.2 * 1 * 50, 0.4 * 1 * 50) / 5)
   )
-  expect_error(
+  expect_equal(
     commodity_structure_rounds_irs(irs_cov = c(0.2, 0.4), n_rounds = 1, par = 50, hh_size = 5),
-    "is not TRUE"
+    round(c(0.2, 0.4) * 1 * 50 / 5)
+  )
+  expect_equal(
+    commodity_structure_rounds_irs(irs_cov = 0.2, n_rounds = 1, par = 50, hh_size = c(5, 5)),
+    round(0.2 * 1 * 50 / c(5, 5))
   )
   expect_error(
-    commodity_structure_rounds_irs(irs_cov = 0.2, n_rounds = 1, par = 50, hh_size = c(5, 5)),
-    "is not TRUE"
+    commodity_structure_rounds_irs(
+      irs_cov = c(0.2, 0.4, 0.6),
+      n_rounds = c(1, 1),
+      par = c(50, 50, 50),
+      hh_size = c(5, 5, 5)
+    ),
+    "length"
   )
 })

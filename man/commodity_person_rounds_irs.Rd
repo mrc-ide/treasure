@@ -7,11 +7,11 @@
 commodity_person_rounds_irs(irs_cov, n_rounds, par)
 }
 \arguments{
-\item{irs_cov}{A vector of IRS coverage per year.}
+\item{irs_cov}{IRS coverage per year. Numeric scalar or vector.}
 
-\item{n_rounds}{A vector of the number of spray rounds per year}
+\item{n_rounds}{Number of spray rounds per year. Numeric scalar or vector.}
 
-\item{par}{Population at risk estimates.}
+\item{par}{Population at risk estimates. Numeric scalar or vector.}
 }
 \value{
 The total number of person-rounds of IRS protection.

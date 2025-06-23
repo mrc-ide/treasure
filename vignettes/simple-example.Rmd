@@ -136,7 +136,7 @@ barplot(
 )
 ```
 
-The examples above show the basic approach for moving from programme
-data to estimates of commodity requirements and associated costs.  More
+The examples above show the basic approach for moving from site input and model
+output data to estimates of commodity requirements and associated costs. More
 complex scenarios can be handled in the same way by adjusting the input
 arguments to the commodity and costing functions.

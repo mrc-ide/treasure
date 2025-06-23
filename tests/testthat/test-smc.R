@@ -22,8 +22,16 @@ test_that("SMC commodity doses", {
     commodity_doses_smc(smc_cov = c(0.1, 0.2), n_rounds = c(3, 3), par_smc = c(100, 50)),
     round(c(0.1 * 3 * 100, 0.2 * 3 * 50))
   )
-  expect_error(
+  expect_equal(
     commodity_doses_smc(smc_cov = c(0.1, 0.2), n_rounds = 3, par_smc = 100),
+    round(c(0.1, 0.2) * 3 * 100)
+  )
+  expect_error(
+    commodity_doses_smc(
+      smc_cov = c(0.1, 0.2, 0.3),
+      n_rounds = c(3, 3),
+      par_smc = c(100, 100, 100)
+    ),
     "length"
   )
 })

@@ -7,9 +7,9 @@
 cost_al(n_doses, cost_per_dose = 0.3, input_year = 2022, ...)
 }
 \arguments{
-\item{n_doses}{Number of doses}
+\item{n_doses}{Number of doses. Numeric scalar or vector.}
 
-\item{cost_per_dose}{Cost per dose is for a single dose (20/120 mg)}
+\item{cost_per_dose}{Cost per dose is for a single dose (20/120 mg). Numeric scalar or vector.}
 
 \item{input_year}{Year the unit costs are reported in}
 

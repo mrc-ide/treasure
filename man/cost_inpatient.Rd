@@ -13,11 +13,11 @@ cost_inpatient(
 )
 }
 \arguments{
-\item{n_visits}{Number of visits}
+\item{n_visits}{Number of visits. Numeric scalar or vector.}
 
-\item{cost_per_day}{Cost per day}
+\item{cost_per_day}{Cost per day. Numeric scalar or vector.}
 
-\item{average_stay_duration}{Average duration of stay, defaults to 3 days following Patouillard et al 2017.}
+\item{average_stay_duration}{Average duration of stay, defaults to 3 days following Patouillard et al 2017. Numeric scalar or vector.}
 
 \item{input_year}{Year the unit costs are reported in}
 

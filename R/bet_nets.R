@@ -56,9 +56,9 @@ commodity_nets <- function(usage, use_rate, distribution_timesteps, crop_timeste
 
 #' Cost standard LLINS
 #'
-#' @param n_llin Number of standard LLIN bed nets
-#' @param llin_unit_cost Commodity unit cost per standard LLIN bed net.
-#' @param llin_delivery_cost Cost to deliver one standard LLIN bet net.
+#' @param n_llin Number of standard LLIN bed nets. Numeric scalar or vector.
+#' @param llin_unit_cost Commodity unit cost per standard LLIN bed net. Numeric scalar or vector.
+#' @param llin_delivery_cost Cost to deliver one standard LLIN bet net. Numeric scalar or vector.
 #' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
 #'
@@ -82,6 +82,7 @@ commodity_nets <- function(usage, use_rate, distribution_timesteps, crop_timeste
 #' \url{https://www.thelancet.com/journals/lanplh/article/PIIS2542-5196(21)00296-5/fulltext}.
 cost_llin <- function(n_llin, llin_unit_cost = 2.02, llin_delivery_cost = 1.50,
                       input_year = 2024, ...) {
+  check_lengths(n_llin, llin_unit_cost, llin_delivery_cost)
   if(any(n_llin < 0)){
     stop("All llin_n estimates must be >= 0")
   }
@@ -97,9 +98,9 @@ cost_llin <- function(n_llin, llin_unit_cost = 2.02, llin_delivery_cost = 1.50,
 
 #' Cost pyrethroid-PBO ITN
 #'
-#' @param n_pbo_itn Number of pyrethroid-PBO bed nets
-#' @param pbo_itn_unit_cost Commodity unit cost per pyrethroid-PBO ITN bed net.
-#' @param pbo_itn_delivery_cost Cost to deliver one pyrethroid-PBO ITN bet net.
+#' @param n_pbo_itn Number of pyrethroid-PBO bed nets. Numeric scalar or vector.
+#' @param pbo_itn_unit_cost Commodity unit cost per pyrethroid-PBO ITN bed net. Numeric scalar or vector.
+#' @param pbo_itn_delivery_cost Cost to deliver one pyrethroid-PBO ITN bet net. Numeric scalar or vector.
 #' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
 #'
@@ -123,6 +124,7 @@ cost_llin <- function(n_llin, llin_unit_cost = 2.02, llin_delivery_cost = 1.50,
 cost_pbo_itn <- function(n_pbo_itn, pbo_itn_unit_cost = 2.63,
                          pbo_itn_delivery_cost = 1.50, input_year = 2024,
                          ...) {
+  check_lengths(n_pbo_itn, pbo_itn_unit_cost, pbo_itn_delivery_cost)
   if(any(n_pbo_itn < 0)){
     stop("All llin_n estimates must be >= 0")
   }
@@ -138,9 +140,9 @@ cost_pbo_itn <- function(n_pbo_itn, pbo_itn_unit_cost = 2.63,
 
 #' Cost pyrethroid-chlorfenapyr (dual ai) ITN
 #'
-#' @param n_dualai_itn Number of pyrethroid-chlorfenapyr bed nets
-#' @param dualai_itn_unit_cost Commodity unit cost per pyrethroid-chlorfenapyr ITN bed net.
-#' @param dualai_itn_delivery_cost Cost to deliver one pyrethroid-chlorfenapyr ITN bet net.
+#' @param n_dualai_itn Number of pyrethroid-chlorfenapyr bed nets. Numeric scalar or vector.
+#' @param dualai_itn_unit_cost Commodity unit cost per pyrethroid-chlorfenapyr ITN bed net. Numeric scalar or vector.
+#' @param dualai_itn_delivery_cost Cost to deliver one pyrethroid-chlorfenapyr ITN bet net. Numeric scalar or vector.
 #' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
 #'
@@ -164,6 +166,7 @@ cost_pbo_itn <- function(n_pbo_itn, pbo_itn_unit_cost = 2.63,
 cost_dualai_itn <- function(n_dualai_itn, dualai_itn_unit_cost = 2.70,
                             dualai_itn_delivery_cost = 1.50, input_year = 2024,
                             ...) {
+  check_lengths(n_dualai_itn, dualai_itn_unit_cost, dualai_itn_delivery_cost)
   if(any(n_dualai_itn < 0)){
     stop("All llin_n estimates must be >= 0")
   }

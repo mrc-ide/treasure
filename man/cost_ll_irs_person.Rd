@@ -12,9 +12,9 @@ cost_ll_irs_person(
 )
 }
 \arguments{
-\item{n_protected}{Number of people protected}
+\item{n_protected}{Number of people protected. Numeric scalar or vector.}
 
-\item{cost_per_person_protected}{Cost per person protected}
+\item{cost_per_person_protected}{Cost per person protected. Numeric scalar or vector.}
 
 \item{input_year}{Year the unit costs are reported in}
 

@@ -13,11 +13,11 @@ cost_rdt(
 )
 }
 \arguments{
-\item{n_tests}{Number of tests}
+\item{n_tests}{Number of tests. Numeric scalar or vector.}
 
-\item{rdt_unit_cost}{Unit cost for rapid diagnostic test}
+\item{rdt_unit_cost}{Unit cost for rapid diagnostic test. Numeric scalar or vector.}
 
-\item{delivery_mark_up}{A mark up for in-country delivery to a public health facility.
+\item{delivery_mark_up}{A mark up for in-country delivery to a public health facility. Numeric scalar or vector.
 Expressed as a proportion of the test unit cost.}
 
 \item{input_year}{Year the unit costs are reported in}

@@ -14,13 +14,13 @@ cost_r21(
 )
 }
 \arguments{
-\item{n_doses}{Number of R21 doses}
+\item{n_doses}{Number of R21 doses. Numeric scalar or vector.}
 
-\item{r21_cost_per_dose}{Cost per R21 dose}
+\item{r21_cost_per_dose}{Cost per R21 dose. Numeric scalar or vector.}
 
-\item{r21_consumables_cost}{Cost for consumables for one dose (e.g injection and reconstitution syringes, safety box etc.)}
+\item{r21_consumables_cost}{Cost for consumables for one dose (e.g injection and reconstitution syringes, safety box etc.). Numeric scalar or vector.}
 
-\item{r21_delivery_cost}{Cost for delivery of one dose}
+\item{r21_delivery_cost}{Cost for delivery of one dose. Numeric scalar or vector.}
 
 \item{input_year}{Year the unit costs are reported in}
 

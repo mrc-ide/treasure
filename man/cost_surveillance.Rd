@@ -12,9 +12,9 @@ cost_surveillance(
 )
 }
 \arguments{
-\item{pop_at_risk}{Population at risk}
+\item{pop_at_risk}{Population at risk. Numeric scalar or vector.}
 
-\item{cost_per_pop_at_risk}{Cost per population at risk}
+\item{cost_per_pop_at_risk}{Cost per population at risk. Numeric scalar or vector.}
 
 \item{input_year}{Year the unit costs are reported in}
 

@@ -13,11 +13,11 @@ cost_pbo_itn(
 )
 }
 \arguments{
-\item{n_pbo_itn}{Number of pyrethroid-PBO bed nets}
+\item{n_pbo_itn}{Number of pyrethroid-PBO bed nets. Numeric scalar or vector.}
 
-\item{pbo_itn_unit_cost}{Commodity unit cost per pyrethroid-PBO ITN bed net.}
+\item{pbo_itn_unit_cost}{Commodity unit cost per pyrethroid-PBO ITN bed net. Numeric scalar or vector.}
 
-\item{pbo_itn_delivery_cost}{Cost to deliver one pyrethroid-PBO ITN bet net.}
+\item{pbo_itn_delivery_cost}{Cost to deliver one pyrethroid-PBO ITN bet net. Numeric scalar or vector.}
 
 \item{input_year}{Year the unit costs are reported in}
 

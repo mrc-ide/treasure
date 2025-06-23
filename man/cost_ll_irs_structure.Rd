@@ -12,9 +12,9 @@ cost_ll_irs_structure(
 )
 }
 \arguments{
-\item{n_sprayed}{Number of structures sprayed}
+\item{n_sprayed}{Number of structures sprayed. Numeric scalar or vector.}
 
-\item{cost_per_structure_sprayed}{Cost per structure sprayed}
+\item{cost_per_structure_sprayed}{Cost per structure sprayed. Numeric scalar or vector.}
 
 \item{input_year}{Year the unit costs are reported in}
 

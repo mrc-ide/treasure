@@ -13,6 +13,15 @@ test_that("RDT costing", {
     1 * inflation_adjust(0.46 + (0.46 * 0.5), 2022, 2024)
   )
 
+  expect_equal(
+    cost_rdt(n_tests = c(1,2), rdt_unit_cost = c(0.5, 1), delivery_mark_up = c(0.2,0.3)),
+    c(1,2) * inflation_adjust(c(0.5,1) + c(0.5,1) * c(0.2,0.3), 2022, 2024)
+  )
+  expect_error(
+    cost_rdt(n_tests = 1:2, rdt_unit_cost = c(1,2,3)),
+    "length"
+  )
+
   expect_error(cost_rdt(n_tests = -1), "All n_tests estimates must be >= 0")
   expect_error(cost_rdt(n_tests = 1, rdt_unit_cost = -1), "RDT cost inputs must be >= 0")
   expect_error(cost_rdt(n_tests = 1, delivery_mark_up = -1), "RDT cost inputs must be >= 0")

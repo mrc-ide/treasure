@@ -10,6 +10,17 @@ test_that("LLIN costing", {
     1 * inflation_adjust(2 + 3, 2024, 2024)
   )
 
+  expect_equal(
+    cost_llin(n_llin = c(1, 2),
+              llin_unit_cost = c(2, 3),
+              llin_delivery_cost = c(3, 4)),
+    c(1, 2) * inflation_adjust(c(2, 3) + c(3, 4), 2024, 2024)
+  )
+  expect_error(
+    cost_llin(n_llin = 1:2, llin_unit_cost = c(1, 2, 3)),
+    "length"
+  )
+
   expect_error(cost_llin(n_llin = -1), "All llin_n estimates must be >= 0")
   expect_error(cost_llin(n_llin = 1, llin_unit_cost = -1), "LLIN cost inputs must be >= 0")
   expect_error(cost_llin(n_llin = 1, llin_delivery_cost = -1), "LLIN cost inputs must be >= 0")

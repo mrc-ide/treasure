@@ -7,9 +7,9 @@
 cost_microscopy(n_tests, cost_per_slide = 0.26, input_year = 2007, ...)
 }
 \arguments{
-\item{n_tests}{Number of tests performed}
+\item{n_tests}{Number of tests performed. Numeric scalar or vector.}
 
-\item{cost_per_slide}{Cost per slide diagnostic performed}
+\item{cost_per_slide}{Cost per slide diagnostic performed. Numeric scalar or vector.}
 
 \item{input_year}{Year the unit costs are reported in}
 

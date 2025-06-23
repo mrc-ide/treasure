@@ -58,8 +58,8 @@ commodity_structure_rounds_irs <- function(irs_cov, n_rounds, par, hh_size){
 
 #' Cost long lasting IRS
 #'
-#' @param n_protected Number of people protected
-#' @param cost_per_person_protected Cost per person protected
+#' @param n_protected Number of people protected. Numeric scalar or vector.
+#' @param cost_per_person_protected Cost per person protected. Numeric scalar or vector.
 #' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
 #'
@@ -81,6 +81,7 @@ commodity_structure_rounds_irs <- function(irs_cov, n_rounds, par, hh_size){
 cost_ll_irs_person <- function(n_protected, cost_per_person_protected = 7.44,
                                input_year = 2020,
                                ...){
+  check_lengths(n_protected, cost_per_person_protected)
   if(any(n_protected < 0)){
     stop("All n_protected estimates must be >= 0")
   }
@@ -94,8 +95,8 @@ cost_ll_irs_person <- function(n_protected, cost_per_person_protected = 7.44,
 
 #' Cost actellic IRS
 #'
-#' @param n_sprayed Number of structures sprayed
-#' @param cost_per_structure_sprayed Cost per structure sprayed
+#' @param n_sprayed Number of structures sprayed. Numeric scalar or vector.
+#' @param cost_per_structure_sprayed Cost per structure sprayed. Numeric scalar or vector.
 #' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
 #'
@@ -117,6 +118,7 @@ cost_ll_irs_person <- function(n_protected, cost_per_person_protected = 7.44,
 cost_ll_irs_structure <- function(n_sprayed, cost_per_structure_sprayed = 26.36,
                                   input_year = 2020,
                                   ...){
+  check_lengths(n_sprayed, cost_per_structure_sprayed)
   if(any(n_sprayed < 0)){
     stop("All n_sprayed estimates must be >= 0")
   }
@@ -130,8 +132,8 @@ cost_ll_irs_structure <- function(n_sprayed, cost_per_structure_sprayed = 26.36,
 
 #' Cost DDT IRS
 #'
-#' @param n_sprayed Number of structures sprayed
-#' @param cost_per_structure_sprayed Cost per structure sprayed
+#' @param n_sprayed Number of structures sprayed. Numeric scalar or vector.
+#' @param cost_per_structure_sprayed Cost per structure sprayed. Numeric scalar or vector.
 #' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
 #'
@@ -148,6 +150,7 @@ cost_ll_irs_structure <- function(n_sprayed, cost_per_structure_sprayed = 26.36,
 cost_ddt_irs_structure <- function(n_sprayed, cost_per_structure_sprayed = 2.25,
                                    input_year = 1999,
                                    ...){
+  check_lengths(n_sprayed, cost_per_structure_sprayed)
   if(any(n_sprayed < 0)){
     stop("All n_sprayed estimates must be >= 0")
   }

@@ -13,11 +13,11 @@ cost_llin(
 )
 }
 \arguments{
-\item{n_llin}{Number of standard LLIN bed nets}
+\item{n_llin}{Number of standard LLIN bed nets. Numeric scalar or vector.}
 
-\item{llin_unit_cost}{Commodity unit cost per standard LLIN bed net.}
+\item{llin_unit_cost}{Commodity unit cost per standard LLIN bed net. Numeric scalar or vector.}
 
-\item{llin_delivery_cost}{Cost to deliver one standard LLIN bet net.}
+\item{llin_delivery_cost}{Cost to deliver one standard LLIN bet net. Numeric scalar or vector.}
 
 \item{input_year}{Year the unit costs are reported in}
 

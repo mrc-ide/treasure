@@ -2,8 +2,8 @@
 #'
 #' Cost of epidemiological and entomological surveillance.
 #'
-#' @param pop_at_risk Population at risk
-#' @param cost_per_pop_at_risk Cost per population at risk
+#' @param pop_at_risk Population at risk. Numeric scalar or vector.
+#' @param cost_per_pop_at_risk Cost per population at risk. Numeric scalar or vector.
 #' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
 #'
@@ -19,6 +19,7 @@
 #' \url{https://gh.bmj.com/content/2/2/e000176}.
 cost_surveillance <- function(pop_at_risk, cost_per_pop_at_risk = 0.05,
                               input_year = 2017, ...){
+  check_lengths(pop_at_risk, cost_per_pop_at_risk)
   if(any(pop_at_risk < 0)){
     stop("All pop_at_risk estimates must be >= 0")
   }

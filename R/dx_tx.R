@@ -333,12 +333,13 @@ commodity_nmf_al_doses <- function(n_nmf, treatment_coverage, proportion_act, ag
 #' RDTs are used for diagnosis of malaria. When costing it is also common to add
 #' additional costs for RDTs used to diagnose non-malaria fevers.
 #'
-#' @param n_tests Number of tests
-#' @param rdt_unit_cost Unit cost for rapid diagnostic test
-#' @param delivery_mark_up A mark up for in-country delivery to a public health facility.
+#' @param n_tests Number of tests. Numeric scalar or vector.
+#' @param rdt_unit_cost Unit cost for rapid diagnostic test. Numeric scalar or vector.
+#' @param delivery_mark_up A mark up for in-country delivery to a public health facility. Numeric scalar or vector.
 #'   Expressed as a proportion of the test unit cost.
 #' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
+#'
 #'
 #' @return RDT costs
 #' @export
@@ -361,6 +362,7 @@ commodity_nmf_al_doses <- function(n_nmf, treatment_coverage, proportion_act, ag
 #' \url{https://gh.bmj.com/content/2/2/e000176}
 cost_rdt <- function(n_tests, rdt_unit_cost = 0.46, delivery_mark_up = 0.15,
                      input_year = 2022, ...){
+  check_lengths(n_tests, rdt_unit_cost, delivery_mark_up)
   if(any(n_tests < 0)){
     stop("All n_tests estimates must be >= 0")
   }
@@ -376,8 +378,8 @@ cost_rdt <- function(n_tests, rdt_unit_cost = 0.46, delivery_mark_up = 0.15,
 
 #' Cost Microscopy
 #'
-#' @param n_tests Number of tests performed
-#' @param cost_per_slide Cost per slide diagnostic performed
+#' @param n_tests Number of tests performed. Numeric scalar or vector.
+#' @param cost_per_slide Cost per slide diagnostic performed. Numeric scalar or vector.
 #' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
 #'
@@ -392,6 +394,7 @@ cost_rdt <- function(n_tests, rdt_unit_cost = 0.46, delivery_mark_up = 0.15,
 #' \url{https://pubmed.ncbi.nlm.nih.gov/18165484/}.
 cost_microscopy <- function(n_tests, cost_per_slide = 0.26, input_year = 2007,
                            ...){
+  check_lengths(n_tests, cost_per_slide)
   if(any(n_tests < 0)){
     stop("All n_tests estimates must be >= 0")
   }
@@ -408,8 +411,8 @@ cost_microscopy <- function(n_tests, cost_per_slide = 0.26, input_year = 2007,
 #'
 #' Note the cost per dose is for a single dose (20/120 mg), not a full treatment course.
 #'
-#' @param n_doses Number of doses
-#' @param cost_per_dose Cost per dose is for a single dose (20/120 mg)
+#' @param n_doses Number of doses. Numeric scalar or vector.
+#' @param cost_per_dose Cost per dose is for a single dose (20/120 mg). Numeric scalar or vector.
 #' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
 #'
@@ -430,6 +433,7 @@ cost_microscopy <- function(n_tests, cost_per_slide = 0.26, input_year = 2007,
 #' \url{https://www.theglobalfund.org/en/sourcing-management/health-products/antimalarial-medicines/}.
 cost_al <- function(n_doses, cost_per_dose = 0.30, input_year = 2022,
                     ...){
+  check_lengths(n_doses, cost_per_dose)
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
   }
@@ -444,8 +448,8 @@ cost_al <- function(n_doses, cost_per_dose = 0.30, input_year = 2022,
 
 #' Cost Chloroquine treatment
 #'
-#' @param n_doses Number of doses
-#' @param cost_per_dose Cost per dose is for a single dose (250mg base each)
+#' @param n_doses Number of doses. Numeric scalar or vector.
+#' @param cost_per_dose Cost per dose is for a single dose (250mg base each). Numeric scalar or vector.
 #' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
 #'
@@ -461,6 +465,7 @@ cost_al <- function(n_doses, cost_per_dose = 0.30, input_year = 2022,
 #' \url{https://www.msf.org/qa-act-now-get-malaria-treatment-works-africa}.
 cost_chloroquine <- function(n_doses, cost_per_dose = 0.10 / 10, input_year = 2003,
                              ...){
+  check_lengths(n_doses, cost_per_dose)
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
   }
@@ -480,8 +485,8 @@ cost_chloroquine <- function(n_doses, cost_per_dose = 0.10 / 10, input_year = 20
 #' So course for a single adult (weighing 50kg) may constitute
 #' 14 days x 0.25mg x 50kg (14 x 0.25 x 50 / 7.5) = 25 doses.
 #'
-#' @param n_doses Number of tests
-#' @param cost_per_dose Cost per dose is for a single dose (7.5 mg)
+#' @param n_doses Number of tests. Numeric scalar or vector.
+#' @param cost_per_dose Cost per dose is for a single dose (7.5 mg). Numeric scalar or vector.
 #' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
 #'
@@ -502,6 +507,7 @@ cost_chloroquine <- function(n_doses, cost_per_dose = 0.10 / 10, input_year = 20
 #' \url{https://www.theglobalfund.org/en/sourcing-management/health-products/antimalarial-medicines/}.
 cost_primaquine <- function(n_doses, cost_per_dose = 0.40, input_year = 2022,
                             ...){
+  check_lengths(n_doses, cost_per_dose)
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
   }
@@ -518,8 +524,8 @@ cost_primaquine <- function(n_doses, cost_per_dose = 0.40, input_year = 2022,
 #'
 #' For information on country specific outpatient costs from WHO CHOICE see \code{?who_coice}
 #'
-#' @param n_visits Number of visits
-#' @param cost_per_visit Cost per visit
+#' @param n_visits Number of visits. Numeric scalar or vector.
+#' @param cost_per_visit Cost per visit. Numeric scalar or vector.
 #' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
 #'
@@ -527,6 +533,7 @@ cost_primaquine <- function(n_doses, cost_per_dose = 0.40, input_year = 2022,
 #' @export
 cost_outpatient <- function(n_visits, cost_per_visit, input_year = 2021,
                            ...){
+  check_lengths(n_visits, cost_per_visit)
   if(any(n_visits < 0)){
     stop("All n_visits estimates must be >= 0")
   }
@@ -543,9 +550,9 @@ cost_outpatient <- function(n_visits, cost_per_visit, input_year = 2021,
 #'
 #' For information on country specific inpatient costs from WHO CHOICE see \code{?who_coice}
 #'
-#' @param n_visits Number of visits
-#' @param cost_per_day Cost per day
-#' @param average_stay_duration Average duration of stay, defaults to 3 days following Patouillard et al 2017.
+#' @param n_visits Number of visits. Numeric scalar or vector.
+#' @param cost_per_day Cost per day. Numeric scalar or vector.
+#' @param average_stay_duration Average duration of stay, defaults to 3 days following Patouillard et al 2017. Numeric scalar or vector.
 #' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
 #'
@@ -554,6 +561,7 @@ cost_outpatient <- function(n_visits, cost_per_visit, input_year = 2021,
 cost_inpatient <- function(n_visits, cost_per_day, average_stay_duration = 3,
                           input_year = 2021,
                           ...){
+  check_lengths(n_visits, cost_per_day, average_stay_duration)
   if(any(n_visits < 0)){
     stop("All n_visits estimates must be >= 0")
   }

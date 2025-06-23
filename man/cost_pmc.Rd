@@ -7,9 +7,9 @@
 cost_pmc(n_doses, pmc_cost_per_dose_delivered = 0.3894, input_year = 2007, ...)
 }
 \arguments{
-\item{n_doses}{Number of PMC doses}
+\item{n_doses}{Number of PMC doses. Numeric scalar or vector.}
 
-\item{pmc_cost_per_dose_delivered}{Cost per dose delivered}
+\item{pmc_cost_per_dose_delivered}{Cost per dose delivered. Numeric scalar or vector.}
 
 \item{input_year}{Year the unit costs are reported in}
 

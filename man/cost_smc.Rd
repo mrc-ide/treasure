@@ -7,9 +7,9 @@
 cost_smc(n_doses, smc_cost_per_dose_delivered = 0.9075, input_year = 2016, ...)
 }
 \arguments{
-\item{n_doses}{Number of SMC doses}
+\item{n_doses}{Number of SMC doses. Numeric scalar or vector.}
 
-\item{smc_cost_per_dose_delivered}{Cost per dose delivered}
+\item{smc_cost_per_dose_delivered}{Cost per dose delivered. Numeric scalar or vector.}
 
 \item{input_year}{Year the unit costs are reported in}
 

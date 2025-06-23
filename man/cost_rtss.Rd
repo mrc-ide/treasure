@@ -14,13 +14,13 @@ cost_rtss(
 )
 }
 \arguments{
-\item{n_doses}{Number of RTS,S doses}
+\item{n_doses}{Number of RTS,S doses. Numeric scalar or vector.}
 
-\item{rtss_cost_per_dose}{Cost per RTS,S dose}
+\item{rtss_cost_per_dose}{Cost per RTS,S dose. Numeric scalar or vector.}
 
-\item{rtss_consumables_cost}{Cost for consumables for one dose (e.g injection and reconstitution syringes, safety box etc.)}
+\item{rtss_consumables_cost}{Cost for consumables for one dose (e.g injection and reconstitution syringes, safety box etc.). Numeric scalar or vector.}
 
-\item{rtss_delivery_cost}{Cost for delivery of one dose}
+\item{rtss_delivery_cost}{Cost for delivery of one dose. Numeric scalar or vector.}
 
 \item{input_year}{Year the unit costs are reported in}
 

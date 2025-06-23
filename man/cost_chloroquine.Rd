@@ -7,9 +7,9 @@
 cost_chloroquine(n_doses, cost_per_dose = 0.1/10, input_year = 2003, ...)
 }
 \arguments{
-\item{n_doses}{Number of doses}
+\item{n_doses}{Number of doses. Numeric scalar or vector.}
 
-\item{cost_per_dose}{Cost per dose is for a single dose (250mg base each)}
+\item{cost_per_dose}{Cost per dose is for a single dose (250mg base each). Numeric scalar or vector.}
 
 \item{input_year}{Year the unit costs are reported in}
 

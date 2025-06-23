@@ -7,9 +7,9 @@
 cost_outpatient(n_visits, cost_per_visit, input_year = 2021, ...)
 }
 \arguments{
-\item{n_visits}{Number of visits}
+\item{n_visits}{Number of visits. Numeric scalar or vector.}
 
-\item{cost_per_visit}{Cost per visit}
+\item{cost_per_visit}{Cost per visit. Numeric scalar or vector.}
 
 \item{input_year}{Year the unit costs are reported in}
 

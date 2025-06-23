@@ -12,9 +12,9 @@ cost_iptp(
 )
 }
 \arguments{
-\item{n_administrations}{Number of IPTp doses}
+\item{n_administrations}{Number of IPTp doses. Numeric scalar or vector.}
 
-\item{iptp_cost_per_administration}{Cost per dose delivered}
+\item{iptp_cost_per_administration}{Cost per dose delivered. Numeric scalar or vector.}
 
 \item{input_year}{Year the unit costs are reported in}
 

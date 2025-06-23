@@ -4,7 +4,13 @@
 \alias{cost_pbo_itn}
 \title{Cost pyrethroid-PBO ITN}
 \usage{
-cost_pbo_itn(n_pbo_itn, pbo_itn_unit_cost = 2.63, pbo_itn_delivery_cost = 1.5)
+cost_pbo_itn(
+  n_pbo_itn,
+  pbo_itn_unit_cost = 2.63,
+  pbo_itn_delivery_cost = 1.5,
+  input_year = 2024,
+  ...
+)
 }
 \arguments{
 \item{n_pbo_itn}{Number of pyrethroid-PBO bed nets}
@@ -12,6 +18,10 @@ cost_pbo_itn(n_pbo_itn, pbo_itn_unit_cost = 2.63, pbo_itn_delivery_cost = 1.5)
 \item{pbo_itn_unit_cost}{Commodity unit cost per pyrethroid-PBO ITN bed net.}
 
 \item{pbo_itn_delivery_cost}{Cost to deliver one pyrethroid-PBO ITN bet net.}
+
+\item{input_year}{Year the unit costs are reported in}
+
+\item{...}{Additional arguments passed to `inflation_adjust()`}
 }
 \value{
 LLIN costs

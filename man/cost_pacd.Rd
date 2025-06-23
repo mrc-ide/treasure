@@ -4,12 +4,16 @@
 \alias{cost_pacd}
 \title{Cost pACD}
 \usage{
-cost_pacd(n_tested, cost_per_person_tested = 4.79)
+cost_pacd(n_tested, cost_per_person_tested = 4.79, input_year = 2015, ...)
 }
 \arguments{
 \item{n_tested}{Number of people tested}
 
 \item{cost_per_person_tested}{Cost per person tested}
+
+\item{input_year}{Year the unit costs are reported in}
+
+\item{...}{Additional arguments passed to `inflation_adjust()`}
 }
 \value{
 pACD costs

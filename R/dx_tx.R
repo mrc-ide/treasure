@@ -336,7 +336,9 @@ commodity_nmf_al_doses <- function(n_nmf, treatment_coverage, proportion_act, ag
 #' @param n_tests Number of tests
 #' @param rdt_unit_cost Unit cost for rapid diagnostic test
 #' @param delivery_mark_up A mark up for in-country delivery to a public health facility.
-#' Expressed as a proportion of the test unit cost.
+#'   Expressed as a proportion of the test unit cost.
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return RDT costs
 #' @export
@@ -357,7 +359,8 @@ commodity_nmf_al_doses <- function(n_nmf, treatment_coverage, proportion_act, ag
 #' Patouillard et al (2017)
 #'
 #' \url{https://gh.bmj.com/content/2/2/e000176}
-cost_rdt <- function(n_tests, rdt_unit_cost = 0.46, delivery_mark_up = 0.15){
+cost_rdt <- function(n_tests, rdt_unit_cost = 0.46, delivery_mark_up = 0.15,
+                     input_year = 2022, ...){
   if(any(n_tests < 0)){
     stop("All n_tests estimates must be >= 0")
   }
@@ -365,8 +368,9 @@ cost_rdt <- function(n_tests, rdt_unit_cost = 0.46, delivery_mark_up = 0.15){
     stop("RDT cost inputs must be >= 0")
   }
 
-  cost_per_test_delivered <- rdt_unit_cost + (rdt_unit_cost * delivery_mark_up)
-  cost <- n_tests * cost_per_test_delivered
+  unit_cost <- rdt_unit_cost + (rdt_unit_cost * delivery_mark_up)
+  unit_cost <- inflation_adjust(unit_cost, input_year, ...)
+  cost <- n_tests * unit_cost
   return(cost)
 }
 
@@ -374,6 +378,8 @@ cost_rdt <- function(n_tests, rdt_unit_cost = 0.46, delivery_mark_up = 0.15){
 #'
 #' @param n_tests Number of tests performed
 #' @param cost_per_slide Cost per slide diagnostic performed
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return Microscopy costs
 #' @export
@@ -383,10 +389,9 @@ cost_rdt <- function(n_tests, rdt_unit_cost = 0.46, delivery_mark_up = 0.15){
 #'
 #' Estimate of $0.26 per slide taken from Lubell et all (2007)
 #'
-#' `inflation_adjust(0.26, 2007, 2024)`
-#'
 #' \url{https://pubmed.ncbi.nlm.nih.gov/18165484/}.
-cost_microscopy <- function(n_tests, cost_per_slide = 0.67){
+cost_microscopy <- function(n_tests, cost_per_slide = 0.26, input_year = 2007,
+                           ...){
   if(any(n_tests < 0)){
     stop("All n_tests estimates must be >= 0")
   }
@@ -394,7 +399,8 @@ cost_microscopy <- function(n_tests, cost_per_slide = 0.67){
     stop("Microscopy cost inputs must be >= 0")
   }
 
-  cost <- n_tests * cost_per_slide
+  unit_cost <- inflation_adjust(cost_per_slide, input_year, ...)
+  cost <- n_tests * unit_cost
   return(cost)
 }
 
@@ -404,6 +410,8 @@ cost_microscopy <- function(n_tests, cost_per_slide = 0.67){
 #'
 #' @param n_doses Number of doses
 #' @param cost_per_dose Cost per dose is for a single dose (20/120 mg)
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return AL costs
 #' @export
@@ -420,7 +428,8 @@ cost_microscopy <- function(n_tests, cost_per_slide = 0.67){
 #' The Global Fund Pooled Procurement Mechanism Reference Pricing: Antimalarial medicines, version: quarter 1, 2022
 #'
 #' \url{https://www.theglobalfund.org/en/sourcing-management/health-products/antimalarial-medicines/}.
-cost_al <- function(n_doses, cost_per_dose = 0.30){
+cost_al <- function(n_doses, cost_per_dose = 0.30, input_year = 2022,
+                    ...){
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
   }
@@ -428,7 +437,8 @@ cost_al <- function(n_doses, cost_per_dose = 0.30){
     stop("AL cost inputs must be >= 0")
   }
 
-  cost <- n_doses * cost_per_dose
+  unit_cost <- inflation_adjust(cost_per_dose, input_year, ...)
+  cost <- n_doses * unit_cost
   return(cost)
 }
 
@@ -436,6 +446,8 @@ cost_al <- function(n_doses, cost_per_dose = 0.30){
 #'
 #' @param n_doses Number of doses
 #' @param cost_per_dose Cost per dose is for a single dose (250mg base each)
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return Chloroquine costs
 #' @export
@@ -447,7 +459,8 @@ cost_al <- function(n_doses, cost_per_dose = 0.30){
 #' costs $0.10 total
 #'
 #' \url{https://www.msf.org/qa-act-now-get-malaria-treatment-works-africa}.
-cost_chloroquine <- function(n_doses, cost_per_dose = 0.10 / 10){
+cost_chloroquine <- function(n_doses, cost_per_dose = 0.10 / 10, input_year = 2003,
+                             ...){
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
   }
@@ -455,7 +468,8 @@ cost_chloroquine <- function(n_doses, cost_per_dose = 0.10 / 10){
     stop("Chloroquine cost inputs must be >= 0")
   }
 
-  cost <- n_doses * cost_per_dose
+  unit_cost <- inflation_adjust(cost_per_dose, input_year, ...)
+  cost <- n_doses * unit_cost
   return(cost)
 }
 
@@ -468,6 +482,8 @@ cost_chloroquine <- function(n_doses, cost_per_dose = 0.10 / 10){
 #'
 #' @param n_doses Number of tests
 #' @param cost_per_dose Cost per dose is for a single dose (7.5 mg)
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return primaquine costs
 #' @export
@@ -484,7 +500,8 @@ cost_chloroquine <- function(n_doses, cost_per_dose = 0.10 / 10){
 #' The Global Fund Pooled Procurement Mechanism Reference Pricing: Antimalarial medicines, version: quarter 1, 2022
 #'
 #' \url{https://www.theglobalfund.org/en/sourcing-management/health-products/antimalarial-medicines/}.
-cost_primaquine <- function(n_doses, cost_per_dose = 0.40){
+cost_primaquine <- function(n_doses, cost_per_dose = 0.40, input_year = 2022,
+                            ...){
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
   }
@@ -492,7 +509,8 @@ cost_primaquine <- function(n_doses, cost_per_dose = 0.40){
     stop("Primaquine cost inputs must be >= 0")
   }
 
-  cost <- n_doses * cost_per_dose
+  unit_cost <- inflation_adjust(cost_per_dose, input_year, region = "South Asia", ...)
+  cost <- n_doses * unit_cost
   return(cost)
 }
 
@@ -502,10 +520,13 @@ cost_primaquine <- function(n_doses, cost_per_dose = 0.40){
 #'
 #' @param n_visits Number of visits
 #' @param cost_per_visit Cost per visit
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return Outpatient costs
 #' @export
-cost_outpatient <- function(n_visits, cost_per_visit){
+cost_outpatient <- function(n_visits, cost_per_visit, input_year = 2021,
+                           ...){
   if(any(n_visits < 0)){
     stop("All n_visits estimates must be >= 0")
   }
@@ -513,7 +534,8 @@ cost_outpatient <- function(n_visits, cost_per_visit){
     stop("Outpatient cost inputs must be >= 0")
   }
 
-  cost <- n_visits * cost_per_visit
+  unit_cost <- inflation_adjust(cost_per_visit, input_year, ...)
+  cost <- n_visits * unit_cost
   return(cost)
 }
 
@@ -524,10 +546,14 @@ cost_outpatient <- function(n_visits, cost_per_visit){
 #' @param n_visits Number of visits
 #' @param cost_per_day Cost per day
 #' @param average_stay_duration Average duration of stay, defaults to 3 days following Patouillard et al 2017.
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return Inpatient costs
 #' @export
-cost_inpatient <- function(n_visits, cost_per_day, average_stay_duration = 3){
+cost_inpatient <- function(n_visits, cost_per_day, average_stay_duration = 3,
+                          input_year = 2021,
+                          ...){
   if(any(n_visits < 0)){
     stop("All n_visits estimates must be >= 0")
   }
@@ -535,7 +561,8 @@ cost_inpatient <- function(n_visits, cost_per_day, average_stay_duration = 3){
     stop("Inpatient cost inputs must be >= 0")
   }
 
-  cost <- n_visits * cost_per_day * average_stay_duration
+  unit_cost <- inflation_adjust(cost_per_day, input_year, ...)
+  cost <- n_visits * unit_cost * average_stay_duration
   return(cost)
 }
 

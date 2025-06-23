@@ -4,7 +4,13 @@
 \alias{cost_inpatient}
 \title{Cost per inpatient visit}
 \usage{
-cost_inpatient(n_visits, cost_per_day, average_stay_duration = 3)
+cost_inpatient(
+  n_visits,
+  cost_per_day,
+  average_stay_duration = 3,
+  input_year = 2021,
+  ...
+)
 }
 \arguments{
 \item{n_visits}{Number of visits}
@@ -12,6 +18,10 @@ cost_inpatient(n_visits, cost_per_day, average_stay_duration = 3)
 \item{cost_per_day}{Cost per day}
 
 \item{average_stay_duration}{Average duration of stay, defaults to 3 days following Patouillard et al 2017.}
+
+\item{input_year}{Year the unit costs are reported in}
+
+\item{...}{Additional arguments passed to `inflation_adjust()`}
 }
 \value{
 Inpatient costs

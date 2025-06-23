@@ -4,12 +4,16 @@
 \alias{cost_primaquine}
 \title{Cost primaquine treatment}
 \usage{
-cost_primaquine(n_doses, cost_per_dose = 0.4)
+cost_primaquine(n_doses, cost_per_dose = 0.4, input_year = 2022, ...)
 }
 \arguments{
 \item{n_doses}{Number of tests}
 
 \item{cost_per_dose}{Cost per dose is for a single dose (7.5 mg)}
+
+\item{input_year}{Year the unit costs are reported in}
+
+\item{...}{Additional arguments passed to `inflation_adjust()`}
 }
 \value{
 primaquine costs

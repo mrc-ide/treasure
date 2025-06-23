@@ -9,8 +9,11 @@ utils::globalVariables("cpi")
 #'
 #' @param cost Numeric value of the original cost.
 #' @param cost_year Integer indicating the year corresponding to `cost`.
-#' @param target_year Integer indicating the year to adjust the cost to.
-#' @param region World region, defaults to SSA
+#' @param target_year Integer indicating the year to adjust the cost to. If not
+#'   supplied, the value of `getOption("treasure.target_year")` is used.
+#' @param region World region. If not supplied, the value of
+#'   `getOption("treasure.region")` is used.
+#' @param adjust Logical indicator if inflation adjustment should be made. Default is true.
 #'
 #' @return Numeric value of the inflation-adjusted cost in `target_year` dollars.
 #'
@@ -19,30 +22,35 @@ utils::globalVariables("cpi")
 #' - `year`: Calendar year.
 #' - `cpi`: CPI index value for that year.
 #'
+#' This function is vectorised over all arguments.
+#'
 #' @examples
 #' # Adjust $0.26 from 2007 to 2024
 #' inflation_adjust(0.26, 2007, 2024)
 #'
 #' @export
-inflation_adjust <- function(cost, cost_year, target_year, region = "Sub-Saharan Africa") {
-  # Ensure single values
-  if (length(cost) != 1 || length(cost_year) != 1 || length(target_year) != 1) {
-    stop("cost, cost_year, and target_year must be single values")
-  }
+inflation_adjust <- function(cost, cost_year, target_year = NULL, region = "Sub-Saharan Africa", adjust = TRUE) {
 
-  # Filter CPI data for region and check years exist
+  # In the unlikely event no inflation adjustment needed
+  if(!adjust){
+    return(cost)
+  }
+  # If the user does not override arguments we take package default parameters for adjustment
+  if (is.null(target_year)) {
+    target_year <- getOption("treasure.target_year", default = 2024)
+  }
   cpi_region <- cpi[cpi$region == region, ]
-  if (!(cost_year %in% cpi_region$year)) {
-    stop(paste("cost_year not found for region:", cost_year))
-  }
-  if (!(target_year %in% cpi_region$year)) {
-    stop(paste("target_year not found for region:", target_year))
-  }
-
-  # Retrieve CPI values
   cpi_base   <- cpi_region$cpi[cpi_region$year == cost_year]
   cpi_target <- cpi_region$cpi[cpi_region$year == target_year]
 
-  # Compute and return adjusted cost
   cost * (cpi_target / cpi_base)
+}
+
+
+#' Set the global target year for inflation adjustments
+#'
+#' @param year Target year to use when adjusting for inflation
+#' @export
+set_target_year <- function(year) {
+  options(treasure.target_year = year)
 }

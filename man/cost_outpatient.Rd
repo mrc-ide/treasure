@@ -4,12 +4,16 @@
 \alias{cost_outpatient}
 \title{Cost per outpatient visit}
 \usage{
-cost_outpatient(n_visits, cost_per_visit)
+cost_outpatient(n_visits, cost_per_visit, input_year = 2021, ...)
 }
 \arguments{
 \item{n_visits}{Number of visits}
 
 \item{cost_per_visit}{Cost per visit}
+
+\item{input_year}{Year the unit costs are reported in}
+
+\item{...}{Additional arguments passed to `inflation_adjust()`}
 }
 \value{
 Outpatient costs

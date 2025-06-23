@@ -4,12 +4,16 @@
 \alias{cost_microscopy}
 \title{Cost Microscopy}
 \usage{
-cost_microscopy(n_tests, cost_per_slide = 0.67)
+cost_microscopy(n_tests, cost_per_slide = 0.26, input_year = 2007, ...)
 }
 \arguments{
 \item{n_tests}{Number of tests performed}
 
 \item{cost_per_slide}{Cost per slide diagnostic performed}
+
+\item{input_year}{Year the unit costs are reported in}
+
+\item{...}{Additional arguments passed to `inflation_adjust()`}
 }
 \value{
 Microscopy costs
@@ -21,8 +25,6 @@ Cost Microscopy
 \strong{Microsopy_unit_cost}
 
 Estimate of $0.26 per slide taken from Lubell et all (2007)
-
-`inflation_adjust(0.26, 2007, 2024)`
 
 \url{https://pubmed.ncbi.nlm.nih.gov/18165484/}.
 }

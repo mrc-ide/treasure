@@ -1,7 +1,7 @@
 #' Cost IPTp
 #'
-#' @param n_administrations Number of IPTp doses
-#' @param iptp_cost_per_administration Cost per dose delivered
+#' @param n_administrations Number of IPTp doses. Numeric scalar or vector.
+#' @param iptp_cost_per_administration Cost per dose delivered. Numeric scalar or vector.
 #' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
 #'
@@ -34,6 +34,7 @@
 #' \url{https://malariajournal.biomedcentral.com/articles/10.1186/s12936-016-1539-4}
 cost_iptp <- function(n_administrations, iptp_cost_per_administration = 0.79,
                       input_year = 2012, ...){
+  check_lengths(n_administrations, iptp_cost_per_administration)
   if(any(n_administrations < 0)){
     stop("All n_administrations estimates must be >= 0")
   }

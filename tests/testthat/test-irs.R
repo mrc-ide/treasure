@@ -10,6 +10,17 @@ test_that("IRS costing", {
     1 * inflation_adjust(2, 2020, 2024)
   )
 
+  expect_equal(
+    cost_ll_irs_person(n_protected = c(1, 2),
+                       cost_per_person_protected = c(7, 8)),
+    c(1, 2) * inflation_adjust(c(7, 8), 2020, 2024)
+  )
+  expect_error(
+    cost_ll_irs_person(n_protected = 1:2,
+                       cost_per_person_protected = 1:3),
+    "length"
+  )
+
   expect_error(cost_ll_irs_person(n_protected = -1), "All n_protected estimates must be >= 0")
   expect_error(cost_ll_irs_person(n_protected = 1, cost_per_person_protected = -1), "Long lasting IRS cost inputs must be >= 0")
 

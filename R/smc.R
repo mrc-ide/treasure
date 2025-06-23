@@ -27,8 +27,8 @@ commodity_doses_smc <- function(smc_cov, n_rounds, par_smc){
 
 #' Cost SMC
 #'
-#' @param n_doses Number of SMC doses
-#' @param smc_cost_per_dose_delivered Cost per dose delivered
+#' @param n_doses Number of SMC doses. Numeric scalar or vector.
+#' @param smc_cost_per_dose_delivered Cost per dose delivered. Numeric scalar or vector.
 #' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
 #'
@@ -53,6 +53,7 @@ commodity_doses_smc <- function(smc_cov, n_rounds, par_smc){
 cost_smc <- function(n_doses, smc_cost_per_dose_delivered = 0.9075,
                      input_year = 2016.,
                      ...){
+  check_lengths(n_doses, smc_cost_per_dose_delivered)
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
   }

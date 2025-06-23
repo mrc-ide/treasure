@@ -41,10 +41,10 @@ commodity_doses_vaccine <- function(vaccine_cov, par_vaccine, n_dose_primary_ser
 
 #' Cost RTS,S
 #'
-#' @param n_doses Number of RTS,S doses
-#' @param rtss_cost_per_dose Cost per RTS,S dose
-#' @param rtss_consumables_cost Cost for consumables for one dose (e.g injection and reconstitution syringes, safety box etc.)
-#' @param rtss_delivery_cost Cost for delivery of one dose
+#' @param n_doses Number of RTS,S doses. Numeric scalar or vector.
+#' @param rtss_cost_per_dose Cost per RTS,S dose. Numeric scalar or vector.
+#' @param rtss_consumables_cost Cost for consumables for one dose (e.g injection and reconstitution syringes, safety box etc.). Numeric scalar or vector.
+#' @param rtss_delivery_cost Cost for delivery of one dose. Numeric scalar or vector.
 #' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
 #'
@@ -67,6 +67,7 @@ cost_rtss <- function(n_doses, rtss_cost_per_dose = 10.02,
                       rtss_consumables_cost = 3.80, rtss_delivery_cost = 1.48,
                       input_year = 2024,
                       ...){
+  check_lengths(n_doses, rtss_cost_per_dose, rtss_consumables_cost, rtss_delivery_cost)
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
   }
@@ -81,10 +82,10 @@ cost_rtss <- function(n_doses, rtss_cost_per_dose = 10.02,
 
 #' Cost R21
 #'
-#' @param n_doses Number of R21 doses
-#' @param r21_cost_per_dose Cost per R21 dose
-#' @param r21_consumables_cost Cost for consumables for one dose (e.g injection and reconstitution syringes, safety box etc.)
-#' @param r21_delivery_cost Cost for delivery of one dose
+#' @param n_doses Number of R21 doses. Numeric scalar or vector.
+#' @param r21_cost_per_dose Cost per R21 dose. Numeric scalar or vector.
+#' @param r21_consumables_cost Cost for consumables for one dose (e.g injection and reconstitution syringes, safety box etc.). Numeric scalar or vector.
+#' @param r21_delivery_cost Cost for delivery of one dose. Numeric scalar or vector.
 #' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
 #'
@@ -118,6 +119,7 @@ cost_rtss <- function(n_doses, rtss_cost_per_dose = 10.02,
 cost_r21 <- function(n_doses, r21_cost_per_dose = 4, r21_consumables_cost = 3.80,
                      r21_delivery_cost = 1.48, input_year = 2024,
                      ...){
+  check_lengths(n_doses, r21_cost_per_dose, r21_consumables_cost, r21_delivery_cost)
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
   }

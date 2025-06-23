@@ -27,8 +27,8 @@ commodity_doses_pmc <- function(pmc_cov, par_pmc, n_rounds = 3){
 
 #' Cost PMC
 #'
-#' @param n_doses Number of PMC doses
-#' @param pmc_cost_per_dose_delivered Cost per dose delivered
+#' @param n_doses Number of PMC doses. Numeric scalar or vector.
+#' @param pmc_cost_per_dose_delivered Cost per dose delivered. Numeric scalar or vector.
 #' @param input_year Year the unit costs are reported in
 #' @param ... Additional arguments passed to `inflation_adjust()`
 #'
@@ -51,6 +51,7 @@ commodity_doses_pmc <- function(pmc_cov, par_pmc, n_rounds = 3){
 cost_pmc <- function(n_doses, pmc_cost_per_dose_delivered = 0.3894,
                      input_year = 2007,
                      ...){
+  check_lengths(n_doses, pmc_cost_per_dose_delivered)
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
   }

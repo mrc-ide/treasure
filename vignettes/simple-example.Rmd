@@ -62,10 +62,12 @@ interventions$cost_nets <- cost_llin(interventions$n_nets)
 interventions
 ```
 
-```{r plot-nets, fig.cap="Nets required by year"}
+```{r plot-nets, fig.cap="Nets required by year", fig.height = 5, fig.width = 7}
 barplot(
   interventions$n_nets,
   names.arg = interventions$year,
+  col = "#2E86AB",
+  border = NA,
   xlab = "Year",
   ylab = "Number of nets"
 )
@@ -121,12 +123,14 @@ cases$cost_act <- cost_al(cases$n_act_doses)
 head(cases)
 ```
 
-```{r plot-cases, fig.cap="RDTs and ACT doses by year"}
+```{r plot-cases, fig.cap="RDTs and ACT doses by year", fig.height = 5, fig.width = 7}
 barplot(
   rbind(cases$n_rdt, cases$n_act_doses),
   beside = TRUE,
   names.arg = cases$year,
   legend.text = c("RDTs", "ACT doses"),
+  col = c("#F4A259", "#2E86AB"),
+  border = NA,
   xlab = "Year",
   ylab = "Number"
 )

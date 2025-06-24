@@ -48,7 +48,7 @@ commodity_doses_smc <- function(smc_cov, n_rounds, par_smc){
 #'
 #' \url{https://www.thelancet.com/journals/langlo/article/PIIS2214-109X(20)30475-7/fulltext}.
 cost_smc <- function(n_doses, smc_cost_per_dose_delivered = 0.9075,
-                     input_year = 2016.,
+                     input_year = 2016,
                      ...){
   check_lengths(n_doses, smc_cost_per_dose_delivered)
   if(any(n_doses < 0)){

@@ -3,8 +3,8 @@ utils::globalVariables("cpi")
 #' Inflate cost to a target year using SSA CPI
 #'
 #' Adjust a given cost from its original year to a specified target year using
-#' the Consumer Price Index (CPI) values from the `cpi` dataset. Note this appoach
-#' uses region median CPIs estimates. For a more correct approach at the country
+#' the Consumer Price Index (CPI) values from the `cpi` dataset. Note this approach
+#' uses region median CPI estimates. For a more correct approach at the country
 #' level see \url{https://linkinghub.elsevier.com/retrieve/pii/S1098-3015(19)32149-7}
 #'
 #' @param cost Numeric value of the original cost.
@@ -18,7 +18,7 @@ utils::globalVariables("cpi")
 #' @return Numeric value of the inflation-adjusted cost in `target_year` dollars.
 #'
 #' @details
-#' The `ssa_cpi` dataset must be included in the package and contain columns:
+#' The `cpi` dataset must be included in the package and contain columns:
 #' - `year`: Calendar year.
 #' - `cpi`: CPI index value for that year.
 #'

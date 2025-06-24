@@ -21,7 +21,7 @@ test_that("LLIN costing", {
     "length"
   )
 
-  expect_error(cost_llin(n_llin = -1), "All llin_n estimates must be >= 0")
+  expect_error(cost_llin(n_llin = -1), "All n_llin estimates must be >= 0")
   expect_error(cost_llin(n_llin = 1, llin_unit_cost = -1), "LLIN cost inputs must be >= 0")
   expect_error(cost_llin(n_llin = 1, llin_delivery_cost = -1), "LLIN cost inputs must be >= 0")
 })
@@ -38,7 +38,7 @@ test_that("Pyrethroid-PBO costing", {
     1 * inflation_adjust(2 + 3, 2024, 2024)
   )
 
-  expect_error(cost_pbo_itn(n_pbo_itn = -1), "All llin_n estimates must be >= 0")
+  expect_error(cost_pbo_itn(n_pbo_itn = -1), "All n_pbo_itn estimates must be >= 0")
   expect_error(cost_pbo_itn(n_pbo_itn = 1, pbo_itn_unit_cost = -1), "PBO cost inputs must be >= 0")
   expect_error(cost_pbo_itn(n_pbo_itn = 1, pbo_itn_delivery_cost = -1), "PBO cost inputs must be >= 0")
 })
@@ -55,7 +55,7 @@ test_that("Pyrethroid-chlorfenapyr costing", {
     1 * inflation_adjust(2 + 3, 2024, 2024)
   )
 
-  expect_error(cost_dualai_itn(n_dualai_itn = -1), "All llin_n estimates must be >= 0")
+  expect_error(cost_dualai_itn(n_dualai_itn = -1), "All n_dualai_itn estimates must be >= 0")
   expect_error(cost_dualai_itn(n_dualai_itn = 1, dualai_itn_unit_cost = -1), "Dual ai cost inputs must be >= 0")
   expect_error(cost_dualai_itn(n_dualai_itn = 1, dualai_itn_delivery_cost = -1), "Dual ai cost inputs must be >= 0")
 })

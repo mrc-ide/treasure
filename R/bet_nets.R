@@ -88,7 +88,7 @@ cost_llin <- function(n_llin, llin_unit_cost = 2.02, llin_delivery_cost = 1.50,
                       input_year = 2024, ...) {
   check_lengths(n_llin, llin_unit_cost, llin_delivery_cost)
   if(any(n_llin < 0)){
-    stop("All llin_n estimates must be >= 0")
+    stop("All n_llin estimates must be >= 0")
   }
   if(any(llin_unit_cost < 0) | any(llin_delivery_cost < 0)){
     stop("LLIN cost inputs must be >= 0")
@@ -130,7 +130,7 @@ cost_pbo_itn <- function(n_pbo_itn, pbo_itn_unit_cost = 2.63,
                          ...) {
   check_lengths(n_pbo_itn, pbo_itn_unit_cost, pbo_itn_delivery_cost)
   if(any(n_pbo_itn < 0)){
-    stop("All llin_n estimates must be >= 0")
+    stop("All n_pbo_itn estimates must be >= 0")
   }
   if(any(pbo_itn_unit_cost < 0) | any(pbo_itn_delivery_cost < 0)){
     stop("PBO cost inputs must be >= 0")
@@ -172,7 +172,7 @@ cost_dualai_itn <- function(n_dualai_itn, dualai_itn_unit_cost = 2.70,
                             ...) {
   check_lengths(n_dualai_itn, dualai_itn_unit_cost, dualai_itn_delivery_cost)
   if(any(n_dualai_itn < 0)){
-    stop("All llin_n estimates must be >= 0")
+    stop("All n_dualai_itn estimates must be >= 0")
   }
   if(any(dualai_itn_unit_cost < 0) | any(dualai_itn_delivery_cost < 0)){
     stop("Dual ai cost inputs must be >= 0")

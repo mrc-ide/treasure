@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">treasure</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,6 +16,10 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/simple-example.html">Simple-example</a></li>
+  </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
       </ul></div>
@@ -40,8 +44,10 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cost_rtss</span><span class="op">(</span></span>
 <span>  <span class="va">n_doses</span>,</span>
 <span>  rtss_cost_per_dose <span class="op">=</span> <span class="fl">10.02</span>,</span>
-<span>  rtss_consumables_cost <span class="op">=</span> <span class="fl">1.52</span>,</span>
-<span>  rtss_delivery_cost <span class="op">=</span> <span class="fl">1.48</span></span>
+<span>  rtss_consumables_cost <span class="op">=</span> <span class="fl">3.8</span>,</span>
+<span>  rtss_delivery_cost <span class="op">=</span> <span class="fl">1.48</span>,</span>
+<span>  input_year <span class="op">=</span> <span class="fl">2024</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -50,19 +56,27 @@
 
 
 <dl><dt id="arg-n-doses">n_doses<a class="anchor" aria-label="anchor" href="#arg-n-doses"></a></dt>
-<dd><p>Number of RTS,S doses</p></dd>
+<dd><p>Number of RTS,S doses. Numeric scalar or vector.</p></dd>
 
 
 <dt id="arg-rtss-cost-per-dose">rtss_cost_per_dose<a class="anchor" aria-label="anchor" href="#arg-rtss-cost-per-dose"></a></dt>
-<dd><p>Cost per RTS,S dose</p></dd>
+<dd><p>Cost per RTS,S dose. Numeric scalar or vector.</p></dd>
 
 
 <dt id="arg-rtss-consumables-cost">rtss_consumables_cost<a class="anchor" aria-label="anchor" href="#arg-rtss-consumables-cost"></a></dt>
-<dd><p>Cost for consumables for one dose (e.g injection and reconstitution syringes, safety box etc.)</p></dd>
+<dd><p>Cost for consumables for one dose (e.g injection and reconstitution syringes, safety box etc.). Numeric scalar or vector.</p></dd>
 
 
 <dt id="arg-rtss-delivery-cost">rtss_delivery_cost<a class="anchor" aria-label="anchor" href="#arg-rtss-delivery-cost"></a></dt>
-<dd><p>Cost for delivery of one dose</p></dd>
+<dd><p>Cost for delivery of one dose. Numeric scalar or vector.</p></dd>
+
+
+<dt id="arg-input-year">input_year<a class="anchor" aria-label="anchor" href="#arg-input-year"></a></dt>
+<dd><p>Year the unit costs are reported in</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Additional arguments passed to `inflation_adjust()`</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -74,6 +88,10 @@
     <p><strong>rtss_cost_per_dose</strong></p>
 <p>Current default is based on the EUR9.30 per dose quoted in
 <a href="https://www.unicef.org/supply/media/19456/file/Malaria%20-%20Vaccine%20-%20QA%20-%20October%202023%20-%20English%20.pdf" class="external-link">https://www.unicef.org/supply/media/19456/file/Malaria%20-%20Vaccine%20-%20QA%20-%20October%202023%20-%20English%20.pdf</a></p>
+<p><strong>rtss_consumables_cost</strong></p>
+<p>Penny et al (2016)
+<a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(15)00725-4/fulltext" class="external-link">https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(15)00725-4/fulltext</a>.
+Pre-inflated so year is the same as dose cost: inflation_adjust(2.52, 2016, 2024) = 3.8</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

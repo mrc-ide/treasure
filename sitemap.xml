@@ -1,15 +1,35 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>/404.html</loc></url>
+<url><loc>/AGENTS.html</loc></url>
 <url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/simple-example.html</loc></url>
 <url><loc>/authors.html</loc></url>
 <url><loc>/index.html</loc></url>
+<url><loc>/reference/check_lengths.html</loc></url>
+<url><loc>/reference/commodity_al_doses.html</loc></url>
+<url><loc>/reference/commodity_chloroquine_doses.html</loc></url>
+<url><loc>/reference/commodity_doses_pmc.html</loc></url>
+<url><loc>/reference/commodity_doses_smc.html</loc></url>
+<url><loc>/reference/commodity_doses_vaccine.html</loc></url>
+<url><loc>/reference/commodity_microscopy_tests.html</loc></url>
+<url><loc>/reference/commodity_nets.html</loc></url>
+<url><loc>/reference/commodity_nmf_al_doses.html</loc></url>
+<url><loc>/reference/commodity_nmf_microscopy_tests.html</loc></url>
+<url><loc>/reference/commodity_nmf_rdt_tests.html</loc></url>
+<url><loc>/reference/commodity_person_rounds_irs.html</loc></url>
+<url><loc>/reference/commodity_rdt_tests.html</loc></url>
+<url><loc>/reference/commodity_structure_rounds_irs.html</loc></url>
 <url><loc>/reference/cost_al.html</loc></url>
+<url><loc>/reference/cost_chloroquine.html</loc></url>
+<url><loc>/reference/cost_ddt_irs_structure.html</loc></url>
 <url><loc>/reference/cost_dualai_itn.html</loc></url>
 <url><loc>/reference/cost_inpatient.html</loc></url>
 <url><loc>/reference/cost_iptp.html</loc></url>
 <url><loc>/reference/cost_ll_irs_person.html</loc></url>
 <url><loc>/reference/cost_ll_irs_structure.html</loc></url>
 <url><loc>/reference/cost_llin.html</loc></url>
+<url><loc>/reference/cost_microscopy.html</loc></url>
 <url><loc>/reference/cost_outpatient.html</loc></url>
 <url><loc>/reference/cost_pacd.html</loc></url>
 <url><loc>/reference/cost_pbo_itn.html</loc></url>
@@ -21,7 +41,10 @@
 <url><loc>/reference/cost_rtss.html</loc></url>
 <url><loc>/reference/cost_smc.html</loc></url>
 <url><loc>/reference/cost_surveillance.html</loc></url>
+<url><loc>/reference/cpi.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/inflation_adjust.html</loc></url>
+<url><loc>/reference/set_target_year.html</loc></url>
 <url><loc>/reference/who_choice.html</loc></url>
 </urlset>
 

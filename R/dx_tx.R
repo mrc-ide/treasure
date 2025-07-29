@@ -1,12 +1,311 @@
+#' Estimate total number of RDT diagnostics required
+#'
+#' @param n_cases Malaria case numbers. Numeric scalar or vector.
+#' @param treatment_coverage Treatment coverage. Numeric scalar or vector.
+#' @param proportion_rdt Proportion of diagnostics that are RDT. Numeric scalar or vector.
+#' @param proportion_tested Proportion of treated cases that are tested. Numeric scalar or vector.
+#'
+#' @return Vector of the number of RDT tests
+#'
+#' @export
+commodity_rdt_tests <- function(n_cases, treatment_coverage, proportion_rdt, proportion_tested = 1){
+  stopifnot(
+    is.numeric(n_cases),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_rdt),
+    is.numeric(proportion_tested)
+  )
+  check_lengths(n_cases, treatment_coverage, proportion_rdt, proportion_tested)
+  stopifnot(
+    all(n_cases >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_rdt >= 0 & proportion_rdt <= 1),
+    all(proportion_tested >= 0 & proportion_tested <= 1)
+  )
+
+  round(n_cases * treatment_coverage * proportion_rdt * proportion_tested)
+}
+
+#' Estimate total number of microscopy diagnostics required
+#'
+#' @inheritParams commodity_rdt_tests
+#' @param proportion_microscopy Proportion of diagnostics that are microscopy. Numeric scalar or vector.
+#'
+#' @return Vector of the number of microscopy tests
+#'
+#' @export
+commodity_microscopy_tests <- function(n_cases, treatment_coverage, proportion_microscopy, proportion_tested = 1){
+  stopifnot(
+    is.numeric(n_cases),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_microscopy),
+    is.numeric(proportion_tested)
+  )
+  check_lengths(n_cases, treatment_coverage, proportion_microscopy, proportion_tested)
+  stopifnot(
+    all(n_cases >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_microscopy >= 0 & proportion_microscopy <= 1),
+    all(proportion_tested >= 0 & proportion_tested <= 1)
+  )
+
+  round(n_cases * treatment_coverage * proportion_microscopy * proportion_tested)
+}
+
+#' Estimate total number of RDT diagnostics required as a result of non malarial fevers
+#'
+#' @param n_nmf Non malarial fever case numbers. Numeric scalar or vector.
+#' @param treatment_coverage Treatment coverage. Numeric scalar or vector.
+#' @param proportion_rdt Proportion of diagnostics that are RDT. Numeric scalar or vector.
+#' @param proportion_tested Proportion of NMFs that are tested. Numeric scalar or vector.
+#' @param pfpr Prevalence. Numeric scalar or vector.
+#' @param pfpr_threshold Prevalence threshold at which it is assumed NMF are not suspected (and subsequently tested) to be malaria. Numeric scalar or vector.
+#'
+#' @return Vector of the number of RDTs tests used on NMFs
+#'
+#' @export
+commodity_nmf_rdt_tests <- function(n_nmf, treatment_coverage, proportion_rdt, proportion_tested = 1, pfpr, pfpr_threshold = 0.05){
+  stopifnot(
+    is.numeric(n_nmf),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_rdt),
+    is.numeric(proportion_tested),
+    is.numeric(pfpr),
+    is.numeric(pfpr_threshold)
+  )
+  check_lengths(n_nmf, treatment_coverage, proportion_rdt, proportion_tested, pfpr, pfpr_threshold)
+  stopifnot(
+    all(n_nmf >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_rdt >= 0 & proportion_rdt <= 1),
+    all(proportion_tested >= 0 & proportion_tested <= 1),
+    all(pfpr >= 0 & pfpr <= 1),
+    all(pfpr_threshold >= 0 & pfpr_threshold <= 1)
+  )
+
+  ifelse(pfpr > pfpr_threshold, round(n_nmf * treatment_coverage * proportion_rdt * proportion_tested), 0)
+}
+
+#' Estimate total number of microscopy diagnostics required as a result of non malarial fevers
+#'
+#' @inheritParams commodity_nmf_rdt_tests
+#' @param proportion_microscopy Proportion of diagnostics that are microscopy. Numeric scalar or vector.
+#'
+#' @return Vector of the number of microscopy tests used on NMFs
+#'
+#' @export
+commodity_nmf_microscopy_tests <- function(n_nmf, treatment_coverage, proportion_microscopy, proportion_tested = 1, pfpr, pfpr_threshold = 0.05){
+  stopifnot(
+    is.numeric(n_nmf),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_microscopy),
+    is.numeric(proportion_tested),
+    is.numeric(pfpr),
+    is.numeric(pfpr_threshold)
+  )
+  check_lengths(n_nmf, treatment_coverage, proportion_microscopy, proportion_tested, pfpr, pfpr_threshold)
+  stopifnot(
+    all(n_nmf >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_microscopy >= 0 & proportion_microscopy <= 1),
+    all(proportion_tested >= 0 & proportion_tested <= 1),
+    all(pfpr >= 0 & pfpr <= 1),
+    all(pfpr_threshold >= 0 & pfpr_threshold <= 1)
+  )
+
+  ifelse(pfpr > pfpr_threshold, round(n_nmf * treatment_coverage * proportion_microscopy * proportion_tested), 0)
+}
+
+#' Estimate total number of AL doses required
+#'
+#' Note the cost per dose is for a single dose (20/120 mg). A treatment course typically
+#' constitutes Artemether + lumefantrine given twice a day for 3 days following
+#' weight-based guidelines:
+#' \itemize{
+#'   \item 5 to <15 kg: 20/120 mg
+#'   \item 15 to <25 kg: 40/240 mg
+#'   \item 25 to <35 kg: 60/360 mg
+#'   \item >=35 kg: 80/480 mg
+#' }
+#' So course for a single adult (weighing >=35kg) may constitute
+#' 3 days x 2 times daily x 4 doses (4 x 20/120mg = 80/480mg) = 24 doses.
+#'
+#' @param n_cases Malaria case numbers by age band. Numeric scalar or vector.
+#' @param treatment_coverage Treatment coverage proportions by age band. Numeric scalar or vector.
+#' @param proportion_act Proportion of treatments that are ACTs by age band. Numeric scalar or vector.
+#' @param age_upper Upper bounds for each age group. Numeric scalar or vector.
+#'
+#' @return A vector giving the number of 20/120mg Artemether + lumefantrine ACT doses required per age group.
+#' @export
+commodity_al_doses <- function(n_cases, treatment_coverage, proportion_act, age_upper) {
+  stopifnot(
+    is.numeric(n_cases),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_act),
+    is.numeric(age_upper)
+  )
+  check_lengths(n_cases, treatment_coverage, proportion_act, age_upper)
+  stopifnot(
+    all(n_cases >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_act >= 0 & proportion_act <= 1),
+    all(age_upper >= 0)
+  )
+
+  # Dose multipliers per age band (number of 20/120mg doses per course)
+  doses_per_course_child   <- 3 * 2 * 1     # 6 doses
+  doses_per_course_child2  <- 3 * 2 * 2.5   # 15 doses
+  doses_per_course_adult   <- 3 * 2 * 4     # 24 doses
+
+  doses_per_course <- ifelse(
+    age_upper <= 5,
+    doses_per_course_child,
+    ifelse(
+      age_upper <= 15,
+      doses_per_course_child2,
+      ifelse(
+        age_upper > 15,
+        doses_per_course_adult,
+        NA_real_
+      )
+    )
+  )
+
+  round(n_cases * treatment_coverage * proportion_act * doses_per_course)
+}
+
+#' Estimate total number of Chloroquine doses required
+#'
+#' Note the cost per dose is for a single dose (250 mg chloroquine phosphate).
+#' A treatment course typically constitutes 41mg/kg (max 2500mg) for adults
+#' \itemize{
+#'   \item 5 to <15 kg: 2 doses
+#'   \item 15 to <25 kg: 4 doses
+#'   \item 25 to <35 kg: 5 doses
+#'   \item >=35 kg: 10 doses
+#' }
+#' So course for a single adult may constitute approximately 10 doses.
+#'
+#' @param n_cases Malaria case numbers by age band. Numeric scalar or vector.
+#' @param treatment_coverage Treatment coverage proportions. Numeric scalar or vector.
+#' @param proportion_non_act Proportion of treatments that are non-ACT (assumed chloroquine). Numeric scalar or vector.
+#' @param age_upper Upper bounds for each age group. Numeric scalar or vector.
+#'
+#' @return A vector giving the number of 250mg chloroquine doses required per age group.
+#' @export
+commodity_chloroquine_doses <- function(n_cases, treatment_coverage, proportion_non_act, age_upper) {
+  stopifnot(
+    is.numeric(n_cases),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_non_act),
+    is.numeric(age_upper)
+  )
+  check_lengths(n_cases, treatment_coverage, proportion_non_act, age_upper)
+  stopifnot(
+    all(n_cases >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_non_act >= 0 & proportion_non_act <= 1),
+    all(age_upper >= 0)
+  )
+
+  # Dose multipliers per age band
+  doses_per_course_child   <- 3
+  doses_per_course_child2  <- 5
+  doses_per_course_adult   <- 10
+
+  doses_per_course <- ifelse(
+    age_upper <= 5,
+    doses_per_course_child,
+    ifelse(
+      age_upper <= 15,
+      doses_per_course_child2,
+      ifelse(
+        age_upper > 15,
+        doses_per_course_adult,
+        NA_real_
+      )
+    )
+  )
+
+  round(n_cases * treatment_coverage * proportion_non_act * doses_per_course)
+}
+
+#' Estimate total number of AL doses required for test +ve non-malarial fevers
+#'
+#' Note the cost per dose is for a single dose (20/120 mg). A treatment course typically
+#' constitutes Artemether + lumefantrine given twice a day for 3 days following
+#' weight-based guidelines:
+#' \itemize{
+#'   \item 5 to <15 kg: 20/120 mg
+#'   \item 15 to <25 kg: 40/240 mg
+#'   \item 25 to <35 kg: 60/360 mg
+#'   \item >=35 kg: 80/480 mg
+#' }
+#' So course for a single adult (weighing >=35kg) may constitute
+#' 3 days x 2 times daily x 4 doses (4 x 20/120mg = 80/480mg) = 24 doses.
+#'
+#' @param n_nmf Non malarial fever case numbers by age band. Numeric scalar or vector.
+#' @param treatment_coverage Treatment coverage proportions. Numeric scalar or vector.
+#' @param proportion_act Proportion of treatments that are ACTs. Numeric scalar or vector.
+#' @param age_upper Upper bounds for each age group. Numeric scalar or vector.
+#' @param pfpr Prevalence. Numeric scalar or vector.
+#' @param pfpr_threshold Prevalence threshold at which it is assumed NMF are not suspected (and subsequently tested) to be malaria. Numeric scalar or vector.
+#'
+#' @return A vector giving the number of 20/120mg Artemether + lumefantrine ACT doses required per age group.
+#' @export
+commodity_nmf_al_doses <- function(n_nmf, treatment_coverage, proportion_act, age_upper, pfpr, pfpr_threshold = 0.05) {
+  stopifnot(
+    is.numeric(n_nmf),
+    is.numeric(treatment_coverage),
+    is.numeric(proportion_act),
+    is.numeric(age_upper),
+    is.numeric(pfpr),
+    is.numeric(pfpr_threshold)
+  )
+  check_lengths(n_nmf, treatment_coverage, proportion_act, age_upper, pfpr, pfpr_threshold)
+  stopifnot(
+    all(n_nmf >= 0),
+    all(treatment_coverage >= 0 & treatment_coverage <= 1),
+    all(proportion_act >= 0 & proportion_act <= 1),
+    all(age_upper >= 0),
+    all(pfpr >= 0 & pfpr <= 1),
+    all(pfpr_threshold >= 0 & pfpr_threshold <= 1)
+  )
+
+  # Dose multipliers per age band (number of 20/120mg doses per course)
+  doses_per_course_child   <- 3 * 2 * 1     # 6 doses
+  doses_per_course_child2  <- 3 * 2 * 2.5   # 15 doses
+  doses_per_course_adult   <- 3 * 2 * 4     # 24 doses
+
+  doses_per_course <- ifelse(
+    age_upper <= 5,
+    doses_per_course_child,
+    ifelse(
+      age_upper <= 15,
+      doses_per_course_child2,
+      ifelse(
+        age_upper > 15,
+        doses_per_course_adult,
+        NA_real_
+      )
+    )
+  )
+
+  ifelse(pfpr > pfpr_threshold, round(n_nmf * pfpr * treatment_coverage * proportion_act * doses_per_course), 0)
+}
+
 #' Cost RDTs
 #'
 #' RDTs are used for diagnosis of malaria. When costing it is also common to add
 #' additional costs for RDTs used to diagnose non-malaria fevers.
 #'
-#' @param n_tests Number of tests
-#' @param rdt_unit_cost Unit cost for rapid diagnostic test
-#' @param delivery_mark_up A mark up for in-country delivery to a public health facility.
-#' Expressed as a proportion of the test unit cost.
+#' @param n_tests Number of tests. Numeric scalar or vector.
+#' @param rdt_unit_cost Unit cost for rapid diagnostic test. Numeric scalar or vector.
+#' @param delivery_mark_up A mark up for in-country delivery to a public health facility. Numeric scalar or vector.
+#'   Expressed as a proportion of the test unit cost.
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
+#'
 #'
 #' @return RDT costs
 #' @export
@@ -27,7 +326,9 @@
 #' Patouillard et al (2017)
 #'
 #' \url{https://gh.bmj.com/content/2/2/e000176}
-cost_rdt <- function(n_tests, rdt_unit_cost = 0.46, delivery_mark_up = 0.15){
+cost_rdt <- function(n_tests, rdt_unit_cost = 0.46, delivery_mark_up = 0.15,
+                     input_year = 2022, ...){
+  check_lengths(n_tests, rdt_unit_cost, delivery_mark_up)
   if(any(n_tests < 0)){
     stop("All n_tests estimates must be >= 0")
   }
@@ -35,27 +336,51 @@ cost_rdt <- function(n_tests, rdt_unit_cost = 0.46, delivery_mark_up = 0.15){
     stop("RDT cost inputs must be >= 0")
   }
 
-  cost_per_test_delivered <- rdt_unit_cost + (rdt_unit_cost * delivery_mark_up)
-  cost <- n_tests * cost_per_test_delivered
+  unit_cost <- rdt_unit_cost + (rdt_unit_cost * delivery_mark_up)
+  unit_cost <- inflation_adjust(unit_cost, input_year, ...)
+  cost <- n_tests * unit_cost
+  return(cost)
+}
+
+#' Cost Microscopy
+#'
+#' @param n_tests Number of tests performed. Numeric scalar or vector.
+#' @param cost_per_slide Cost per slide diagnostic performed. Numeric scalar or vector.
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
+#'
+#' @return Microscopy costs
+#' @export
+#'
+#' @references
+#' \strong{Microsopy_unit_cost}
+#'
+#' Estimate of $0.26 per slide taken from Lubell et all (2007)
+#'
+#' \url{https://pubmed.ncbi.nlm.nih.gov/18165484/}.
+cost_microscopy <- function(n_tests, cost_per_slide = 0.26, input_year = 2007,
+                           ...){
+  check_lengths(n_tests, cost_per_slide)
+  if(any(n_tests < 0)){
+    stop("All n_tests estimates must be >= 0")
+  }
+  if(any(cost_per_slide < 0)){
+    stop("Microscopy cost inputs must be >= 0")
+  }
+
+  unit_cost <- inflation_adjust(cost_per_slide, input_year, ...)
+  cost <- n_tests * unit_cost
   return(cost)
 }
 
 #' Cost Artemether/Lumefantrine treatment
 #'
-#' Note the cost per dose is for a single dose (20/120 mg). A treatment course typically
-#' constitutes Artemether + lumefantrine given twice a day for 3 days following
-#' weight-based guidelines:
-#' \itemize{
-#'   \item 5 to <15 kg: 20/120 mg
-#'   \item 15 to <25 kg: 40/240 mg
-#'   \item 25 to <35 kg: 60/360 mg
-#'   \item >=35 kg: 80/480 mg
-#' }
-#' So course for a single adult (weighing >=35kg) may constitute
-#' 3 days x 2 times daily x 4 doses (4 x 20/120mg = 80/480mg) = 24 doses.
+#' Note the cost per dose is for a single dose (20/120 mg), not a full treatment course.
 #'
-#' @param n_doses Number of tests
-#' @param cost_per_dose Cost per dose is for a single dose (20/120 mg)
+#' @param n_doses Number of doses. Numeric scalar or vector.
+#' @param cost_per_dose Cost per dose is for a single dose (20/120 mg). Numeric scalar or vector.
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return AL costs
 #' @export
@@ -72,7 +397,9 @@ cost_rdt <- function(n_tests, rdt_unit_cost = 0.46, delivery_mark_up = 0.15){
 #' The Global Fund Pooled Procurement Mechanism Reference Pricing: Antimalarial medicines, version: quarter 1, 2022
 #'
 #' \url{https://www.theglobalfund.org/en/sourcing-management/health-products/antimalarial-medicines/}.
-cost_al <- function(n_doses, cost_per_dose = 0.30){
+cost_al <- function(n_doses, cost_per_dose = 0.30, input_year = 2022,
+                    ...){
+  check_lengths(n_doses, cost_per_dose)
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
   }
@@ -80,7 +407,40 @@ cost_al <- function(n_doses, cost_per_dose = 0.30){
     stop("AL cost inputs must be >= 0")
   }
 
-  cost <- n_doses * cost_per_dose
+  unit_cost <- inflation_adjust(cost_per_dose, input_year, ...)
+  cost <- n_doses * unit_cost
+  return(cost)
+}
+
+#' Cost Chloroquine treatment
+#'
+#' @param n_doses Number of doses. Numeric scalar or vector.
+#' @param cost_per_dose Cost per dose is for a single dose (250mg base each). Numeric scalar or vector.
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
+#'
+#' @return Chloroquine costs
+#' @export
+#'
+#' @references
+#' \strong{cost_per_dose}
+#'
+#' Assumes a full adult course is ~10 tablets of 250mg chloroquine base, and
+#' costs $0.10 total
+#'
+#' \url{https://www.msf.org/qa-act-now-get-malaria-treatment-works-africa}.
+cost_chloroquine <- function(n_doses, cost_per_dose = 0.10 / 10, input_year = 2003,
+                             ...){
+  check_lengths(n_doses, cost_per_dose)
+  if(any(n_doses < 0)){
+    stop("All n_doses estimates must be >= 0")
+  }
+  if(any(cost_per_dose < 0)){
+    stop("Chloroquine cost inputs must be >= 0")
+  }
+
+  unit_cost <- inflation_adjust(cost_per_dose, input_year, ...)
+  cost <- n_doses * unit_cost
   return(cost)
 }
 
@@ -91,8 +451,10 @@ cost_al <- function(n_doses, cost_per_dose = 0.30){
 #' So course for a single adult (weighing 50kg) may constitute
 #' 14 days x 0.25mg x 50kg (14 x 0.25 x 50 / 7.5) = 25 doses.
 #'
-#' @param n_doses Number of tests
-#' @param cost_per_dose Cost per dose is for a single dose (7.5 mg)
+#' @param n_doses Number of tests. Numeric scalar or vector.
+#' @param cost_per_dose Cost per dose is for a single dose (7.5 mg). Numeric scalar or vector.
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return primaquine costs
 #' @export
@@ -109,7 +471,9 @@ cost_al <- function(n_doses, cost_per_dose = 0.30){
 #' The Global Fund Pooled Procurement Mechanism Reference Pricing: Antimalarial medicines, version: quarter 1, 2022
 #'
 #' \url{https://www.theglobalfund.org/en/sourcing-management/health-products/antimalarial-medicines/}.
-cost_primaquine <- function(n_doses, cost_per_dose = 0.40){
+cost_primaquine <- function(n_doses, cost_per_dose = 0.40, input_year = 2022,
+                            ...){
+  check_lengths(n_doses, cost_per_dose)
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
   }
@@ -117,7 +481,8 @@ cost_primaquine <- function(n_doses, cost_per_dose = 0.40){
     stop("Primaquine cost inputs must be >= 0")
   }
 
-  cost <- n_doses * cost_per_dose
+  unit_cost <- inflation_adjust(cost_per_dose, input_year, region = "South Asia", ...)
+  cost <- n_doses * unit_cost
   return(cost)
 }
 
@@ -125,12 +490,16 @@ cost_primaquine <- function(n_doses, cost_per_dose = 0.40){
 #'
 #' For information on country specific outpatient costs from WHO CHOICE see \code{?who_coice}
 #'
-#' @param n_visits Number of visits
-#' @param cost_per_visit Cost per visit
+#' @param n_visits Number of visits. Numeric scalar or vector.
+#' @param cost_per_visit Cost per visit. Numeric scalar or vector.
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return Outpatient costs
 #' @export
-cost_outpatient <- function(n_visits, cost_per_visit){
+cost_outpatient <- function(n_visits, cost_per_visit, input_year = 2021,
+                           ...){
+  check_lengths(n_visits, cost_per_visit)
   if(any(n_visits < 0)){
     stop("All n_visits estimates must be >= 0")
   }
@@ -138,7 +507,8 @@ cost_outpatient <- function(n_visits, cost_per_visit){
     stop("Outpatient cost inputs must be >= 0")
   }
 
-  cost <- n_visits * cost_per_visit
+  unit_cost <- inflation_adjust(cost_per_visit, input_year, ...)
+  cost <- n_visits * unit_cost
   return(cost)
 }
 
@@ -146,13 +516,18 @@ cost_outpatient <- function(n_visits, cost_per_visit){
 #'
 #' For information on country specific inpatient costs from WHO CHOICE see \code{?who_coice}
 #'
-#' @param n_visits Number of visits
-#' @param cost_per_day Cost per day
-#' @param average_stay_duration Average duration of stay, defaults to 3 days following Patouillard et al 2017.
+#' @param n_visits Number of visits. Numeric scalar or vector.
+#' @param cost_per_day Cost per day. Numeric scalar or vector.
+#' @param average_stay_duration Average duration of stay, defaults to 3 days following Patouillard et al 2017. Numeric scalar or vector.
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return Inpatient costs
 #' @export
-cost_inpatient <- function(n_visits, cost_per_day, average_stay_duration = 3){
+cost_inpatient <- function(n_visits, cost_per_day, average_stay_duration = 3,
+                          input_year = 2021,
+                          ...){
+  check_lengths(n_visits, cost_per_day, average_stay_duration)
   if(any(n_visits < 0)){
     stop("All n_visits estimates must be >= 0")
   }
@@ -160,7 +535,8 @@ cost_inpatient <- function(n_visits, cost_per_day, average_stay_duration = 3){
     stop("Inpatient cost inputs must be >= 0")
   }
 
-  cost <- n_visits * cost_per_day * average_stay_duration
+  unit_cost <- inflation_adjust(cost_per_day, input_year, ...)
+  cost <- n_visits * unit_cost * average_stay_duration
   return(cost)
 }
 

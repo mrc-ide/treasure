@@ -1,9 +1,46 @@
+#' Number of vaccine doses delivered
+#'
+#' Note, if duration for full course (primary + boosters) is >1 year, costs for
+#' the full course will be all assigned to the year of the primary series.
+#'
+#' @param vaccine_cov Vaccine coverage. Numeric scalar or vector.
+#' @param par_vaccine Population at risk within vaccine-eligible age range. Numeric scalar or vector.
+#' @param n_dose_primary_series Number of doses in the primary series. Numeric scalar or vector.
+#' @param booster_coverage_downscale Capture the drop off in coverage between primary series and boosters such that `booster coverage = vaccine_cov * booster_coverage_downscale`. Numeric scalar or vector.
+#' @param n_boosters Number of booster doses. Numeric scalar or vector.
+#'
+#' @return The total number of vaccine doses delivered.
+#' @export
+commodity_doses_vaccine <- function(vaccine_cov, par_vaccine, n_dose_primary_series = 3, booster_coverage_downscale = 0.8, n_boosters = 1){
+  stopifnot(
+    is.numeric(vaccine_cov),
+    is.numeric(par_vaccine),
+    is.numeric(n_dose_primary_series),
+    is.numeric(booster_coverage_downscale),
+    is.numeric(n_boosters)
+  )
+  check_lengths(vaccine_cov, par_vaccine, n_dose_primary_series, booster_coverage_downscale, n_boosters)
+  stopifnot(
+    all(vaccine_cov >= 0 & vaccine_cov <= 1),
+    all(par_vaccine >= 0),
+    all(n_dose_primary_series >= 0),
+    all(booster_coverage_downscale >= 0 & booster_coverage_downscale <= 1),
+    all(n_boosters >= 0)
+  )
+
+  n_vaccine <- vaccine_cov * par_vaccine
+  n_doses_vaccine <- round((n_vaccine * n_dose_primary_series) + (n_vaccine * booster_coverage_downscale * n_boosters))
+  return(n_doses_vaccine)
+}
+
 #' Cost RTS,S
 #'
-#' @param n_doses Number of RTS,S doses
-#' @param rtss_cost_per_dose Cost per RTS,S dose
-#' @param rtss_consumables_cost Cost for consumables for one dose (e.g injection and reconstitution syringes, safety box etc.)
-#' @param rtss_delivery_cost Cost for delivery of one dose
+#' @param n_doses Number of RTS,S doses. Numeric scalar or vector.
+#' @param rtss_cost_per_dose Cost per RTS,S dose. Numeric scalar or vector.
+#' @param rtss_consumables_cost Cost for consumables for one dose (e.g injection and reconstitution syringes, safety box etc.). Numeric scalar or vector.
+#' @param rtss_delivery_cost Cost for delivery of one dose. Numeric scalar or vector.
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return RTS,S costs
 #' @export
@@ -14,24 +51,37 @@
 #' Current default is based on the EUR9.30 per dose quoted in
 #' \url{https://www.unicef.org/supply/media/19456/file/Malaria\%20-\%20Vaccine\%20-\%20QA\%20-\%20October\%202023\%20-\%20English\%20.pdf}
 #'
-cost_rtss <- function(n_doses, rtss_cost_per_dose = 10.02, rtss_consumables_cost = 1.52, rtss_delivery_cost = 1.48){
+#' \strong{rtss_consumables_cost}
+#'
+#' Penny et al (2016)
+#' \url{https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(15)00725-4/fulltext}.
+#' Pre-inflated so year is the same as dose cost: inflation_adjust(2.52, 2016, 2024) = 3.8
+#'
+cost_rtss <- function(n_doses, rtss_cost_per_dose = 10.02,
+                      rtss_consumables_cost = 3.80, rtss_delivery_cost = 1.48,
+                      input_year = 2024,
+                      ...){
+  check_lengths(n_doses, rtss_cost_per_dose, rtss_consumables_cost, rtss_delivery_cost)
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
   }
   if(any(rtss_cost_per_dose < 0) | any(rtss_consumables_cost < 0) | any(rtss_delivery_cost < 0)){
     stop("RTSS cost inputs must be >= 0")
   }
-  rtss_cost_per_dose_delivered <- rtss_cost_per_dose + rtss_consumables_cost + rtss_delivery_cost
-  cost <- n_doses * rtss_cost_per_dose_delivered
+  unit_cost <- rtss_cost_per_dose + rtss_consumables_cost + rtss_delivery_cost
+  unit_cost <- inflation_adjust(unit_cost, input_year, ...)
+  cost <- n_doses * unit_cost
   return(cost)
 }
 
 #' Cost R21
 #'
-#' @param n_doses Number of R21 doses
-#' @param r21_cost_per_dose Cost per R21 dose
-#' @param r21_consumables_cost Cost for consumables for one dose (e.g injection and reconstitution syringes, safety box etc.)
-#' @param r21_delivery_cost Cost for delivery of one dose
+#' @param n_doses Number of R21 doses. Numeric scalar or vector.
+#' @param r21_cost_per_dose Cost per R21 dose. Numeric scalar or vector.
+#' @param r21_consumables_cost Cost for consumables for one dose (e.g injection and reconstitution syringes, safety box etc.). Numeric scalar or vector.
+#' @param r21_delivery_cost Cost for delivery of one dose. Numeric scalar or vector.
+#' @param input_year Year the unit costs are reported in
+#' @param ... Additional arguments passed to `inflation_adjust()`
 #'
 #' @return R21 costs
 #' @export
@@ -49,6 +99,7 @@ cost_rtss <- function(n_doses, rtss_cost_per_dose = 10.02, rtss_consumables_cost
 #'
 #' Penny et al (2016)
 #' \url{https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(15)00725-4/fulltext}.
+#' Pre-inflated so year is the same as dose cost: inflation_adjust(2.52, 2016, 2024) = 3.8
 #'
 #' \strong{r21_delivery_cost}
 #'
@@ -59,14 +110,18 @@ cost_rtss <- function(n_doses, rtss_cost_per_dose = 10.02, rtss_consumables_cost
 #' Age-based: $1.48 (default)
 #' Seasonal: $3.75
 #' Hybrid: $2.36
-cost_r21 <- function(n_doses, r21_cost_per_dose = 4, r21_consumables_cost = 1.52, r21_delivery_cost = 1.48){
+cost_r21 <- function(n_doses, r21_cost_per_dose = 4, r21_consumables_cost = 3.80,
+                     r21_delivery_cost = 1.48, input_year = 2024,
+                     ...){
+  check_lengths(n_doses, r21_cost_per_dose, r21_consumables_cost, r21_delivery_cost)
   if(any(n_doses < 0)){
     stop("All n_doses estimates must be >= 0")
   }
   if(any(r21_cost_per_dose < 0) | any(r21_consumables_cost < 0) | any(r21_delivery_cost < 0)){
     stop("R21 cost inputs must be >= 0")
   }
-  r21_cost_per_dose_delivered <- r21_cost_per_dose + r21_consumables_cost + r21_delivery_cost
-  cost <- n_doses * r21_cost_per_dose_delivered
+  unit_cost <- r21_cost_per_dose + r21_consumables_cost + r21_delivery_cost
+  unit_cost <- inflation_adjust(unit_cost, input_year, ...)
+  cost <- n_doses * unit_cost
   return(cost)
 }

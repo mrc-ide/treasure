@@ -4,28 +4,22 @@
 \alias{cost_al}
 \title{Cost Artemether/Lumefantrine treatment}
 \usage{
-cost_al(n_doses, cost_per_dose = 0.3)
+cost_al(n_doses, cost_per_dose = 0.3, input_year = 2022, ...)
 }
 \arguments{
-\item{n_doses}{Number of tests}
+\item{n_doses}{Number of doses. Numeric scalar or vector.}
 
-\item{cost_per_dose}{Cost per dose is for a single dose (20/120 mg)}
+\item{cost_per_dose}{Cost per dose is for a single dose (20/120 mg). Numeric scalar or vector.}
+
+\item{input_year}{Year the unit costs are reported in}
+
+\item{...}{Additional arguments passed to `inflation_adjust()`}
 }
 \value{
 AL costs
 }
 \description{
-Note the cost per dose is for a single dose (20/120 mg). A treatment course typically
-constitutes Artemether + lumefantrine given twice a day for 3 days following
-weight-based guidelines:
-\itemize{
-  \item 5 to <15 kg: 20/120 mg
-  \item 15 to <25 kg: 40/240 mg
-  \item 25 to <35 kg: 60/360 mg
-  \item >=35 kg: 80/480 mg
-}
-So course for a single adult (weighing >=35kg) may constitute
-3 days x 2 times daily x 4 doses (4 x 20/120mg = 80/480mg) = 24 doses.
+Note the cost per dose is for a single dose (20/120 mg), not a full treatment course.
 }
 \references{
 \strong{dosing information}

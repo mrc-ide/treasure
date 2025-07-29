@@ -7,15 +7,21 @@
 cost_dualai_itn(
   n_dualai_itn,
   dualai_itn_unit_cost = 2.7,
-  dualai_itn_delivery_cost = 1.5
+  dualai_itn_delivery_cost = 1.5,
+  input_year = 2024,
+  ...
 )
 }
 \arguments{
-\item{n_dualai_itn}{Number of pyrethroid-chlorfenapyr bed nets}
+\item{n_dualai_itn}{Number of pyrethroid-chlorfenapyr bed nets. Numeric scalar or vector.}
 
-\item{dualai_itn_unit_cost}{Commodity unit cost per pyrethroid-chlorfenapyr ITN bed net.}
+\item{dualai_itn_unit_cost}{Commodity unit cost per pyrethroid-chlorfenapyr ITN bed net. Numeric scalar or vector.}
 
-\item{dualai_itn_delivery_cost}{Cost to deliver one pyrethroid-chlorfenapyr ITN bet net.}
+\item{dualai_itn_delivery_cost}{Cost to deliver one pyrethroid-chlorfenapyr ITN bet net. Numeric scalar or vector.}
+
+\item{input_year}{Year the unit costs are reported in}
+
+\item{...}{Additional arguments passed to `inflation_adjust()`}
 }
 \value{
 LLIN costs

@@ -4,12 +4,21 @@
 \alias{cost_iptp}
 \title{Cost IPTp}
 \usage{
-cost_iptp(n_administrations, iptp_cost_per_administration = 0.79)
+cost_iptp(
+  n_administrations,
+  iptp_cost_per_administration = 0.79,
+  input_year = 2012,
+  ...
+)
 }
 \arguments{
-\item{n_administrations}{Number of IPTp doses}
+\item{n_administrations}{Number of IPTp doses. Numeric scalar or vector.}
 
-\item{iptp_cost_per_administration}{Cost per dose delivered}
+\item{iptp_cost_per_administration}{Cost per dose delivered. Numeric scalar or vector.}
+
+\item{input_year}{Year the unit costs are reported in}
+
+\item{...}{Additional arguments passed to `inflation_adjust()`}
 }
 \value{
 IPTp costs

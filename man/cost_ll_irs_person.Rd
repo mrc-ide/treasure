@@ -4,12 +4,21 @@
 \alias{cost_ll_irs_person}
 \title{Cost long lasting IRS}
 \usage{
-cost_ll_irs_person(n_protected, cost_per_person_protected = 7.44)
+cost_ll_irs_person(
+  n_protected,
+  cost_per_person_protected = 7.44,
+  input_year = 2020,
+  ...
+)
 }
 \arguments{
-\item{n_protected}{Number of people protected}
+\item{n_protected}{Number of people protected. Numeric scalar or vector.}
 
-\item{cost_per_person_protected}{Cost per person protected}
+\item{cost_per_person_protected}{Cost per person protected. Numeric scalar or vector.}
+
+\item{input_year}{Year the unit costs are reported in}
+
+\item{...}{Additional arguments passed to `inflation_adjust()`}
 }
 \value{
 Long lasting IRS costs

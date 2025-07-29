@@ -4,14 +4,24 @@
 \alias{cost_llin}
 \title{Cost standard LLINS}
 \usage{
-cost_llin(n_llin, llin_unit_cost = 2.02, llin_delivery_cost = 1.5)
+cost_llin(
+  n_llin,
+  llin_unit_cost = 2.02,
+  llin_delivery_cost = 1.5,
+  input_year = 2024,
+  ...
+)
 }
 \arguments{
-\item{n_llin}{Number of standard LLIN bed nets}
+\item{n_llin}{Number of standard LLIN bed nets. Numeric scalar or vector.}
 
-\item{llin_unit_cost}{Commodity unit cost per standard LLIN bed net.}
+\item{llin_unit_cost}{Commodity unit cost per standard LLIN bed net. Numeric scalar or vector.}
 
-\item{llin_delivery_cost}{Cost to deliver one standard LLIN bet net.}
+\item{llin_delivery_cost}{Cost to deliver one standard LLIN bet net. Numeric scalar or vector.}
+
+\item{input_year}{Year the unit costs are reported in}
+
+\item{...}{Additional arguments passed to `inflation_adjust()`}
 }
 \value{
 LLIN costs

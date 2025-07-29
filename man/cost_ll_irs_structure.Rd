@@ -4,12 +4,21 @@
 \alias{cost_ll_irs_structure}
 \title{Cost actellic IRS}
 \usage{
-cost_ll_irs_structure(n_sprayed, cost_per_structure_sprayed = 26.36)
+cost_ll_irs_structure(
+  n_sprayed,
+  cost_per_structure_sprayed = 26.36,
+  input_year = 2020,
+  ...
+)
 }
 \arguments{
-\item{n_sprayed}{Number of structures sprayed}
+\item{n_sprayed}{Number of structures sprayed. Numeric scalar or vector.}
 
-\item{cost_per_structure_sprayed}{Cost per structure sprayed}
+\item{cost_per_structure_sprayed}{Cost per structure sprayed. Numeric scalar or vector.}
+
+\item{input_year}{Year the unit costs are reported in}
+
+\item{...}{Additional arguments passed to `inflation_adjust()`}
 }
 \value{
 Long lasting IRS costs

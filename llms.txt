@@ -1,0 +1,127 @@
+# treasure ![](reference/figures/Treasure.png)
+
+The goal of treasure is to provide basic, generic unit-costing help for
+[malariasimulation](https://mrc-ide.github.io/malariasimulation/).
+
+Functionality is minimal. The key goal of treasure is to be a
+transparent and version controlled repository for unit cost estimates
+that included detailed citations or references for cost sources.
+
+⚠️ Cost estimates are targeted to be as up-to-date as possible.
+Retrospective costing of past programmes may therefore require
+adjustment.
+
+⚠️ This is a living package and costs will be updated when new data are
+available. As such, be sure to reference and use a specific version if
+stable costing is required for a project.
+
+⚠️ This is not an exhaustive source of malaria programme costs. For an
+example of a more complete costing exercise please see [Patouillard et
+al](https://gh.bmj.com/content/2/2/e000176), and for a recent cost and
+cost-effectiveness review [Conteh et
+al](https://www.sciencedirect.com/science/article/pii/S1098301521001479?via%3Dihub).
+
+⚠️ When using treasure, please be sure to reference the original
+sources, not just the package.
+
+⚠️ All costs are in USD\$, however the reference year for costs may
+differ and costs have not be inflation-adjusted.
+
+## Updates
+
+Updates, reviews and improvements are encouraged via
+[PRs](https://github.com/mrc-ide/treasure/pulls)!
+
+Updates should be citable from a published source. They should be
+in-line with the aim of this package to be a source for generic costing
+estimates and therefore should be broadly representative of the costing
+for a given intervention, and (ideally) not focussed on a specific
+location or implementation approach.
+
+Any suggested update via a PR should include: 1. An update to the
+costing function default value. 2. Updated documentation for the
+function including a citable source in the references section. 3.
+Corresponding update to the unit tests for the modified costing
+function.
+
+## Installation
+
+You can install the development version of treasure from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("mrc-ide/treasure")
+```
+
+# Package index
+
+## All functions
+
+- [`commodity_al_doses()`](commodity_al_doses.md) : Estimate total
+  number of AL doses required
+- [`commodity_chloroquine_doses()`](commodity_chloroquine_doses.md) :
+  Estimate total number of Chloroquine doses required
+- [`commodity_doses_pmc()`](commodity_doses_pmc.md) : Number of doses of
+  PMC
+- [`commodity_doses_smc()`](commodity_doses_smc.md) : Number of doses of
+  SMC
+- [`commodity_doses_vaccine()`](commodity_doses_vaccine.md) : Number of
+  vaccine doses delivered
+- [`commodity_microscopy_tests()`](commodity_microscopy_tests.md) :
+  Estimate total number of microscopy diagnostics required
+- [`commodity_nets()`](commodity_nets.md) : Estimate the number of bed
+  nets required to match usage target
+- [`commodity_nmf_al_doses()`](commodity_nmf_al_doses.md) : Estimate
+  total number of AL doses required for test +ve non-malarial fevers
+- [`commodity_nmf_microscopy_tests()`](commodity_nmf_microscopy_tests.md)
+  : Estimate total number of microscopy diagnostics required as a result
+  of non malarial fevers
+- [`commodity_nmf_rdt_tests()`](commodity_nmf_rdt_tests.md) : Estimate
+  total number of RDT diagnostics required as a result of non malarial
+  fevers
+- [`commodity_person_rounds_irs()`](commodity_person_rounds_irs.md) :
+  Number of people-rounds of IRS
+- [`commodity_rdt_tests()`](commodity_rdt_tests.md) : Estimate total
+  number of RDT diagnostics required
+- [`commodity_structure_rounds_irs()`](commodity_structure_rounds_irs.md)
+  : Number of structure-rounds of IRS
+- [`cost_al()`](cost_al.md) : Cost Artemether/Lumefantrine treatment
+- [`cost_chloroquine()`](cost_chloroquine.md) : Cost Chloroquine
+  treatment
+- [`cost_ddt_irs_structure()`](cost_ddt_irs_structure.md) : Cost DDT IRS
+- [`cost_dualai_itn()`](cost_dualai_itn.md) : Cost
+  pyrethroid-chlorfenapyr (dual ai) ITN
+- [`cost_inpatient()`](cost_inpatient.md) : Cost per inpatient visit
+- [`cost_iptp()`](cost_iptp.md) : Cost IPTp
+- [`cost_ll_irs_person()`](cost_ll_irs_person.md) : Cost long lasting
+  IRS
+- [`cost_ll_irs_structure()`](cost_ll_irs_structure.md) : Cost actellic
+  IRS
+- [`cost_llin()`](cost_llin.md) : Cost standard LLINS
+- [`cost_microscopy()`](cost_microscopy.md) : Cost Microscopy
+- [`cost_outpatient()`](cost_outpatient.md) : Cost per outpatient visit
+- [`cost_pacd()`](cost_pacd.md) : Cost pACD
+- [`cost_pbo_itn()`](cost_pbo_itn.md) : Cost pyrethroid-PBO ITN
+- [`cost_pmc()`](cost_pmc.md) : Cost PMC
+- [`cost_primaquine()`](cost_primaquine.md) : Cost primaquine treatment
+- [`cost_r21()`](cost_r21.md) : Cost R21
+- [`cost_racd()`](cost_racd.md) : Cost rACD
+- [`cost_rdt()`](cost_rdt.md) : Cost RDTs
+- [`cost_rtss()`](cost_rtss.md) : Cost RTS,S
+- [`cost_smc()`](cost_smc.md) : Cost SMC
+- [`cost_surveillance()`](cost_surveillance.md) : Cost surveillance
+- [`cpi`](cpi.md) : World Bank Consumer Price Index (CPI)
+- [`discount_future_values()`](discount_future_values.md) : Discount
+  Future Values with Flexible Start Year
+- [`inflation_adjust()`](inflation_adjust.md) : Inflate cost to a target
+  year using SSA CPI
+- [`set_target_year()`](set_target_year.md) : Set the global target year
+  for inflation adjustments
+- [`who_choice`](who_choice.md) : WHO CHOICE inpatient/outpatient costs.
+
+# Articles
+
+### All vignettes
+
+- [Simple-example](simple-example.md):

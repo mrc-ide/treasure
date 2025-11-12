@@ -1,0 +1,61 @@
+# Cost RTS,S
+
+Cost RTS,S
+
+## Usage
+
+``` r
+cost_rtss(
+  n_doses,
+  rtss_cost_per_dose = 10.02,
+  rtss_consumables_cost = 3.8,
+  rtss_delivery_cost = 1.48,
+  input_year = 2024,
+  ...
+)
+```
+
+## Arguments
+
+- n_doses:
+
+  Number of RTS,S doses. Numeric scalar or vector.
+
+- rtss_cost_per_dose:
+
+  Cost per RTS,S dose. Numeric scalar or vector.
+
+- rtss_consumables_cost:
+
+  Cost for consumables for one dose (e.g injection and reconstitution
+  syringes, safety box etc.). Numeric scalar or vector.
+
+- rtss_delivery_cost:
+
+  Cost for delivery of one dose. Numeric scalar or vector.
+
+- input_year:
+
+  Year the unit costs are reported in
+
+- ...:
+
+  Additional arguments passed to \`inflation_adjust()\`
+
+## Value
+
+RTS,S costs
+
+## References
+
+**rtss_cost_per_dose**
+
+Current default is based on the EUR9.30 per dose quoted in
+<https://www.unicef.org/supply/media/19456/file/Malaria%20-%20Vaccine%20-%20QA%20-%20October%202023%20-%20English%20.pdf>
+
+**rtss_consumables_cost**
+
+Penny et al (2016)
+<https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(15)00725-4/fulltext>.
+Pre-inflated so year is the same as dose cost: inflation_adjust(2.52,
+2016, 2024) = 3.8

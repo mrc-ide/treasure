@@ -50,6 +50,7 @@ You can install the development version of treasure from
 [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("devtools")
 devtools::install_github("mrc-ide/treasure")
 ```

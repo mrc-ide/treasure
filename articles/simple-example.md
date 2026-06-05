@@ -1,6 +1,7 @@
 # Simple-example
 
 ``` r
+
 library(treasure)
 ```
 
@@ -15,6 +16,7 @@ population at risk (`par`) and a target level of insecticide treated net
 (ITN) usage by year.
 
 ``` r
+
 interventions <- data.frame(
   year = 1:6,
   itn_use = c(0, 0.6, 0.5, 0.2, 0.5, 0.4),
@@ -36,6 +38,7 @@ constant usage rate, distributions on the first day of each year, and a
 half life of two years.
 
 ``` r
+
 dist_steps <- cumsum(c(1, rep(365, 5)))
 crop_steps <- dist_steps + 183
 half_life  <- 730
@@ -63,6 +66,7 @@ interventions
 ```
 
 ``` r
+
 barplot(
   interventions$n_nets,
   names.arg = interventions$year,
@@ -84,6 +88,7 @@ The second example uses case data by year and age band. For simplicity
 we assume constant treatment coverage and diagnostic usage.
 
 ``` r
+
 cases <- data.frame(
   year = rep(1:6, each = 3),
   age_lower = rep(c(0, 5, 15), 6),
@@ -121,6 +126,7 @@ doses required using
 specific dose multipliers are determined by the `age_upper` values.
 
 ``` r
+
 prop_rdt <- 1
 prop_act <- 1
 
@@ -162,6 +168,7 @@ cases
 Costs can then be added using the corresponding costing functions.
 
 ``` r
+
 cases$cost_rdt <- cost_rdt(cases$n_rdt)
 cases$cost_act <- cost_al(cases$n_act_doses)
 head(cases)
@@ -182,6 +189,7 @@ head(cases)
 ```
 
 ``` r
+
 barplot(
   rbind(cases$n_rdt, cases$n_act_doses),
   beside = TRUE,
